@@ -1,0 +1,131 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Foundations
+import Button from "@/components/fundations/elements/Button.astro";
+
+interface Props {
+  links: Array<{ label: string; href: string }>;
+}
+
+const { links } = Astro.props;
+---
+
+<div class="relative lg:hidden select-none" data-mobile-nav-root>
+  <button
+    class="p-2 text-base-900 hover:bg-base-100 rounded-lg transition-colors"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls="mobile-nav-panel"
+    data-mobile-nav-toggle
+  >
+    <span class="sr-only">Open menu</span>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+  <div
+    aria-hidden="true"
+    data-mobile-nav-overlay
+    class="fixed inset-0 z-40 bg-base-950/40 opacity-0 pointer-events-none transition-opacity duration-200"
+  >
+  </div>
+  <div
+    id="mobile-nav-panel"
+    class="absolute right-0 mt-3 z-50 w-[min(26rem,92vw)] origin-top-right rounded-3xl border border-base-200 bg-white shadow-xl shadow-base-950/10 ring-1 ring-base-900/5 opacity-0 scale-95 translate-y-2 pointer-events-none transition duration-150 ease-out hidden"
+    aria-hidden="true"
+    data-mobile-nav-panel
+  >
+    <div class="flex items-center justify-between gap-4 border-b border-base-200 p-4">
+      <a href="/" class="flex items-center gap-3 text-base-900">
+        <Logo class="size-9 shrink-0" />
+        <div>
+          <span class="block text-xs font-semibold uppercase text-base-600">Madavi</span>
+          <span class="block text-sm font-medium">Advisory</span>
+        </div>
+      </a>
+      <button
+        class="p-2 text-base-900 hover:bg-base-100 rounded-lg transition-colors"
+        aria-label="Close menu"
+        data-mobile-nav-close
+      >
+        <span class="sr-only">Close menu</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex max-h-[70svh] flex-col">
+      <nav class="flex-1 overflow-y-auto p-4" aria-label="Mobile">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="block rounded-2xl px-4 py-3 text-base font-medium text-base-900 transition hover:bg-base-50 focus:outline-none"
+              data-mobile-nav-link
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="border-t border-base-200 p-4">
+        <Button
+          isLink={true}
+          size="sm"
+          variant="accent"
+          href="/contact"
+          class="w-full"
+          data-mobile-nav-link
+        >
+          Get Started
+        </Button>
+      </div>
+    </div>
+  </div>
+  <script is:inline>
+    {
+      const root = document.querySelector("[data-mobile-nav-root]");
+      if (root) {
+        const toggle = root.querySelector("[data-mobile-nav-toggle]");
+        const panel = root.querySelector("[data-mobile-nav-panel]");
+        const overlay = root.querySelector("[data-mobile-nav-overlay]");
+        const close = root.querySelector("[data-mobile-nav-close]");
+        const links = root.querySelectorAll("[data-mobile-nav-link]");
+
+        let isOpen = false;
+
+        const toggleNav = () => {
+          isOpen = !isOpen;
+          toggle.setAttribute("aria-expanded", String(isOpen));
+          panel.setAttribute("aria-hidden", String(!isOpen));
+
+          if (isOpen) {
+            panel.classList.remove("hidden");
+            void panel.offsetWidth;
+            overlay.classList.remove("opacity-0", "pointer-events-none");
+            overlay.classList.add("opacity-100");
+            panel.classList.remove("opacity-0", "scale-95", "translate-y-2", "pointer-events-none");
+            panel.classList.add("opacity-100", "scale-100", "translate-y-0");
+          } else {
+            overlay.classList.add("opacity-0", "pointer-events-none");
+            overlay.classList.remove("opacity-100");
+            panel.classList.add("opacity-0", "scale-95", "translate-y-2", "pointer-events-none");
+            panel.classList.remove("opacity-100", "scale-100", "translate-y-0");
+            setTimeout(() => {
+              if (!isOpen) panel.classList.add("hidden");
+            }, 150);
+          }
+        };
+
+        [toggle, close, overlay].forEach((el) => el?.addEventListener("click", toggleNav));
+        links.forEach((link) => link.addEventListener("click", () => {
+          if (isOpen) toggleNav();
+        }));
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && isOpen) toggleNav();
+        });
+      }
+    }
+  </script>
+</div>

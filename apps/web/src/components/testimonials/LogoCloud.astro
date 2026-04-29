@@ -1,0 +1,77 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Foundations
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+// Sanity
+import { client } from "@/lib/sanity/client";
+
+const query = `*[_type == "clientLogo"] | order(order asc) [0...10] {
+  _id,
+  company,
+  logo {
+    asset -> {
+      url
+    },
+    alt
+  },
+  url
+}`;
+
+const logos = await client.fetch(query);
+
+---
+
+<style>
+  .logo-img {
+    transition: filter 0.3s ease;
+    filter: grayscale(100%);
+  }
+
+  .logo-img:hover {
+    filter: grayscale(0%) !important;
+  }
+</style>
+
+<div>
+  <Kicker variant="default">Our Clients</Kicker>
+  <Text
+    tag="h2"
+    variant="displayMD"
+    class="text-base-950 text-balance font-medium tracking-tight font-display mt-8"
+  >
+    Brands We Have Worked With
+  </Text>
+</div>
+
+<div
+  class="grid grid-cols-2 lg:grid-cols-5 gap-4 items-center justify-between mt-12"
+>
+  {
+    logos.map((logo) => (
+        <div class="bg-base-50 p-4 flex flex-col items-center justify-center aspect-square">
+          {logo.url ? (
+            <a href={logo.url} target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+              <img
+                src={logo.logo.asset.url}
+                alt={logo.logo.alt || logo.company}
+                loading="eager"
+                decoding="async"
+                class="object-contain w-3/4 h-3/4 logo-img"
+              />
+            </a>
+          ) : (
+            <img
+              src={logo.logo.asset.url}
+              alt={logo.logo.alt || logo.company}
+              loading="eager"
+              decoding="async"
+              class="object-contain w-3/4 h-3/4 logo-img"
+              style="filter: grayscale(100%)"
+            />
+          )}
+        </div>
+    ))
+  }
+</div> 

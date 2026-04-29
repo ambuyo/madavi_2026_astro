@@ -1,0 +1,501 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <!-- SECTION 1: SERVICES HERO -->
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Madavi Advisory Services</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          We build AI adoption capability through four productized engagements.
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6"
+        >
+          Not transformation programs. Not vendor enablement. Strategic advisory
+          designed for systematic capability building—diagnostics that surface
+          gaps, retainers that build governance, cohorts that develop
+          decision-making fluency, and thought leadership that positions AI
+          adoption as organizational readiness work.
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Built for African C-suite leaders navigating AI decisions in
+          HealthTech, financial services, and development finance.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- SECTION 2: SERVICE OVERVIEW -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Four ways we build capability
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Each engagement addresses a specific stage in your AI adoption
+          journey. Entry points for organizations that need readiness
+          assessment. Ongoing counsel for leaders making frequent decisions.
+          Group learning for executive teams. Thought leadership for industry
+          positioning.
+        </Text>
+      </div>
+
+      <!-- Service Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        <!-- Card 1: Diagnostic -->
+        <div class="bg-base-50 p-8 flex flex-col gap-6">
+          <div>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base-900 font-display"
+            >
+              AI Readiness Diagnostic
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 mt-2"
+            >
+              The entry point. Assessment before investment.
+            </Text>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Price: $2,500–$4,000
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Duration: 2-week fixed scope
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600"
+              >
+                9-page diagnostic with color-coded gaps, adoption-adjusted ROI,
+                and 90-day roadmap
+              </Text>
+            </div>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/ai-services/readiness-diagnostic"
+            class="w-fit"
+          >
+            Learn more →
+          </Button>
+        </div>
+
+        <!-- Card 2: Retainer -->
+        <div class="bg-base-50 p-8 flex flex-col gap-6">
+          <div>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base-900 font-display"
+            >
+              Executive Advisory Retainer
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 mt-2"
+            >
+              Ongoing strategic counsel. For frequent decisions.
+            </Text>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Price: $1,500–$2,500/month
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Commitment: 3-month minimum
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600"
+              >
+                Monthly 1-hour session + unlimited async support between
+                sessions
+              </Text>
+            </div>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/ai-services/advisory"
+            class="w-fit"
+          >
+            Learn more →
+          </Button>
+        </div>
+
+        <!-- Card 3: Cohort -->
+        <div class="bg-base-50 p-8 flex flex-col gap-6">
+          <div>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base-900 font-display"
+            >
+              Leadership AI Fluency Cohort
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 mt-2"
+            >
+              Structured learning. For executive teams.
+            </Text>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Price: $800–$1,200 per seat
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Duration: 4-week program
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600"
+              >
+                8–12 non-competing executives + HCAIF certification + alumni
+                network
+              </Text>
+            </div>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/ai-services/leadership-ai-fluency"
+            class="w-fit"
+          >
+            Learn more →
+          </Button>
+        </div>
+
+        <!-- Card 4: Keynote -->
+        <div class="bg-base-50 p-8 flex flex-col gap-6">
+          <div>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base-900 font-display"
+            >
+              Keynote & Speaking
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 mt-2"
+            >
+              Thought leadership. For industry positioning.
+            </Text>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Price: $1,500–$3,500 per engagement
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 font-medium"
+              >
+                Duration: 45–60 minutes
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600"
+              >
+                Framework-anchored presentations on AI adoption and
+                organizational readiness
+              </Text>
+            </div>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/ai-services/keynote-speaking"
+            class="w-fit"
+          >
+            Learn more →
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- SECTION 3: ENGAGEMENT PROCESS -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          How to work with Madavi
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Simple, transparent process. No RFPs. No multi-week scoping. Choose a
+          service, confirm fit, get started.
+        </Text>
+      </div>
+
+      <!-- Process Steps -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Step 1
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2 font-medium">
+            Initial Contact
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            Submit inquiry via website. We respond within 24 hours.
+          </Text>
+        </div>
+
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Step 2
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2 font-medium">
+            Fit Assessment (30 min)
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            Describe your AI initiative. We assess fit and recommend service.
+          </Text>
+        </div>
+
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Step 3
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2 font-medium">
+            Proposal & Agreement
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            Review proposal, discuss scope, sign engagement letter.
+          </Text>
+        </div>
+
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Step 4
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2 font-medium">
+            Payment & Kickoff
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            Pay invoice, schedule kickoff, begin engagement.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- SECTION 4: PRICING PHILOSOPHY -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Why we show pricing publicly
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6"
+        >
+          Transparent pricing is a filtering mechanism. If our fees don't fit
+          your budget, we're not the right partner. If they do, let's talk
+          about fit—not negotiate.
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          We sell outcomes, not time. You know what you're paying upfront. No
+          scope creep. No surprise invoices. We optimize for quality, not
+          billable hours.
+        </Text>
+      </div>
+
+      <div class="mt-12 p-8 bg-base-50">
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-900 font-medium"
+        >
+          We don't negotiate on methodology. We're flexible on scope.
+        </Text>
+        <Text
+          tag="p"
+          variant="textSM"
+          class="text-base-600 mt-4"
+        >
+          If budget is a constraint, we'll adjust scope (fewer interviews,
+          shorter commitment, smaller group) rather than discount quality.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- SECTION 5: TRUST SIGNALS & FINAL CTA -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Ready to build AI adoption capability?
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6"
+        >
+          Start with a 30-minute strategic session. No cost. No pitch. We'll
+          assess your readiness using the HCAIF framework and tell you what to
+          address first.
+        </Text>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+          <Button
+            variant="default"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Schedule Strategic Session
+          </Button>
+          <Button
+            variant="muted"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Request Service Proposal
+          </Button>
+        </div>
+
+        <div class="mt-12 space-y-3">
+          <div class="flex items-start gap-3">
+            <Text tag="p" variant="textSM" class="text-base-600">
+              ✓ No long-term contracts (except 3-month retainer minimum)
+            </Text>
+          </div>
+          <div class="flex items-start gap-3">
+            <Text tag="p" variant="textSM" class="text-base-600">
+              ✓ Transparent pricing (what you see is what you pay)
+            </Text>
+          </div>
+          <div class="flex items-start gap-3">
+            <Text tag="p" variant="textSM" class="text-base-600">
+              ✓ Honest advice (we'll tell you if we're not the right fit)
+            </Text>
+          </div>
+          <div class="flex items-start gap-3">
+            <Text tag="p" variant="textSM" class="text-base-600">
+              ✓ Framework-driven (proven methodologies, not proprietary magic)
+            </Text>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

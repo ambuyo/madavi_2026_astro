@@ -1,0 +1,50 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import ServiceCardFull from "@/components/services/ServiceCardFull.astro";
+// Content
+import { getServices } from "@/lib/data";
+
+const allServices = await getServices();
+const individualServices = allServices.filter(
+  (service) => service.data.pricing
+);
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+      <Kicker variant="default">Individuals</Kicker>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display lg:col-span-2 lg:-mt-2"
+      >
+        Individual Services
+      </Text>
+
+      <Text
+        tag="p"
+        variant="textLG"
+        class="text-base-900 lg:text-pretty lg:col-span-2"
+      >
+        Need specific accounting services? Choose from our à la carte options
+        for one-time or occasional needs.
+      </Text>
+    </div>
+
+    <div
+      class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-12 p-8 lg:p-12 bg-base-50"
+    >
+      {
+        individualServices.map((service) => (
+          <ServiceCardFull service={service} />
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

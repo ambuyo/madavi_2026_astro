@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const { frontmatter } = Astro.props;
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          {frontmatter.page}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Last updated on <span>
+            <time
+              datetime={new Date(frontmatter.pubDate).toLocaleDateString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "long",
+                }
+              )}
+            >
+              {
+                new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                })
+              }</time
+            ></span
+          >
+        </Text>
+        <Wrapper variant="prose" class="mt-12 lg:mt-24">
+          <slot />
+        </Wrapper>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

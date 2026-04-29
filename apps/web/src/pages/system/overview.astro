@@ -1,0 +1,158 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const pageSections = [
+  {
+    title: "Static",
+    columns: [
+      {
+        category: " Pages",
+        links: [
+          { text: "Home", href: "/" },
+          { text: "FAQ", href: "/faq" },
+          { text: "404", href: "/404" },
+          { text: "About", href: "/about" },
+          { text: "Pricing", href: "/pricing" },
+          { text: "Locations", href: "/locations" },
+          { text: "Testimonials", href: "/testimonials" },
+        ],
+      },
+      {
+        category: "Forms",
+        links: [{ text: "Contact", href: "/contact" }],
+      },
+      {
+        category: "System",
+        links: [
+          { text: "Colors", href: "/system/colors" },
+          { text: "Links", href: "/system/link" },
+          { text: "Buttons", href: "/system/buttons" },
+          { text: "Typography", href: "/system/typography" },
+        ],
+      },
+      {
+        category: "Resources",
+        links: [
+          { text: "Social", href: "https://x.com/lexingtonthemes" },
+          {
+            text: "License",
+            href: "https://lexingtonthemes.com/legal/license",
+          },
+          {
+            text: "Documentation",
+            href: "https://lexingtonthemes.com/documentation/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Content Collections",
+    columns: [
+      {
+        category: "Services",
+        links: [
+          { text: "Home", href: "/services/" },
+          { text: "Details", href: "/services/audit-support-assurance" },
+        ],
+      },
+      {
+        category: "Case Studies",
+        links: [
+          { text: "Home", href: "/case-studies/" },
+          { text: "Details", href: "/case-studies/healthcare-turnaround" },
+        ],
+      },
+      {
+        category: "Industries",
+        links: [
+          { text: "Home", href: "/industries/" },
+          { text: "Details", href: "/industries/healthcare-medical" },
+        ],
+      },
+      {
+        category: "Blog Pages",
+        links: [
+          { text: "Home ", href: "/blog/" },
+          { text: "Post", href: "/blog/posts/1" },
+          { text: "Tag Index", href: "/blog/tags" },
+          { text: "Tag Category", href: "/blog/tags/photography" },
+          { text: "RSS", href: "/rss.xml" },
+        ],
+      },
+      {
+        category: "Accountants",
+        links: [
+          { text: "Home", href: "/team/" },
+          { text: "Details", href: "/team/maria-gonzalez" },
+        ],
+      },
+      {
+        category: "Legal",
+        links: [
+          { text: "Terms Of Use", href: "/legal/terms" },
+          { text: "Privacy Policy", href: "/legal/privacy" },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <Text
+        tag="h1"
+        variant="displayLG"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Overview
+      </Text>
+      <div class="flex flex-col mt-12 gap-12">
+        {
+          pageSections.map((section) => (
+            <div>
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="font-medium font-display text-base-900"
+              >
+                {section.title}
+              </Text>
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 xl:grid-cols-4">
+                {section.columns.map((column) => (
+                  <div>
+                    <Text
+                      tag="p"
+                      variant="textBase"
+                      class="font-medium text-base-900"
+                    >
+                      {column.category}
+                    </Text>
+                    <ul role="list" class="mt-2 ">
+                      {column.links.map((link) => (
+                        <li>
+                          <Text
+                            tag="a"
+                            variant="textSM"
+                            href={link.href}
+                            class="text-base-700 hover:text-base-900 duration-300"
+                          >
+                            {link.text}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

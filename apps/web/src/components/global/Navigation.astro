@@ -1,0 +1,89 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import Search from "@/components/global/Search.astro";
+import MobileNav from "@/components/global/MobileNav.astro";
+import MegaMenu from "@/components/global/MegaMenu.astro";
+
+// Navigation links
+const navLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Industries", href: "/industries" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Team", href: "/team" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 bg-white">
+  <Wrapper variant="standard" class="py-6">
+    <div class="flex items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3 text-base-900 max-w-xs">
+        <Logo class="h-16 w-auto" />
+      </a>
+      <nav class="hidden items-center gap-8 lg:flex group" aria-label="Primary">
+        {
+          navLinks.map((link) => {
+            const hasMegamenu = link.label === "Services" || link.label === "Industries";
+            return (
+              <a
+                href={link.href}
+                class={`text-sm font-medium text-base-700 transition-colors hover:text-base-950 ${hasMegamenu ? "has-megamenu" : ""}`}
+              >
+                {link.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+      <div class="flex items-center gap-2">
+        <Search />
+        <Button
+          isLink
+          size="xs"
+          variant="default"
+          href="/contact"
+          class="hidden lg:flex"
+        >
+          Get Started
+        </Button>
+        <MobileNav links={navLinks} />
+      </div>
+    </div>
+  </Wrapper>
+  <div class="group/megamenu">
+    <MegaMenu />
+  </div>
+</header>
+
+<script is:inline>
+  {
+    const header = document.querySelector("header");
+    if (header) {
+      const navLinks = header.querySelectorAll("a.has-megamenu");
+      const megamenu = header.querySelector("#megamenu");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          megamenu?.classList.remove("hidden");
+        });
+        link.addEventListener("mouseleave", () => {
+          megamenu?.classList.add("hidden");
+        });
+      });
+
+      megamenu?.addEventListener("mouseenter", () => {
+        megamenu?.classList.remove("hidden");
+      });
+
+      megamenu?.addEventListener("mouseleave", () => {
+        megamenu?.classList.add("hidden");
+      });
+    }
+  }
+</script>

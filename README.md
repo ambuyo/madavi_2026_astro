@@ -1,4 +1,67 @@
-# Mulberry
+# Madavi
+
+**AI Advisory for Enterprises**
+
+Madavi is a human-centric AI advisory firm that helps African enterprise leaders adopt AI by addressing organizational readiness before technology deployment — using the proprietary HCAIF framework to tell executives what they need to hear, not what they want to hear.
+
+## Quick Start
+
+This is an Astro + Sanity CMS project powered by the Mulberry theme from Lexington Themes.
+
+### Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run development servers
+pnpm dev           # Both web and studio
+pnpm dev:web       # Web app only (http://localhost:3000)
+pnpm dev:studio    # Sanity Studio (http://localhost:3333)
+
+# Build for production
+pnpm build         # Build both
+pnpm build:web     # Web app only
+pnpm build:studio  # Studio only
+```
+
+### Project Structure
+
+- `apps/web` — Astro site with all pages and components
+- `apps/studio` — Sanity CMS with content management
+- `apps/web/src/content/` — Markdown content collections
+- `apps/web/src/pages/` — Page routes
+- `apps/web/src/components/` — Reusable components
+
+### Key Features
+
+✨ **10-Section Service Template** — Full conversion-optimized service pages with Hero, Problem, Process, Deliverables, Frameworks, Case Studies, Pricing, Ideal Client Profile, FAQ, and Conversion sections
+
+📝 **Dual Content Model** — Use Sanity CMS for dynamic content or Markdown collections for version-controlled content
+
+🎨 **Tailwind CSS + Custom Design** — Built with utility-first CSS and custom brand tokens
+
+🔍 **SEO-Ready** — Automatic sitemaps, RSS feeds, and meta tag management
+
+📱 **Responsive Design** — Mobile-first approach with Astro Islands
+
+### Documentation
+
+- [10-Section Service Template Guide](./SERVICE-TEMPLATE-GUIDE.md)
+- [Quick Start Guide](./QUICKSTART.md)
+- [Implementation Summary](./IMPLEMENTATION-SUMMARY.md)
+- [Agents & Architecture](./AGENTS.md)
+
+### Configuration
+
+See `.env.example` for required environment variables:
+- `SANITY_PROJECT_ID` — Your Sanity project ID
+- `SANITY_DATASET` — Dataset name (default: `production`)
+- `SANITY_API_VERSION` — API version (default: `2024-01-01`)
+
+### License
+
+Built with [Mulberry](https://lexingtonthemes.com/templates/mulberry/) theme from Lexington Themes
 
 ![Theme preview](https://lexingtonthemes.com/OpenGraph/mulberry/twitter.png)
 

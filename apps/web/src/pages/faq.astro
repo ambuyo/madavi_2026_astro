@@ -1,0 +1,148 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import couple from "@/images/assets/couple.png";
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Plus from "@/components/fundations/icons/Plus.astro";
+// FAQ Data Structure
+const faqData = [
+  {
+    category: "General Questions",
+    questions: [
+      {
+        question: "What services does Mulberry  Accounting offer?",
+        answer:
+          "We offer comprehensive accounting services including tax preparation, financial planning, audit services, business consulting, payroll management, and CFO services. Our team specializes in serving businesses of all sizes across various industries.",
+      },
+      {
+        question: "How long has Mulberry  Accounting been in business?",
+        answer:
+          "Mulberry  Accounting has been serving clients since 2010, providing over a decade of experience in financial services and business advisory. Our long-standing relationships with clients demonstrate our commitment to excellence and reliability.",
+      },
+      {
+        question: "Do you serve clients outside of my local area?",
+        answer:
+          "Yes, we serve clients both locally and remotely. Our cloud-based accounting solutions and virtual meeting capabilities allow us to provide high-quality service to clients anywhere. Many of our clients prefer the convenience of working with us remotely.",
+      },
+    ],
+  },
+  {
+    category: "Services & Expertise",
+    questions: [
+      {
+        question: "What industries do you specialize in?",
+        answer:
+          "We have extensive experience across various industries including technology, healthcare, manufacturing, retail, professional services, and non-profit organizations. Our team stays current with industry-specific regulations and best practices.",
+      },
+      {
+        question: "How do you handle tax preparation and filing?",
+        answer:
+          "Our tax preparation process involves a thorough review of your financial records, identification of deductions and credits, and strategic tax planning. We use advanced tax software and stay current with the latest tax laws to ensure accurate and timely filing. We also offer year-round tax planning services.",
+      },
+      {
+        question: "What accounting software do you use?",
+        answer:
+          "We work with industry-leading accounting software including QuickBooks, Xero, Sage, and custom enterprise solutions. Our team is certified in multiple platforms and can help you choose and implement the best software for your business needs.",
+      },
+    ],
+  },
+  {
+    category: "Pricing & Billing",
+    questions: [
+      {
+        question: "How much do your services cost?",
+        answer:
+          "Our pricing varies based on the services you need, the size of your business, and the complexity of your accounting requirements. We offer transparent pricing with no hidden fees. Contact us for a free consultation and personalized quote.",
+      },
+      {
+        question: "Do you offer monthly or annual billing?",
+        answer:
+          "We offer flexible billing options including monthly, quarterly, and annual plans. For ongoing services like bookkeeping and CFO services, we typically bill monthly. Tax services and one-time projects may have different billing structures.",
+      },
+      {
+        question: "What payment methods do you accept?",
+        answer:
+          "We accept all major credit cards, ACH transfers, and checks. For your convenience, we can set up automatic monthly payments for recurring services. All payments are processed securely through encrypted channels.",
+      },
+    ],
+  },
+  {
+    category: "Getting Started",
+    questions: [
+      {
+        question: "What information do I need to provide to get started?",
+        answer:
+          "For new clients, we'll need basic business information, recent financial statements, tax returns, and access to your accounting software or records. The specific requirements depend on the services you need. We'll provide a detailed checklist during your initial consultation.",
+      },
+      {
+        question: "How long does it take to get started with your services?",
+        answer:
+          "Most clients can get started within 1-2 weeks after their initial consultation. This includes setting up secure access, transferring records, and establishing communication protocols. For urgent tax deadlines or audits, we can expedite the onboarding process.",
+      },
+      {
+        question: "Can I switch from my current accountant to Mulberry ?",
+        answer:
+          "Absolutely! We can help you transition smoothly from your current accountant. We'll coordinate with your existing provider to ensure a seamless transfer of records and continuity of service. Many clients choose us specifically for our transition support.",
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Faq</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Frequently Asked Questions
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Find answers to common questions about our accounting services,
+          pricing, and how we can help your business succeed financially.
+        </Text>
+      </div>
+      <div class="space-y-8 gap-8 mt-12 lg:mt-24">
+        {
+          faqData.map((category) => (
+            <div class="p-8 lg:p-12 bg-base-50">
+              <Text
+                tag="h3"
+                variant="textXL"
+                class="text-base-900 text-balance font-medium tracking-tight font-display"
+              >
+                {category.category}
+              </Text>
+              <div class="divide-y divide-base-100 border-y border-base-100 mt-2 text-balance">
+                {category.questions.map((faq) => (
+                  <details class="group">
+                    <summary class="cursor-pointer py-4 text-base font-medium text-base-900 hover:text-accent-500 transition-colors grid grid-cols-1 lg:grid-cols-2 select-none ">
+                      {faq.question}
+                      <Plus class="size-5 hidden lg:block transition-transform group-open:rotate-180 duration-300 ml-auto" />
+                    </summary>
+                    <div class="pb-4  text-base-600">{faq.answer}</div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,393 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Kicker variant="default">SERVICE 3 OF 4</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Leadership AI Fluency Cohort
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6 text-pretty"
+        >
+          Structured learning for non-competing executives. Your leadership team doesn't need to become AI engineers. They need to make better AI decisions. Not a course. Not a workshop. Systematic decision-making capability development.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- PROGRAM STRUCTURE -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Program Structure
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="p-8 bg-base-50 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Format
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>• 4-week program</li>
+            <li>• One 90-minute session per week</li>
+            <li>• 8–12 participants (non-competing)</li>
+            <li>• Delivered via video conference</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-base-50 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Time Commitment
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>• 90-minute live sessions</li>
+            <li>• 2–3 hours async work per week</li>
+            <li>• Total: 5–6 hours per week</li>
+          </ul>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- 4-WEEK CURRICULUM -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        4-Week Curriculum
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <div class="flex items-start gap-4">
+            <div class="bg-accent-400 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">
+              1
+            </div>
+            <div class="flex-1">
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                AI Readiness Assessment
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                Learn the HCAIF framework and assess your organization across five dimensions.
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-3 font-medium">
+                Deliverable: Personal HCAIF assessment (1-page scorecard)
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <div class="flex items-start gap-4">
+            <div class="bg-accent-400 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">
+              2
+            </div>
+            <div class="flex-1">
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                Driver Trees & Business Acumen
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                Build analytical frameworks for AI decisions. Calculate adoption-adjusted ROI.
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-3 font-medium">
+                Deliverable: Driver tree + financial impact model
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <div class="flex items-start gap-4">
+            <div class="bg-accent-400 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">
+              3
+            </div>
+            <div class="flex-1">
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                Change Management & Governance
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                Design adoption strategies and governance frameworks for your organization.
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-3 font-medium">
+                Deliverable: Governance framework + stakeholder map
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <div class="flex items-start gap-4">
+            <div class="bg-accent-400 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">
+              4
+            </div>
+            <div class="flex-1">
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                Communication & Implementation
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                Build communication frameworks and 90-day implementation roadmaps.
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-3 font-medium">
+                Deliverable: 90-day roadmap + board presentation
+              </Text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        What You Get
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="p-8 bg-base-50 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Individual Deliverables
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>✓ Personalized HCAIF assessment</li>
+            <li>✓ Driver tree for your AI initiative</li>
+            <li>✓ Adoption-adjusted ROI model</li>
+            <li>✓ Governance framework</li>
+            <li>✓ Stakeholder map</li>
+            <li>✓ 90-day implementation roadmap</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-base-50 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Ongoing Access
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>✓ HCAIF Certified Practitioner credential</li>
+            <li>✓ Lifetime access to templates & frameworks</li>
+            <li>✓ Alumni network with peer support</li>
+            <li>✓ Quarterly alumni sessions</li>
+            <li>✓ 80+ graduate community</li>
+          </ul>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- UPCOMING COHORTS -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Upcoming Cohorts
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Cohort 3: June 2026
+          </Text>
+          <div class="mt-4 space-y-2 text-sm text-base-600">
+            <p>Wednesdays: June 4, 11, 18, 25</p>
+            <p>Time: 3:00–4:30 PM EAT</p>
+            <p class="font-medium mt-3">Enrollment deadline: May 28</p>
+            <p>Status: 7/12 seats filled</p>
+          </div>
+          <Button
+            variant="default"
+            size="xs"
+            isLink={true}
+            href="/contact"
+            class="mt-4"
+          >
+            Enroll in Cohort 3
+          </Button>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Cohort 4: September 2026
+          </Text>
+          <div class="mt-4 space-y-2 text-sm text-base-600">
+            <p>Wednesdays: September 3, 10, 17, 24</p>
+            <p>Time: 3:00–4:30 PM EAT</p>
+            <p class="font-medium mt-3">Enrollment opens: July 15</p>
+            <p>Target: 10–12 participants</p>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/contact"
+            class="mt-4"
+          >
+            Join Waitlist
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- WHO PARTICIPATES -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Who Participates
+      </Text>
+
+      <div class="mt-12">
+        <Text tag="p" variant="textBase" class="text-base-600">
+          Ideal participant profile:
+        </Text>
+        <ul class="mt-4 space-y-2 text-sm text-base-600">
+          <li>• C-suite or senior leadership (CEO, COO, CHRO, CTO, VP-level)</li>
+          <li>• Facing AI decisions in next 90 days</li>
+          <li>• Budget authority ($50K+ AI spend)</li>
+          <li>• Non-competing organizations (different sectors or geographies)</li>
+        </ul>
+
+        <div class="mt-8 p-8 bg-base-50 rounded-lg">
+          <Text tag="p" variant="textBase" class="text-base-900 font-medium">
+            Typical Cohort Composition
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>• 2–3 HealthTech leaders</li>
+            <li>• 2–3 Financial services executives</li>
+            <li>• 2–3 Development finance professionals</li>
+            <li>• 1–2 Retail/e-commerce leaders</li>
+            <li>• 1–2 Other sectors</li>
+          </ul>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- PRICING -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Investment: $800–$1,200 per seat
+        </Text>
+
+        <div class="mt-8 space-y-6">
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Pricing Options:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• $800/seat: Individual enrollment</li>
+              <li>• $1,000/seat: Corporate sponsor (3+ seats)</li>
+              <li>• $1,200/seat: DFI/foundation sponsor</li>
+            </ul>
+          </div>
+
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Group Discounts:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• 3–5 seats: 10% discount ($900/seat)</li>
+              <li>• 6+ seats: 15% discount ($850/seat)</li>
+              <li>• DFI portfolio packages: Custom pricing</li>
+            </ul>
+          </div>
+
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Payment Terms:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• 50% deposit upon enrollment (reserves seat)</li>
+              <li>• 50% due at Session 1</li>
+              <li>• Full refund if withdraw before Session 1</li>
+              <li>• No refunds after Session 1 begins</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Ready to join the next cohort?
+        </Text>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+          <Button
+            variant="default"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Enroll Now
+          </Button>
+          <Button
+            variant="muted"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Ask About Group Enrollment
+          </Button>
+        </div>
+
+        <Button
+          variant="muted"
+          size="xs"
+          isLink={true}
+          href="/ai-services"
+          class="mt-8"
+        >
+          ← Back to Services
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

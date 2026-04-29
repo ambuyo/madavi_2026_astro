@@ -1,0 +1,150 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Locations Data
+const locations = [
+  {
+    name: "Financial District",
+    city: "New York, NY",
+    address: "123 Wall Street, Suite 456\nNew York, NY 10005",
+    phone: "(555) 123-4567",
+    hours: "Mon-Fri: 8:00 AM - 6:00 PM\nSat: 9:00 AM - 2:00 PM",
+    phoneHref: "tel:+15551234567",
+  },
+  {
+    name: "Midtown Manhattan",
+    city: "New York, NY",
+    address: "456 Madison Avenue, Suite 789\nNew York, NY 10017",
+    phone: "(555) 234-5678",
+    hours: "Mon-Fri: 8:00 AM - 6:00 PM\nSat: 9:00 AM - 2:00 PM",
+    phoneHref: "tel:+15552345678",
+  },
+  {
+    name: "Queens Business Center",
+    city: "Queens, NY",
+    address: "789 Queens Boulevard, Suite 101\nFlushing, NY 11354",
+    phone: "(555) 345-6789",
+    hours: "Mon-Fri: 8:00 AM - 5:00 PM\nSat: By Appointment",
+    phoneHref: "tel:+15553456789",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="p-8 lg:p-12 bg-base-50">
+      <div class="max-w-xl">
+        <Kicker variant="default">Offices</Kicker>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-display lg:mt-8"
+        >
+          Our Office Locations
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-700 lg:text-pretty lg:col-span-2 mt-4"
+        >
+          Visit any of our conveniently located offices for in-person
+          consultations, document drop-off, or to meet with your dedicated
+          accounting team.
+        </Text>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-2">
+        {
+          locations.map((location) => (
+            <div class="relative group bg-white flex flex-col overflow-hidden p-8 gap-24 h-full justify-between">
+              <div>
+                <div>
+                  <Text
+                    tag="h3"
+                    variant="textXL"
+                    class="text-base-900 font-display"
+                  >
+                    {location.name}
+                  </Text>
+                  <Text tag="p" variant="textSM" class="text-base-600 mt-1">
+                    {location.city}
+                  </Text>
+                </div>
+                <div class="mt-4  divide-y divide-base-100">
+                  <div class="py-4">
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-700 font-medium"
+                    >
+                      Address
+                    </Text>
+                    <Text tag="p" variant="textSM" class="text-base-600">
+                      {location.address.split("\n").map((line) => (
+                        <>
+                          {line}
+                          <br />
+                        </>
+                      ))}
+                    </Text>
+                  </div>
+                  <div class="py-4">
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-700 font-medium"
+                    >
+                      Phone
+                    </Text>
+                    <Text tag="p" variant="textSM" class="text-base-600">
+                      {location.phone}
+                    </Text>
+                  </div>
+                  <div class="py-4">
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-700 font-medium"
+                    >
+                      Hours
+                    </Text>
+                    <Text tag="p" variant="textSM" class="text-base-600">
+                      {location.hours.split("\n").map((line) => (
+                        <>
+                          {line}
+                          <br />
+                        </>
+                      ))}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col lg:flex-row gap-2 mt-8">
+                <Button
+                  size="sm"
+                  variant="default"
+                  isLink={true}
+                  href={location.phoneHref}
+                  class="w-full lg:w-fit"
+                >
+                  Call
+                </Button>
+                <Button
+                  size="sm"
+                  variant="muted"
+                  isLink={true}
+                  href="/contact"
+                  class="w-full lg:w-fit"
+                >
+                  Directions
+                </Button>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

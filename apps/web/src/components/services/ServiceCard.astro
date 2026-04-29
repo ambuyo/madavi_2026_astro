@@ -1,0 +1,42 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Icons for services
+const { title, summary, category, icon, url } = {
+  url: "/services/" + Astro.props.service.slug,
+  title: Astro.props.service.data.title,
+  summary: Astro.props.service.data.summary,
+  category: Astro.props.service.data.category,
+  icon: Astro.props.service.data.icon,
+};
+---
+
+<article
+  class="relative group bg-white flex flex-col overflow-hidden p-8 gap-24 lg:gap-62 h-full justify-between"
+>
+  <a
+    href={url}
+    title={`Learn more: ${title}`}
+    aria-label={`Learn more about: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <div>
+    <Text tag="p" variant="textXS" class="text-base-700 uppercase font-medium"
+      >{category}</Text
+    >
+    <div>
+      <Text tag="h3" variant="displaySM" class="text-base-900 mt-8 font-display"
+        >{title}</Text
+      >
+      <Text tag="p" variant="textBase" class="text-base-600 mt-4 text-pretty"
+        >{summary}</Text
+      >
+    </div>
+  </div>
+
+  <Text
+    tag="p"
+    variant="textSM"
+    class="uppercase font-medium text-base-900 group-hover:text-accent-400 mt-4"
+    >Read further</Text
+  >
+</article>

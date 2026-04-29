@@ -1,0 +1,182 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Sections
+import BlogCard from "@/components/blog/BlogCard.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+const { frontmatter } = Astro.props;
+// Data
+import { getTeamMemberBySlug, getPosts } from "@/lib/data";
+const team = frontmatter.team
+  ? await getTeamMemberBySlug(frontmatter.team)
+  : null;
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((post) =>
+  post.data.tags.some((tag) => frontmatter.tags.includes(tag))
+);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12 relative">
+      <div class="max-w-3xl">
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          {frontmatter.title}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          {frontmatter.description}
+        </Text>
+      </div>
+    </Wrapper>
+    <Wrapper variant="paddingLess">
+      <Image
+        alt={frontmatter.image.alt}
+        src={frontmatter.image.url}
+        width={800}
+        height={600}
+        loading="lazy"
+        decoding="async"
+        class="w-full max-h-150 object-cover object-top"
+      />
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div>
+          <div class="lg:sticky lg:top-25">
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="text-base-900 text-balance font-medium tracking-tight font-display"
+            >
+              Article Details
+            </Text>
+            <div class="mt-8 space-y-4">
+              <div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-500 uppercase tracking-wide"
+                >
+                  Published
+                </Text>
+                <Text tag="p" variant="textBase" class="text-base-900">
+                  <time datetime={new Date(frontmatter.pubDate).toISOString()}>
+                    {
+                      new Date(frontmatter.pubDate).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "2-digit",
+                        }
+                      )
+                    }
+                  </time>
+                </Text>
+              </div>
+              {
+                team && (
+                  <div>
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-500 uppercase tracking-wide"
+                    >
+                      Author
+                    </Text>
+                    <a href={`/team/${team.slug}`} class="group">
+                      <Text
+                        tag="p"
+                        variant="textBase"
+                        class="text-base-900 group-hover:text-accent-600 transition-colors"
+                      >
+                        {team.data.name}
+                      </Text>
+                      <Text tag="p" variant="textSM" class="text-base-600">
+                        {team.data.role}
+                      </Text>
+                    </a>
+                  </div>
+                )
+              }
+              <div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-500 uppercase tracking-wide"
+                >
+                  Tasg
+                </Text>
+                <div class="flex flex-col gap-1 mt-2">
+                  {
+                    frontmatter.tags.map((tag) => (
+                      <a
+                        href={`/blog/tags/${tag}`}
+                        class="inline-block text-base-700 text-sm capitalize"
+                      >
+                        {tag.replace(/-/g, " ")}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <Text
+            tag="p"
+            variant="displayMD"
+            class="text-base-900 font-medium tracking-tight font-display"
+          >
+            {frontmatter.description}
+          </Text>
+          <Wrapper variant="prose" class="mt-12">
+            <slot />
+          </Wrapper>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  {
+    relatedPosts.length > 0 && (
+      <section>
+        <Wrapper variant="standard" class="py-12">
+          <div>
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="text-base-900 text-balance font-medium tracking-tight font-display"
+            >
+              Related Articles
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 lg:text-balance mt-4"
+            >
+              More insights on accounting and financial management
+            </Text>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4 p-8 lg:p-12 bg-base-50">
+              {relatedPosts.slice(0, 4).map((post) => (
+                <BlogCard post={post} />
+              ))}
+            </div>
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

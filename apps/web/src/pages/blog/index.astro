@@ -1,0 +1,47 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+// Data
+import { getPosts } from "@/lib/data";
+const allPosts = await getPosts();
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime();
+  const dateB = new Date(b.data.pubDate).getTime();
+  return dateB - dateA;
+});
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Journal</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Accounting Insights & Business Wisdom
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Stay ahead of the curve with expert analysis, practical tips, and the
+          latest trends in accounting, finance, and business management.
+        </Text>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 mt-12 gap-2 p-8 lg:p-12 bg-base-50"
+      >
+        {allPosts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

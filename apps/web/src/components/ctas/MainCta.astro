@@ -1,0 +1,62 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import couple from "@/images/assets/couple.png";
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="paddingLess">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <Image
+        src={couple}
+        width={1200}
+        height={800}
+        alt="Professional accounting services background"
+        class="w-full h-full object-cover object-top"
+      />
+      <div
+        class="p-8 lg:p-24 lg:px-26 bg-black text-balance lg:order-first h-full flex flex-col justify-between"
+      >
+        <div>
+          <Shield class="h-8 lg:h-12 text-white" />
+          <Text
+            tag="h3"
+            variant="displayLG"
+            class="text-white font-display font-medium mt-24"
+          >
+            Maximize profits, minimize complexity
+          </Text>
+          <Text tag="p" variant="textXL" class="text-white font-medium mt-4">
+            Take control of your financial future with Mulberry 's expert
+            accounting services.
+          </Text>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-2 mt-8">
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/contact"
+            class="w-full lg:w-fit"
+          >
+            Get Free Consultation
+          </Button>
+          <Button
+            variant="mutedDark"
+            size="xs"
+            isLink={true}
+            href="/pricing"
+            class="w-full lg:w-fit"
+          >
+            View Pricing
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

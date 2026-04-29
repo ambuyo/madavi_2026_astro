@@ -1,0 +1,23 @@
+{
+  "name": "mulberry",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:web": "pnpm --filter @lexington/web dev",
+    "dev:studio": "pnpm --filter @lexington/studio dev",
+    "build": "pnpm --parallel -r build",
+    "build:web": "pnpm --filter @lexington/web build",
+    "build:studio": "pnpm --filter @lexington/studio build",
+    "clean": "bash scripts/clean.sh",
+    "seed:all": "SEED_ALL=1 pnpm exec tsx scripts/migrate-to-sanity.ts"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "dependencies": {
+    "@sanity/client": "^6.24.1",
+    "dotenv": "^17.2.3",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}

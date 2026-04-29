@@ -1,0 +1,22 @@
+---
+import { getCaseStudies, getCaseStudyBySlug } from "@/lib/data";
+import CaseStudiesLayout from "@/layouts/CaseStudiesLayout.astro";
+
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const caseStudy = await getCaseStudyBySlug(slug!);
+if (!caseStudy) {
+  return Astro.redirect("/404");
+}
+const Content = caseStudy.render ? (await caseStudy.render()).Content : null;
+---
+
+<CaseStudiesLayout frontmatter={caseStudy.data}>
+  {Content ? <Content /> : <div set:html={caseStudy.body} />}
+</CaseStudiesLayout>

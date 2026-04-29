@@ -1,0 +1,178 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import IndustryCard from "@/components/industries/IndustryCard.astro";
+// Data
+import { getIndustries } from "@/lib/data";
+const allIndustries = await getIndustries();
+// Get the industry slug from the URL
+const industrySlug = Astro.url.pathname.split("/").filter(Boolean).pop();
+// Filter related industries (excluding current one) - maybe by shared services
+const { frontmatter } = Astro.props;
+const relatedIndustries = allIndustries
+  .filter(
+    (industry) =>
+      industry.data.relevantServices.some((service) =>
+        frontmatter.relevantServices.includes(service)
+      ) && industry.slug !== industrySlug
+  )
+  .slice(0, 2);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          {frontmatter.title}
+        </Text>
+      </div>
+    </Wrapper>
+    <Wrapper variant="paddingLess">
+      <Image
+        alt={frontmatter.image.alt}
+        src={frontmatter.image.url}
+        width={800}
+        height={600}
+        loading="lazy"
+        decoding="async"
+        class="w-full max-h-150 object-cover object-top"
+      />
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 gap-2">
+        <div>
+          <div class="flex flex-col gap-8 lg:sticky lg:top-25">
+            <div>
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-base-900 font-display"
+              >
+                Industry Overview
+              </Text>
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-base-600 lg:text-balance mt-8"
+              >
+                {frontmatter.summary}
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-base-900 font-display"
+              >
+                Common Challenges
+              </Text>
+              <ul role="list" class="mt-8 list-none space-y-2">
+                {
+                  frontmatter.painPoints.map((painPoint) => (
+                    <li>
+                      <Text
+                        tag="p"
+                        variant="textBase"
+                        class="text-base-600 lg:text-balance"
+                      >
+                        - {painPoint}
+                      </Text>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+        <Wrapper variant="prose" class="lg:col-span-2">
+          <slot />
+        </Wrapper>
+        <div>
+          <div class="flex flex-col gap-8 lg:sticky lg:top-25">
+            <div>
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-base-900 font-display"
+              >
+                Our Expertise
+              </Text>
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-base-600 text-pretty mt-2"
+              >
+                We understand the unique financial challenges faced by {
+                  frontmatter.title.toLowerCase()
+                } businesses and provide specialized accounting solutions tailored
+                to your industry needs.
+              </Text>
+            </div>
+            <div>
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-base-900 font-display"
+              >
+                Relevant Services
+              </Text>
+              <ul role="list" class="mt-2 list-none">
+                {
+                  frontmatter.relevantServices.map((service) => (
+                    <li>
+                      <Text tag="p" variant="textBase" class="text-base-600">
+                        - {service}
+                      </Text>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  {
+    relatedIndustries.length > 0 && (
+      <section>
+        <Wrapper variant="standard" class="py-12">
+          <div>
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="text-base-900 text-balance font-medium tracking-tight font-display"
+            >
+              Related Industries
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 lg:text-balance mt-4"
+            >
+              Other industries we serve with specialized accounting expertise
+            </Text>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4 p-8 lg:p-12 bg-base-50">
+              {relatedIndustries.map((industry) => (
+                <IndustryCard industry={industry} />
+              ))}
+            </div>
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

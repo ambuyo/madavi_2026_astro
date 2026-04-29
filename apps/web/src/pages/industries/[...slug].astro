@@ -1,0 +1,22 @@
+---
+import IndustriesLayout from "@/layouts/IndustriesLayout.astro";
+import { getIndustries, getIndustryBySlug } from "@/lib/data";
+
+export async function getStaticPaths() {
+  const industries = await getIndustries();
+  return industries.map((industry) => ({
+    params: { slug: industry.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const industry = await getIndustryBySlug(slug!);
+if (!industry) {
+  return Astro.redirect("/404");
+}
+const Content = industry.render ? (await industry.render()).Content : null;
+---
+
+<IndustriesLayout frontmatter={industry.data}>
+  {Content ? <Content /> : <div set:html={industry.body} />}
+</IndustriesLayout>

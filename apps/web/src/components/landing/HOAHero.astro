@@ -1,0 +1,68 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import heroImage from "@/images/assets/heroImage.png";
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section class="mt-[10px]">
+  <Wrapper variant="standard" class="py-24 lg:min-h-[calc(100dvh-4rem)]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div
+        class="rounded-3xl bg-accent-50 p-8 lg:p-12 flex flex-col justify-center"
+      >
+        <div> 
+          <Text
+            tag="span"
+            variant="textXS"
+            class="uppercase font-medium text-accent-700"
+          >
+            People before Platforms.
+          </Text>
+          <Text
+            tag="h1"
+            variant="displayLG"
+            class="text-base-900 mt-12 tracking-tigt font-display"
+          >
+We build AI adoption capability before you deploy technology.
+          </Text>
+          <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+  Advisory for African C-suite leaders who recognize that organizational readiness determines outcomes—not algorithms.
+
+          </Text>
+          <div class="flex flex-wrap gap-4 mt-12">
+            <Button
+              isLink
+              size="xs"
+              variant="accent"
+              href="/documents"
+              class="w-fit"
+            >
+Schedule Strategic Session            </Button>
+            <Button
+              isLink
+              size="xs"
+              variant="muted"
+              href="/contact"
+              class="w-fit"
+            >
+              Contact the Association
+            </Button>
+          </div>
+        </div>
+      </div>
+      <Image
+        width={800}
+        height={800}
+        src={heroImage}
+        alt="Hero image"
+        loading="eager"
+        decoding="async"
+        class="size-full rounded-3xl order-first lg:order-last aspect-12/9 lg:aspect-square w-full 2xl:aspect-9/14 object-cover object-center"
+      />
+    </div>
+  </Wrapper>
+</section>

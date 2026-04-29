@@ -1,0 +1,15 @@
+---
+import { Image } from "astro:assets";
+import logoImage from "@/images/brand/logos/Madavi Logo - Full.png";
+
+const { class: className = "", ...rest } = Astro.props;
+---
+
+<Image
+  src={logoImage}
+  alt="Madavi Logo"
+  width={940}
+  height={300}
+  class={`object-contain ${className}`}
+  {...rest}
+/>

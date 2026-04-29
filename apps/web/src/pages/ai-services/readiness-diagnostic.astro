@@ -1,0 +1,374 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Kicker variant="default">SERVICE 1 OF 4</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          AI Readiness Diagnostic
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6 text-pretty"
+        >
+          The entry point. Assessment before investment. Before you spend $50K–$200K on AI deployment, spend 2 weeks understanding whether your organization is ready to adopt it.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- WHAT MAKES THIS DIFFERENT -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        What Makes This Different
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-red-50 border border-red-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-red-900 font-medium">
+            Standard AI consulting approach:
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-red-800">
+            <li>• Vendor demonstrates tool</li>
+            <li>• Technical team validates accuracy</li>
+            <li>• Procurement approves budget</li>
+            <li>• Deploy to 500 users</li>
+            <li class="font-medium mt-3">Result: 18% adoption, tool sits unused</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-green-50 border border-green-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-green-900 font-medium">
+            HCAIF Diagnostic approach:
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-green-800">
+            <li>• Assess current readiness across 5 dimensions</li>
+            <li>• Build driver trees to identify root causes</li>
+            <li>• Model adoption-adjusted ROI (not vendor ROI)</li>
+            <li>• Prioritize capability-building over technology procurement</li>
+            <li class="font-medium mt-3">Result: Deploy when organization is ready, achieve 60–75% adoption</li>
+          </ul>
+        </div>
+      </div>
+
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-900 font-medium mt-8"
+      >
+        The difference: We tell you whether to deploy now, build capability first, or redesign the initiative entirely.
+      </Text>
+    </Wrapper>
+  </section>
+
+  <!-- HCAIF FRAMEWORK -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        The HCAIF Framework: Five Dimensions
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            1. Human Capacity
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            Does your team have the skills to use AI effectively?
+          </Text>
+          <ul class="mt-4 space-y-1 text-sm text-base-600">
+            <li>• Executive AI literacy (can leadership articulate value beyond hype?)</li>
+            <li>• Technical capability (in-house expertise vs. vendor dependency)</li>
+            <li>• Change leadership capacity (who owns adoption internally?)</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            2. Cultural Readiness
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            Will your organization actually adopt what you deploy?
+          </Text>
+          <ul class="mt-4 space-y-1 text-sm text-base-600">
+            <li>• Trust in automation (do staff believe AI recommendations?)</li>
+            <li>• Risk tolerance (permission to experiment and fail?)</li>
+            <li>• Psychological safety (can staff report AI errors without blame?)</li>
+            <li>• Decision-making culture (data-driven vs. intuition-based?)</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            3. Adoption Infrastructure
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            Do you have the systems to support AI tools?
+          </Text>
+          <ul class="mt-4 space-y-1 text-sm text-base-600">
+            <li>• Change management capability (structured rollout process?)</li>
+            <li>• Training infrastructure (onboarding, ongoing support?)</li>
+            <li>• Feedback loops (user input shapes iteration?)</li>
+            <li>• Success measurement (how you'll know it's working?)</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            4. Integration Feasibility
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            Can AI actually connect to your existing tech stack?
+          </Text>
+          <ul class="mt-4 space-y-1 text-sm text-base-600">
+            <li>• Legacy system compatibility (can it integrate or does it require workarounds?)</li>
+            <li>• Data infrastructure (quality, accessibility, governance)</li>
+            <li>• API architecture (integration complexity, vendor lock-in risk)</li>
+            <li>• Technical debt (migration required before AI works?)</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            5. Financial Sustainability
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            Can you afford not just deployment but ongoing optimization?
+          </Text>
+          <ul class="mt-4 space-y-1 text-sm text-base-600">
+            <li>• TCO understanding (beyond license costs: training, integration, support, iteration)</li>
+            <li>• Adoption risk in projections (standard ROI vs. reality-adjusted ROI)</li>
+            <li>• Continuous improvement budget (AI requires ongoing refinement, not one-time deployment)</li>
+            <li>• Success measurement capability (can you actually track ROI post-launch?)</li>
+          </ul>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Methodology: How the Diagnostic Works
+      </Text>
+
+      <div class="mt-12 space-y-8">
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Week 1: Discovery & Analysis
+          </Text>
+          <div class="mt-6 space-y-4">
+            <div>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Day 1–3: Structured Interviews (90 minutes each)
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+                We interview 2–3 stakeholders: Executive sponsor, operational lead, and front-line representative. Using driver tree construction and HCAIF dimension probing.
+              </Text>
+            </div>
+
+            <div>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Day 4–5: Analysis
+              </Text>
+              <ul class="mt-2 space-y-1 text-xs text-base-600">
+                <li>• Score each HCAIF dimension (1–10 scale)</li>
+                <li>• Build driver trees showing causal relationships</li>
+                <li>• Calculate adoption-adjusted ROI</li>
+                <li>• Map readiness gaps to business impact</li>
+                <li>• Prioritize interventions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Week 2: Report Development & Delivery
+          </Text>
+          <div class="mt-6 space-y-4">
+            <div>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Day 6–9: Report Writing (9 Pages)
+              </Text>
+              <ul class="mt-2 space-y-1 text-xs text-base-600">
+                <li>• Page 1: Executive summary</li>
+                <li>• Page 2: Driver tree visualization</li>
+                <li>• Pages 3–7: HCAIF dimension analysis</li>
+                <li>• Page 8: Financial impact model</li>
+                <li>• Page 9: Implementation roadmap</li>
+              </ul>
+            </div>
+
+            <div>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Day 10: Delivery & Debrief (60-minute session)
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+                Walk through findings, discuss red/yellow/green scores, clarify recommendations, explore next steps.
+              </Text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        What You Get: Deliverables
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Primary Deliverable: 9-Page Report
+          </Text>
+          <ul class="mt-4 space-y-3 text-sm text-base-600">
+            <li>✓ Executive summary with primary recommendation</li>
+            <li>✓ Driver tree visualization with color-coded readiness assessment</li>
+            <li>✓ HCAIF five-dimension assessment (1 page per dimension)</li>
+            <li>✓ Financial impact model (standard vs. adoption-adjusted ROI)</li>
+            <li>✓ 90-day implementation roadmap</li>
+          </ul>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Secondary Deliverable
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-4">
+            60-minute debrief session with presentation of findings, Q&A, and discussion of next steps.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- PRICING -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Investment: $2,500–$4,000
+        </Text>
+
+        <div class="mt-8 p-8 bg-base-50 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            What's Included:
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>• 2-week fixed scope (no hourly billing)</li>
+            <li>• 2–3 stakeholder interviews (90 minutes each)</li>
+            <li>• Driver tree analysis</li>
+            <li>• HCAIF five-dimension assessment</li>
+            <li>• 9-page diagnostic report</li>
+            <li>• 60-minute debrief session</li>
+            <li>• Email support during analysis period</li>
+          </ul>
+        </div>
+
+        <div class="mt-8 p-8 bg-base-50 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            What's Not Included:
+          </Text>
+          <ul class="mt-4 space-y-2 text-sm text-base-600">
+            <li>• Implementation (we assess readiness, we don't build AI systems)</li>
+            <li>• Ongoing advisory (that's the Retainer service)</li>
+            <li>• Training delivery (that's the Cohort service)</li>
+          </ul>
+        </div>
+
+        <div class="mt-8">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Payment Terms:
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            100% upfront (protects cash flow, signals commitment). Invoice issued upon engagement confirmation. Report delivered within 14 calendar days of kickoff.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Ready for a readiness assessment?
+        </Text>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+          <Button
+            variant="default"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Request Diagnostic Proposal
+          </Button>
+          <Button
+            variant="muted"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Schedule Strategic Session
+          </Button>
+        </div>
+
+        <Button
+          variant="muted"
+          size="xs"
+          isLink={true}
+          href="/ai-services"
+          class="mt-8"
+        >
+          ← Back to Services
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

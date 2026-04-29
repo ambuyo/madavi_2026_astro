@@ -1,0 +1,32 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import team from "@/images/assets/team.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+<section>
+  <Wrapper variant="standard" class="pt-12">
+    <div class="max-w-2xl">
+      <Kicker variant="default">Find us</Kicker>
+      <Text
+        tag="h1"
+        variant="displayLG"
+        class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+      >
+        Our Locations
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-600 lg:text-balance mt-4"
+      >
+        Visit us at one of our convenient locations or schedule a virtual
+        consultation. We're here to serve your accounting and financial needs
+        across multiple regions.
+      </Text>
+    </div>
+  </Wrapper>
+</section>

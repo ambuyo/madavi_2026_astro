@@ -1,0 +1,22 @@
+---
+import LegalLayout from "@/layouts/LegalLayout.astro";
+import { getInfoPages, getInfoPageBySlug } from "@/lib/data";
+
+export async function getStaticPaths() {
+  const infoPages = await getInfoPages();
+  return infoPages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const page = await getInfoPageBySlug(slug!);
+if (!page) {
+  return Astro.redirect("/404");
+}
+const Content = page.render ? (await page.render()).Content : null;
+---
+
+<LegalLayout frontmatter={page.data}>
+  {Content ? <Content /> : <div set:html={page.body} />}
+</LegalLayout>

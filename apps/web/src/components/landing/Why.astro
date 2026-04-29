@@ -1,0 +1,96 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import talk from "@/images/assets/talk.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Compoenents
+import LogoCloud from "@/components/testimonials/LogoCloud.astro";
+const features = [
+  {
+    title: "Lightning Fast",
+    description:
+      "Quick turnaround times without compromising accuracy. Get your financial reports when you need them.",
+  },
+  {
+    title: "100% Secure",
+    description:
+      "Bank-level security and encryption protect your sensitive financial data at all times.",
+  },
+  {
+    title: "Expert Team",
+    description:
+      "Certified accountants and financial advisors with decades of combined experience.",
+  },
+  {
+    title: "Personalized Service",
+    description:
+      "Tailored solutions that understand your unique business needs and challenges.",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div
+      class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 p-8 lg:p-12 bg-base-50"
+    >
+      <Image
+        src={talk}
+        alt="Image"
+        width={800}
+        height={1440}
+        loading="eager"
+        decoding="async"
+        class="size-full object-cover object-center aspect-square"
+      />
+      <div class="flex flex-col">
+        <div>
+          <Kicker variant="default">Why Mulberry Stands Out</Kicker>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-base 950 text-balance font-medium tracking-tight font-display mt-8"
+          >
+            Trusted Accounting Excellence Since 2010
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-700 mt-2 text-pretty"
+          >
+            With over a decade of experience serving businesses across
+            industries, we combine cutting-edge technology with traditional
+            accounting wisdom to deliver unparalleled financial clarity and
+            peace of mind.
+          </Text>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-8 mt-12">
+          {
+            features.map((feature) => (
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="text-base-900 font-display"
+                >
+                  {feature.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-600 mt-2 text-pretty"
+                >
+                  {feature.description}
+                </Text>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <LogoCloud />
+  </Wrapper>
+</section>

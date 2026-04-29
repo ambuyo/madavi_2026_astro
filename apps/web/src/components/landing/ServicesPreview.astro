@@ -1,0 +1,79 @@
+---
+// Assets
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import ServiceCard from "@/components/services/ServiceCard.astro";
+// Data
+import { getServices } from "@/lib/data";
+const allServices = await getServices();
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div class="p-8 lg:p-12 bg-base-50">
+      <div class="max-w-xl">
+        <Kicker variant="default">Services</Kicker>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-display lg:mt-8"
+        >
+          Everything your business needs to thrive financially
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-700 lg:text-pretty lg:col-span-2 mt-4"
+        >
+          From startup bookkeeping to complex tax strategies, we provide
+          end-to-end accounting solutions that save you time, reduce costs, and
+          ensure compliance. Focus on growing your business while we handle the
+          numbers.
+        </Text>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-2">
+        {
+          allServices
+            .slice(0, 2)
+            .map((service) => <ServiceCard service={service} />)
+        }
+        <div
+          class="bg-accent-400 p-8 flex flex-col h-full justify-between gap-8"
+        >
+          <div>
+            <Shield class="h-8 text-white" />
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base text-white font-display font-medium mt-24"
+            >
+              Ready to get started?
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-white font-medium mt-2"
+            >
+              Get in touch with us to learn more about our services and how we
+              can help you.
+            </Text>
+          </div>
+          <Button
+            size="xs"
+            variant="muted"
+            isLink={true}
+            href="/services"
+            class="w-fit"
+          >
+            Explore All Our Services
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

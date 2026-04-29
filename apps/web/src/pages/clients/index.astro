@@ -1,0 +1,120 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Sanity
+import { client } from "@/lib/sanity/client";
+
+const query = `*[_type == "clientLogo"] | order(order asc) {
+  _id,
+  company,
+  logo {
+    asset -> {
+      url
+    },
+    alt
+  },
+  url,
+  industry
+}`;
+
+const allLogos = await client.fetch(query);
+
+// Group logos by industry
+const industryMap = {
+  healthcare: "Healthcare",
+  legal: "Legal",
+  foundations: "Foundations",
+  consortiums: "Consortiums",
+  realEstate: "Real Estate",
+  retailEcommerce: "Retail & Ecommerce",
+  agriculture: "Agriculture",
+  ventureCapital: "Venture Capital",
+  technology: "Technology",
+  manufacturing: "Manufacturing",
+};
+
+const groupedLogos = allLogos.reduce((acc: Record<string, any[]>, logo: any) => {
+  const industry = logo.industry || "other";
+  if (!acc[industry]) {
+    acc[industry] = [];
+  }
+  acc[industry].push(logo);
+  return acc;
+}, {});
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Our Clients</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+          >Brands We Work With</Text
+        >
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          We partner with leading organizations across diverse industries to deliver exceptional results
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  {Object.entries(groupedLogos).map(([industry, logos]) => (
+    <section class="py-16 border-t border-base-200">
+      <Wrapper variant="standard">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display mb-12"
+        >
+          {industryMap[industry as keyof typeof industryMap] || industry}
+        </Text>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 items-center justify-between">
+          {(logos as any[]).map((logo) => (
+            <div class="bg-base-50 p-4 flex flex-col items-center justify-center aspect-square">
+              {logo.url ? (
+                <a href={logo.url} target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+                  <img
+                    src={logo.logo.asset.url}
+                    alt={logo.logo.alt || logo.company}
+                    loading="eager"
+                    decoding="async"
+                    class="object-contain w-3/4 h-3/4 logo-img"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={logo.logo.asset.url}
+                  alt={logo.logo.alt || logo.company}
+                  loading="eager"
+                  decoding="async"
+                  class="object-contain w-3/4 h-3/4 logo-img"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </Wrapper>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .logo-img {
+    transition: filter 0.3s ease;
+    filter: grayscale(100%);
+  }
+
+  .logo-img:hover {
+    filter: grayscale(0%) !important;
+  }
+</style>

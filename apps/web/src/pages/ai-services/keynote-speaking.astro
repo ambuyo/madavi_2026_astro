@@ -1,0 +1,349 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Kicker variant="default">SERVICE 4 OF 4</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Keynote & Speaking
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6 text-pretty"
+        >
+          Thought leadership for industry positioning. Framework-anchored presentations on organizational readiness, adoption-adjusted ROI, and why 70% of AI initiatives fail. Content that challenges audiences and positions AI adoption as capability-building work.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- SPEAKING TOPICS -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Featured Speaking Topics
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-base-50 border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            "Why 70% of AI Initiatives Fail (And How to Be in the 30%)"
+          </Text>
+          <div class="mt-4 space-y-3">
+            <div>
+              <Text tag="p" variant="textXS" class="text-base-600 font-medium">
+                Duration: 45–60 minutes
+              </Text>
+            </div>
+            <Text tag="p" variant="textSM" class="text-base-600">
+              Explain why organizational readiness determines outcomes, not algorithm accuracy. Share the BCG 10-20-70 principle and HCAIF framework.
+            </Text>
+          </div>
+        </div>
+
+        <div class="p-8 bg-base-50 border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            "The $3.2B AI Adoption Gap: What African Enterprises Get Wrong"
+          </Text>
+          <div class="mt-4 space-y-3">
+            <div>
+              <Text tag="p" variant="textXS" class="text-base-600 font-medium">
+                Duration: 45–60 minutes
+              </Text>
+            </div>
+            <Text tag="p" variant="textSM" class="text-base-600">
+              African market context, adoption-adjusted ROI, why vendor projections fail, sector-specific examples (HealthTech, FinTech, DFI).
+            </Text>
+          </div>
+        </div>
+
+        <div class="p-8 bg-base-50 border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            "From Pilot Purgatory to Scaled Adoption in 90 Days"
+          </Text>
+          <div class="mt-4 space-y-3">
+            <div>
+              <Text tag="p" variant="textXS" class="text-base-600 font-medium">
+                Duration: 60 minutes (includes interactive workshop)
+              </Text>
+            </div>
+            <Text tag="p" variant="textSM" class="text-base-600">
+              FAST framework, 90-day capability-building roadmap, cultural readiness audit, stakeholder mapping, interactive components.
+            </Text>
+          </div>
+        </div>
+
+        <div class="p-8 bg-base-50 border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            "Governance Frameworks for AI in Regulated Industries"
+          </Text>
+          <div class="mt-4 space-y-3">
+            <div>
+              <Text tag="p" variant="textXS" class="text-base-600 font-medium">
+                Duration: 60–90 minutes (workshop format)
+              </Text>
+            </div>
+            <Text tag="p" variant="textSM" class="text-base-600">
+              Regulatory landscape, trust infrastructure, governance framework design, compliance, liability clarification, case studies.
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 p-8 bg-accent-100 rounded-lg border border-accent-200">
+        <Text tag="p" variant="textSM" class="text-accent-900 font-medium">
+          Custom Topics Available
+        </Text>
+        <Text tag="p" variant="textXS" class="text-accent-800 mt-2">
+          We adapt content based on audience seniority (C-suite, technical teams, mixed), sector (HealthTech, FinTech, DFI), and geographic context (East Africa, West Africa, pan-African).
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        What's Included
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Standard Keynote Engagement
+          </Text>
+          <ul class="mt-6 space-y-3 text-sm text-base-600">
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-accent-400">✓</span>
+              <span>45–60 minute presentation (customized to audience)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-accent-400">✓</span>
+              <span>15-minute Q&A session</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-accent-400">✓</span>
+              <span>Slide deck (branded for event, shared post-event)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-accent-400">✓</span>
+              <span>Pre-event consultation (30 minutes)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-accent-400">✓</span>
+              <span>Post-event summary & follow-up</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Optional Add-ons
+          </Text>
+          <ul class="mt-6 space-y-3 text-sm text-base-600">
+            <li>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Panel participation
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-1">
+                $500 additional | 30–45 minute panel
+              </Text>
+            </li>
+            <li>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Workshop facilitation
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-1">
+                $1,000 additional | 2-hour interactive workshop
+              </Text>
+            </li>
+            <li>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Closed-door executive briefing
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-1">
+                $1,500 additional | Private session with leadership team
+              </Text>
+            </li>
+            <li>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                Recording/livestream rights
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-1">
+                $500 additional | Public distribution permission
+              </Text>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- EVENT TYPES -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Event Types We Serve
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="p-6 border border-base-200 rounded-lg">
+          <Text tag="h4" variant="displaySM" class="text-base-900 font-display">
+            Conference Keynotes
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-3">
+            HealthTech conferences, FinTech summits, AI/ML events, tech summits, business association events.
+          </Text>
+        </div>
+
+        <div className="p-6 border border-base-200 rounded-lg">
+          <Text tag="h4" variant="displaySM" class="text-base-900 font-display">
+            Corporate Events
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-3">
+            Company all-hands, leadership off-sites, board retreats, AI governance deep-dives.
+          </Text>
+        </div>
+
+        <div className="p-6 border border-base-200 rounded-lg">
+          <Text tag="h4" variant="displaySM" class="text-base-900 font-display">
+            DFI & Development Finance
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-3">
+            Portfolio company convenings, investor forums, development finance conferences.
+          </Text>
+        </div>
+
+        <div className="p-6 border border-base-200 rounded-lg">
+          <Text tag="h4" variant="displaySM" class="text-base-900 font-display">
+            Academic & Research Forums
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-3">
+            University lectures, research conferences, executive education programs.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- PRICING -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Investment: $1,500–$3,500 per engagement
+        </Text>
+
+        <div class="mt-8 space-y-6">
+          <div className="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Pricing by Event Type:
+            </Text>
+            <ul className="mt-4 space-y-2 text-sm text-base-600">
+              <li>• $1,500: Local event (Nairobi), 45-minute keynote</li>
+              <li>• $2,000: Regional event (East Africa), 60-minute keynote</li>
+              <li>• $2,500: International event, travel required, 60-minute keynote</li>
+              <li>• $3,500: Executive briefing (closed-door), workshop components</li>
+            </ul>
+          </div>
+
+          <div className="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Travel:
+            </Text>
+            <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+              Client covers flight (economy), accommodation (mid-range hotel), ground transport. Or bundle into fee ($500–$1,000 depending on destination).
+            </Text>
+          </div>
+
+          <div className="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Payment Terms:
+            </Text>
+            <ul className="mt-4 space-y-2 text-sm text-base-600">
+              <li>• 50% deposit upon booking confirmation</li>
+              <li>• 50% due 7 days before event</li>
+              <li>• Full refund if canceled 30+ days before event</li>
+              <li>• 50% refund if canceled 15–30 days before</li>
+              <li>• No refund if canceled less than 15 days</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Ready to book a keynote?
+        </Text>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+          <Button
+            variant="default"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Submit Speaking Inquiry
+          </Button>
+          <Button
+            variant="muted"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Schedule Planning Call
+          </Button>
+        </div>
+
+        <Button
+          variant="muted"
+          size="xs"
+          isLink={true}
+          href="/ai-services"
+          class="mt-8"
+        >
+          ← Back to Services
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

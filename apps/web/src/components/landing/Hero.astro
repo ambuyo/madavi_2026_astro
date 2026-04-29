@@ -1,0 +1,54 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import HeroImage from "@/images/assets/heroImage.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="standard" class="pt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <Kicker variant="default">Mulberry Accounting</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Expert accounting services for businesses
+        </Text>
+      </div>
+      <div>
+        <Text tag="p" variant="textBase" class="text-base-600 lg:text-balance">
+          Professional bookkeeping, tax planning, and financial advisory
+          services tailored to help your business thrive. Trusted by
+          entrepreneurs across all industries.
+        </Text>
+        <Button
+          variant="muted"
+          size="base"
+          isLink={true}
+          href="/system/overview"
+          class="mt-8 w-fit"
+        >
+          See all pages
+        </Button>
+      </div>
+    </div>
+  </Wrapper>
+  <Wrapper variant="paddingLess" class="pt-12">
+    <Image
+      src={HeroImage}
+      alt="Hero Image"
+      width={1200}
+      height={1400}
+      loading="eager"
+      decoding="async"
+      class="w-full max-h-200 object-cover object-top"
+    />
+  </Wrapper>
+</section>

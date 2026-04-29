@@ -1,0 +1,22 @@
+---
+import { getTeamMembers, getTeamMemberBySlug } from "@/lib/data";
+import TeamLayout from "@/layouts/TeamLayout.astro";
+
+export async function getStaticPaths() {
+  const team = await getTeamMembers();
+  return team.map((member) => ({
+    params: { slug: member.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const member = await getTeamMemberBySlug(slug!);
+if (!member) {
+  return Astro.redirect("/404");
+}
+const Content = member.render ? (await member.render()).Content : null;
+---
+
+<TeamLayout frontmatter={member.data}>
+  {Content ? <Content /> : <div set:html={member.body} />}
+</TeamLayout>

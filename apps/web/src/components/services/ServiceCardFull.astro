@@ -1,0 +1,44 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Icons for services
+const { title, summary, category, pricing, url } = {
+  url: "/services/" + Astro.props.service.slug,
+  title: Astro.props.service.data.title,
+  summary: Astro.props.service.data.summary,
+  category: Astro.props.service.data.category,
+  pricing: Astro.props.service.data.pricing,
+};
+---
+
+<article
+  class="relative group bg-white flex flex-col overflow-hidden p-8 gap-24 h-full justify-between"
+>
+  <a
+    href={url}
+    title={`Learn more: ${title}`}
+    aria-label={`Learn more about: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <div>
+    <Text tag="p" variant="textXS" class="text-base-700 uppercase font-medium">
+      {
+        pricing.pricingModel === "monthly"
+          ? `${pricing.startingPrice}/month`
+          : `From ${pricing.startingPrice}`
+      }
+    </Text>
+    <Text tag="h3" variant="displaySM" class="text-base-900 font-display mt-8">
+      {title}
+    </Text>
+    <Text tag="p" variant="textBase" class="text-base-600 mt-4 text-pretty">
+      {summary}
+    </Text>
+  </div>
+  <Text
+    tag="p"
+    variant="textSM"
+    class="uppercase font-medium text-base-900 group-hover:text-accent-400"
+    >Read further</Text
+  >
+</article>

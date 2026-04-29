@@ -1,0 +1,199 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import whiteLogo from "@/images/brand/logos/Madavi Logo - Full- white.png";
+import BigLogo from "@/components/assets/BigLogo.astro";
+// Icons
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+import ShieldCheck from "@/components/fundations/icons/ShieldCheck.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Footer link configurations
+const footerSections = [
+  {
+    title: "Services",
+    links: [
+      { href: "/services", label: "All Services" },
+      {
+        href: "/services/bookkeeping-accounting",
+        label: "Bookkeeping & Accounting",
+      },
+      {
+        href: "/services/audit-support-assurance",
+        label: "Audit Support & Assurance",
+      },
+      {
+        href: "/services/business-formation-setup",
+        label: "Business Formation",
+      },
+      {
+        href: "/services/business-valuation-appraisal",
+        label: "Business Valuation",
+      },
+      {
+        href: "/services/bankruptcy-financial-restructuring-accounting",
+        label: "Bankruptcy & Restructuring",
+      },
+      {
+        href: "/services/agricultural-accounting-farm-management",
+        label: "Agricultural Accounting",
+      },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { href: "/industries", label: "Industries We Serve" },
+      { href: "/case-studies", label: "Case Studies" },
+      { href: "/blog", label: "Blog & Insights" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/about", label: "About Us" },
+      { href: "/team", label: "Our Team" },
+      { href: "/testimonials", label: "Testimonials" },
+      { href: "/contact", label: "Contact Us" },
+    ],
+  },
+  {
+    title: "Quick Links",
+    links: [
+      { href: "#", label: "Tax Forms & Documents" },
+      { href: "#", label: "Client Portal Login" },
+      { href: "#", label: "Payment Portal" },
+      { href: "#", label: "File Upload Center" },
+      { href: "#", label: "Tax Calendar" },
+      { href: "#", label: "Business Resources" },
+    ],
+  },
+];
+const legalLinks = [
+  { href: "/legal/privacy", label: "Privacy Policy" },
+  { href: "/legal/terms", label: "Terms of Service" },
+  { href: "#", label: "Security" },
+  { href: "#", label: "Accessibility" },
+];
+
+const certifications = [
+  "Certified Public Accountants",
+  "Enrolled Agents",
+  "QuickBooks Certified",
+];
+---
+
+<footer class="border-t border-base-900" style="background-color: #00424e;">
+  <Wrapper variant="standard" class="py-16">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8">
+      <div class="col-span-full lg:col-span-1">
+        <Image src={whiteLogo} alt="Madavi Logo" width={940} height={300} class="h-12 w-auto object-contain" />
+        <Text tag="p" variant="textXS" class="text-base-300 mt-12">
+          Professional accounting and financial services tailored to your
+          business needs. Trusted expertise across all industries.
+        </Text>
+        <Text
+          tag="p"
+          variant="textXS"
+          class="text-base-300 border-t border-base-900 pt-4 mt-4"
+        >
+          © <span id="current-year"></span> Mulberry Accounting. All rights reserved.
+        </Text>
+      </div>
+      {
+        footerSections.map((section) => (
+          <div>
+            <Text tag="h3" variant="textSM" class="text-white uppercase ">
+              {section.title}
+            </Text>
+            <ul class="space-y-2 mt-4 lg:mt-12">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="group text-xs flex items-center text-base-300 hover:text-accent-400 transition-colors duration-300 justify-between"
+                  >
+                    {link.label}
+                    <ArrowRight class="size-4 hidden group-hover:flex duration-300" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div>
+        <Text tag="h3" variant="textSM" class="text-white uppercase">
+          Contact Information
+        </Text>
+        <div class="mt-4 lg:mt-12">
+          <address class="space-y-3 not-italic">
+            <Text tag="p" variant="textXS" class="text-base-300">
+              <span class="block text-white uppercase">Phone:</span> (555) 123-4567
+            </Text>
+            <Text tag="p" variant="textXS" class="text-base-300">
+              <span class="block text-white uppercase">Email:</span> info@mulberry.com
+            </Text>
+            <Text tag="p" variant="textXS" class="text-base-300">
+              <span class="block text-white uppercase">Address:</span>
+              123 Business Ave, Suite 100 New York, NY 10001
+            </Text>
+          </address>
+          <div class="border-t border-base-900 pt-4 mt-4">
+            <Text tag="p" variant="textXS" class="text-base-300">
+              <span class="block text-white uppercase">Business Hours:</span>
+            </Text>
+            <Text tag="p" variant="textXS" class="text-base-300 mt-2">
+              <span class="block"
+                ><span class="text-white uppercase">Mon-Fri:</span> 8:00 AM - 6:00
+                PM</span
+              >
+              <span class="block">
+                <span class="text-white uppercase">Sat:</span> 9:00 AM - 2:00 PM</span
+              >
+              <span class="block"
+                ><span class="text-white uppercase">Sun:</span> Closed</span
+              >
+            </Text>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-2 items-start border-t border-base-900 pt-4 mt-12"
+    >
+      <div class="flex flex-col lg:flex-row gap-y-2 gap-x-2">
+        {
+          certifications.map((cert) => (
+            <div class="flex items-center gap-2">
+              <ShieldCheck class="h-3 text-white" />
+              <Text tag="span" variant="textXS" class="text-base-400">
+                {cert}
+              </Text>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="flex flex-wrap md:justify-end gap-y-2 gap-x-2">
+        {
+          legalLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-base-400 hover:text-accent-400 transition-colors text-xs"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <BigLogo class="text-white mt-24" />
+  </Wrapper>
+</footer>
+<script>
+  // Auto-update copyright year
+  document.getElementById("current-year").textContent = new Date()
+    .getFullYear()
+    .toString();
+</script>

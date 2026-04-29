@@ -1,0 +1,147 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+// Data
+import { getPosts } from "@/lib/data";
+const allPosts = await getPosts();
+// Get the team slug from the URL
+const teamSlug = Astro.url.pathname.split("/").filter(Boolean).pop();
+// Filter posts by this team (based on slug)
+const relatedPosts = allPosts.filter((post) => post.data.team === teamSlug);
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="max-w-2xl">
+          <Text
+            tag="h1"
+            variant="displayLG"
+            class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+          >
+            {frontmatter.name}
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-600 lg:text-balance mt-4"
+          >
+            {frontmatter.role}
+          </Text>
+          <div class="mt-12 space-y-12">
+            <div>
+              <Text
+                tag="h2"
+                variant="textXL"
+                class="text-base-900 text-balance font-medium tracking-tight font-display"
+              >
+                About {frontmatter.name.split(" ")[0]}
+              </Text>
+              <div class="mt-4 space-y-4">
+                {
+                  frontmatter.bio.split("\n").map((paragraph) => (
+                    <Text
+                      tag="p"
+                      variant="textBase"
+                      class="text-base-600 lg:text-balance"
+                    >
+                      {paragraph}
+                    </Text>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <Text
+                tag="h2"
+                variant="textXL"
+                class="text-base-900 text-balance font-medium tracking-tight font-display"
+              >
+                Connect & Follow
+              </Text>
+              <div class="mt-4 flex flex-wrap gap-4">
+                <a
+                  href={frontmatter.socials.twitter}
+                  class="uppercase font-medium text-base-900 group-hover:text-accent-400 text-xs"
+                  aria-label="Follow on Twitter"
+                >
+                  Twitter
+                </a>
+
+                <a
+                  href={frontmatter.socials.linkedin}
+                  class="uppercase font-medium text-base-900 group-hover:text-accent-400 text-xs"
+                  aria-label="Connect on LinkedIn"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={frontmatter.socials.website}
+                  class="uppercase font-medium text-base-900 group-hover:text-accent-400 text-xs"
+                  aria-label="Visit website"
+                >
+                  Website
+                </a>
+                <a
+                  href={`mailto:${frontmatter.socials.email}`}
+                  class="uppercase font-medium text-base-900 group-hover:text-accent-400 text-xs"
+                  aria-label="Send email"
+                >
+                  Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Image
+          alt={frontmatter.image.alt}
+          src={frontmatter.image.url}
+          width={800}
+          height={600}
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover object-top"
+        />
+      </div>
+    </Wrapper>
+  </section>
+
+  {
+    relatedPosts.length > 0 && (
+      <section>
+        <Wrapper variant="standard" class="py-12">
+          <div>
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="text-base-900 text-balance font-medium tracking-tight font-display"
+            >
+              Latest Articles by {frontmatter.name.split(" ")[0]}
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-600 lg:text-balance mt-4"
+            >
+              Insights and expertise from our accounting professionals
+            </Text>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4 p-8 lg:p-12 bg-base-50">
+              {relatedPosts.map((post) => (
+                <BlogCard post={post} />
+              ))}
+            </div>
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

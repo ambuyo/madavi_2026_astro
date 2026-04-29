@@ -1,0 +1,41 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import IndustryCard from "@/components/industries/IndustryCard.astro";
+// Data
+import { getIndustries } from "@/lib/data";
+const allIndustries = await getIndustries();
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Industries</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+          >Industries We Serve</Text
+        >
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Specialized accounting expertise tailored to the unique needs of
+          different industries
+        </Text>
+      </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 mt-12 gap-2 p-8 lg:p-12 bg-base-50"
+      >
+        {allIndustries.map((industry) => <IndustryCard industry={industry} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

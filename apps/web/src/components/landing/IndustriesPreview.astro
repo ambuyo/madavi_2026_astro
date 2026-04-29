@@ -1,0 +1,77 @@
+---
+// Assets
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import IndustryCard from "@/components/industries/IndustryCard.astro";
+// Data
+import { getIndustries } from "@/lib/data";
+const allIndustries = await getIndustries();
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="p-8 lg:p-12 bg-base-50">
+      <div class="max-w-xl">
+        <Kicker variant="default">Industries</Kicker>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-display lg:mt-8"
+        >
+          Industries We Serve
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-700 lg:text-balance mt-4"
+        >
+          Specialized accounting expertise across diverse industries,
+          understanding the unique financial challenges of each sector.
+        </Text>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-2">
+        {
+          allIndustries
+            .slice(0, 2)
+            .map((industry) => <IndustryCard industry={industry} />)
+        }
+        <div
+          class="bg-accent-400 p-8 flex flex-col h-full justify-between gap-8"
+        >
+          <div>  
+            <Shield class="h-8 text-white" />
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base text-white font-display font-medium mt-24"
+            >
+              Ready to get started?
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-white font-medium mt-2"
+            >
+              Get in touch with us to learn more about our services and how we
+              can help you.
+            </Text>
+          </div>
+          <Button
+            size="sm"
+            variant="muted"
+            isLink={true}
+            href="/industries"
+            class="w-fit"
+          >
+            Explore All Industries
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

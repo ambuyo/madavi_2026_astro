@@ -1,0 +1,69 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import ServiceCard from "@/components/services/ServiceCard.astro";
+// Data
+import { getServices } from "@/lib/data";
+const allServices = await getServices();
+// Group services by category
+const servicesByCategory: Record<string, typeof allServices> =
+  allServices.reduce(
+    (acc, service) => {
+      const category = service.data.category;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(service);
+      return acc;
+    },
+    {} as Record<string, typeof allServices>
+  );
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Services</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+          >Our Services</Text
+        >
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Comprehensive accounting and financial services tailored to your
+          business needs
+        </Text>
+      </div>
+      <div class="space-y-12 lg:space-y-24 mt-12 gap-2">
+        {
+          Object.entries(servicesByCategory).map(([category, services]) => (
+            <div>
+              <Text
+                tag="h2"
+                variant="displaySM"
+                class="font-display text-base-900 "
+              >
+                {category}
+              </Text>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4 p-8 lg:p-12 bg-base-50">
+                {services.map((service) => (
+                  <ServiceCard service={service} />
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

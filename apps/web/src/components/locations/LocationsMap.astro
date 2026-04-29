@@ -1,0 +1,41 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+<section>
+  <Wrapper variant="standard" class="pt-12 lg:pt-24">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+      <Kicker variant="default">maps</Kicker>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display lg:col-span-2 lg:-mt-2"
+      >
+        Find Us On The Map
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-600 lg:text-pretty lg:col-span-2 lg:-mt-2"
+      >
+        Our offices are strategically located to serve clients across key
+        business districts. Click on any location to get directions or contact
+        information.
+      </Text>
+    </div>
+  </Wrapper>
+  <Wrapper variant="paddingLess" class="pt-12">
+    <div>
+      <iframe
+        width="100%"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="h-200"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7326472360283!2d-118.40060368459375!3d34.069650679331854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc3a5c71%3A0xbae5cb597764b!2s456%20Justice%20Boulevard%2C%20Los%20Angeles%2C%20CA%2090210!5e0!3m2!1sen!2sus!4v1696871234567!5m2!1sen!2sus"
+      ></iframe>
+    </div>
+  </Wrapper>
+</section>

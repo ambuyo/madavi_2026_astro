@@ -1,0 +1,50 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+// Content
+import { getAllTags } from "@/lib/data";
+const tags = await getAllTags();
+const pageTitle = "Tag Index";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Tag index</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Tag directory</Text
+        >
+      </div>
+      <ul
+        role="list"
+        class="mt-12 divide-y divide-base-200 p-8 lg:p-12 bg-base-50"
+      >
+        {
+          tags.map((tag) => (
+            <li>
+              <Text
+                tag="a"
+                variant="textXL"
+                class="capitalize flex items-center justify-between gap-2 py-4 font-display  text-base-900  hover:text-accent-500"
+                href={`/blog/tags/${tag}`}
+              >
+                {tag.replace(/-/g, " ")}
+                <ArrowRight class="size-4" />
+              </Text>
+            </li>
+          ))
+        }
+      </ul>
+    </Wrapper>
+  </section>
+</BaseLayout>

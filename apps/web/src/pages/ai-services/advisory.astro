@@ -1,0 +1,332 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Kicker variant="default">SERVICE 2 OF 4</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Executive Advisory Retainer
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-6 text-pretty"
+        >
+          Ongoing strategic counsel for frequent AI decisions. You're making 3+ AI decisions per quarter: vendor selection, budget allocation, governance design, stakeholder buy-in. You need strategic counsel from someone with no product to sell and no internal politics to navigate.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- FORMAT & SCOPE -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-base-900 font-display"
+          >
+            What You Get
+          </Text>
+
+          <div class="mt-8 space-y-6">
+            <div>
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                Format
+              </Text>
+              <ul class="mt-4 space-y-2 text-sm text-base-600">
+                <li>• 1-hour monthly strategy session</li>
+                <li>• Unlimited async support (voice notes, email, quick calls)</li>
+                <li>• Bi-weekly check-in emails</li>
+              </ul>
+            </div>
+
+            <div>
+              <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+                Scope
+              </Text>
+              <ul class="mt-4 space-y-2 text-sm text-base-600">
+                <li>• Vendor selection criteria</li>
+                <li>• Adoption strategy design</li>
+                <li>• Governance frameworks</li>
+                <li>• Financial modeling</li>
+                <li>• Stakeholder management</li>
+                <li>• When to proceed vs. pause</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-base-900 font-display"
+          >
+            What This Is Not
+          </Text>
+
+          <div class="mt-8 space-y-4">
+            <div class="p-6 border border-base-200 rounded-lg">
+              <Text tag="p" variant="textSM" class="text-base-700 font-medium">
+                Not a coaching relationship
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+                We don't work on leadership development, personal effectiveness, or mindset.
+              </Text>
+            </div>
+
+            <div class="p-6 border border-base-200 rounded-lg">
+              <Text tag="p" variant="textSM" class="text-base-700 font-medium">
+                Not implementation support
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+                We advise on decisions that determine success, we don't build systems.
+              </Text>
+            </div>
+
+            <div class="p-6 border border-base-200 rounded-lg">
+              <Text tag="p" variant="textSM" class="text-base-700 font-medium">
+                Not vendor-neutral facilitation
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+                We have opinions. We'll tell you which vendor to choose and why.
+              </Text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- MONTHLY AGENDA -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        Typical Monthly Agenda Topics
+      </Text>
+
+      <div class="mt-12 space-y-6">
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Month 1: Foundations
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-3">
+            Review current AI initiatives, assess organizational readiness using HCAIF framework, set 90-day milestones, identify immediate blockers.
+          </Text>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Months 2–3: Vendor Selection & Governance
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-3">
+            Vendor evaluation criteria, governance framework design, pilot design, stakeholder mapping.
+          </Text>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Months 4–6: Adoption Strategy & Change Management
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-3">
+            Adoption playbook development, trust-building strategies, communication frameworks, financial modeling.
+          </Text>
+        </div>
+
+        <div class="p-8 bg-white border border-base-200 rounded-lg">
+          <Text tag="h3" variant="displaySM" class="text-base-900 font-display">
+            Month 7+: Scale & Iteration
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-3">
+            Pilot retrospectives, scale decisions, portfolio management, continuous improvement.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- WHEN YOU NEED THIS -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-medium tracking-tight font-display"
+      >
+        When You Need This
+      </Text>
+
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Post-diagnostic continuation
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            You ran a diagnostic, found gaps, and need ongoing guidance as you build capability.
+          </Text>
+        </div>
+
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Active AI procurement
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            You're evaluating vendors and need strategic counsel beyond feature checklists.
+          </Text>
+        </div>
+
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Stalled pilot syndrome
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            You deployed an AI tool and adoption hasn't grown beyond initial users.
+          </Text>
+        </div>
+
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Portfolio complexity
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            You're managing 3+ AI initiatives and need help with prioritization.
+          </Text>
+        </div>
+
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Governance design
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            You're building AI governance for regulated industries (finance, healthcare).
+          </Text>
+        </div>
+
+        <div class="p-6 border border-base-200 rounded-lg">
+          <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+            Board pressure
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-600 mt-2">
+            Your board is asking hard questions about AI ROI and you need realistic projections.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- PRICING -->
+  <section class="border-t border-base-200 bg-base-50">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Investment: $1,500–$2,500/month
+        </Text>
+
+        <div class="mt-8 space-y-6">
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Pricing Factors:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• $1,500/month: Single AI initiative, standard complexity</li>
+              <li>• $2,000/month: Multiple initiatives or complex organizational structure</li>
+              <li>• $2,500/month: Portfolio management (3+ concurrent initiatives)</li>
+            </ul>
+          </div>
+
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              Commitment:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• 3-month minimum engagement</li>
+              <li>• Month-to-month renewal after initial period</li>
+              <li>• Quarterly billing in advance</li>
+              <li>• 30-day notice for cancellation (either party)</li>
+            </ul>
+          </div>
+
+          <div class="p-8 bg-white border border-base-200 rounded-lg">
+            <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+              What's Included:
+            </Text>
+            <ul class="mt-4 space-y-2 text-sm text-base-600">
+              <li>• 1-hour monthly strategy session</li>
+              <li>• Unlimited async support</li>
+              <li>• Bi-weekly check-in emails</li>
+              <li>• Access to HCAIF templates & calculators</li>
+              <li>• Session summaries with action items</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-base-200">
+    <Wrapper variant="standard" class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-base-900 text-balance font-medium tracking-tight font-display"
+        >
+          Ready for ongoing strategic counsel?
+        </Text>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+          <Button
+            variant="default"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Request Retainer Proposal
+          </Button>
+          <Button
+            variant="muted"
+            size="base"
+            isLink={true}
+            href="/contact"
+          >
+            Schedule Strategic Session
+          </Button>
+        </div>
+
+        <Button
+          variant="muted"
+          size="xs"
+          isLink={true}
+          href="/ai-services"
+          class="mt-8"
+        >
+          ← Back to Services
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

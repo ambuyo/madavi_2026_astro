@@ -1,0 +1,17 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+const { class: className = "", variant = "default", ...rest } = Astro.props;
+const variantColors = {
+  default: "text-base-600",
+  dark: "text-base-300",
+};
+---
+
+<Text
+  tag="p"
+  variant="textSM"
+  class={`${variantColors[variant] || variantColors.default}  uppercase font-medium w-fit ${className}`}
+  {...rest}
+>
+  <slot />
+</Text>

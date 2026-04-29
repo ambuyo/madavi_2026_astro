@@ -1,0 +1,134 @@
+---
+// Assets
+import Shield from "@/components/assets/Shield.astro";
+
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Popular Pages Data
+const popularPages = [
+  {
+    href: "/services",
+    title: "Our Services",
+    description: "Explore our accounting solutions",
+  },
+  {
+    href: "/about",
+    title: "About Us",
+    description: "Learn about our company",
+  },
+  {
+    href: "/contact",
+    title: "Contact",
+    description: "Get in touch with us",
+  },
+  {
+    href: "/faq",
+    title: "FAQ",
+    description: "Find answers to common questions",
+  },
+  {
+    href: "/blog",
+    title: "Blog",
+    description: "Read our latest insights",
+  },
+  {
+    href: "/pricing",
+    title: "Pricing",
+    description: "View our service packages",
+  },
+];
+---
+
+<BaseLayout h>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Faq</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+        >
+          Page Not Found
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          We apologize, but the page you're looking for doesn't exist. It may
+          have been moved, deleted, or you may have mistyped the URL.
+        </Text>
+        <div class="flex flex-col lg:flex-row gap-2 mt-8">
+          <Button variant="default" size="xs" isLink={true} href="/">
+            Return Home
+          </Button>
+          <Button variant="muted" size="xs" isLink={true} href="/contact">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-2">
+        {
+          popularPages.map((page) => (
+            <div class="relative group  flex flex-col overflow-hidden gap-24 lg:gap-62 p-8 bg-base-50 h-full justify-between">
+              <a href={page.href} class="inset-0 absolute z-10" />
+              <div class="text-left">
+                <Text
+                  tag="h3"
+                  variant="displayMD"
+                  class="text-base-900 font-display"
+                >
+                  {page.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textBase"
+                  class="text-base-600 mt-4 text-pretty"
+                >
+                  {page.description}
+                </Text>
+              </div>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="uppercase font-medium text-base-900 group-hover:text-accent-400 mt-4"
+              >
+                Read further
+              </Text>
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="mt-8 pt-8 border-t border-base-100 flex flex-wrap gap-4 justify-between items-start"
+      >
+        <Text tag="p" variant="textSM" class="text-base-600">
+          Need immediate assistance? Our team is here to help.
+        </Text>
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+        >
+          <a
+            href="#_"
+            class="uppercase font-medium ext-base-900 hover:text-accent-400 text-sm"
+          >
+            (555) 012-3456
+          </a>
+          <span class="hidden sm:block text-base-300">•</span>
+          <a
+            href="mailto:hello@mulberry.com"
+            class="uppercase font-medium ext-base-900 hover:text-accent-400 text-sm"
+          >
+            hello@mulberry.com
+          </a>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

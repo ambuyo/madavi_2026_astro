@@ -1,0 +1,30 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="standard" class="pt-12">
+    <div class="max-w-2xl">
+      <Kicker variant="default">Contact</Kicker>
+      <Text
+        tag="h1"
+        variant="displayLG"
+        class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+      >
+        Contact Us
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-600 lg:text-balance mt-4"
+      >
+        Ready to take your business finances to the next level? Get in touch
+        with our expert accounting team. We're here to help with all your
+        financial needs.
+      </Text>
+    </div>
+  </Wrapper>
+</section>
