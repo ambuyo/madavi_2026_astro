@@ -1,13 +1,11 @@
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   experimental: {
     svgo: true,
-  },
-  vite: {
-    plugins: [tailwindcss()],
   },
   markdown: {
     drafts: true,
@@ -21,5 +19,8 @@ export default defineConfig({
     drafts: true,
   },
   site: "https://madavi.ai",
-  integrations: [sitemap()],
+  integrations: [react(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

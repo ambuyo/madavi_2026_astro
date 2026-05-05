@@ -1,0 +1,169 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import methodologyImage from "@/images/assets/talk.png";
+import testimonialImage from "@/images/assets/testimonial.png";
+
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const methodologySteps = [
+  {
+    title: "METHODOLOGY THAT DELIVERS",
+    subtitle: "HCAIF — Not Just a Framework, a Philosophy",
+    description:
+      "Our Human-Centric AI Integration Framework isn't theoretical—it's the battle-tested methodology we use to deploy AI across five industry verticals. It ensures every automation we build preserves the human elements that matter while eliminating the busywork that doesn't.",
+  },
+  {
+    title: "EDUCATION AS TRANSFORMATION",
+    subtitle: "We Don't Just Build—We Transfer Knowledge",
+    description:
+      "Automation isn't magic if your team doesn't understand it. We embed education into every engagement, ensuring your people aren't just using the systems we build—they're mastering them, evolving them, and owning them.",
+  },
+  {
+    title: "LONG-TERM PARTNERSHIP",
+    subtitle: "Continuous Optimization, Not One-Time Deployment",
+    description:
+      "We don't vanish after launch day. We stay involved, monitoring performance, optimizing workflows, and scaling systems as your business evolves. Automation is a capability we build with you, not for you.",
+  },
+  {
+    title: "PROVEN TRACK RECORD",
+    subtitle: "Results Before Rebranding",
+    description:
+      "Before we ever called ourselves an AI firm, we delivered measurable outcomes for 60+ businesses. We generated 20M+ keyword hits. We contributed over $2M in revenue. Our commitment to excellence didn't start with AI—it started with accountability. And it continues today.",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="paddingLess" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div>
+        <div class="relative w-full lg:sticky lg:top-16 lg:h-screen">
+          <Image
+            src={methodologyImage}
+            width={1440}
+            height={900}
+            alt="Madavi - WHY Madavi Stands Out"
+            class="object-cover object-center w-full h-full bg-base-50"
+            loading="eager"
+            decoding="async"
+          />
+          <div
+            class="lg:absolute lg:inset-0 size-full bg-accent-900 lg:bg-accent-900/90 flex flex-col items-start justify-start px-8 md:px-12 lg:px-24 z-10 py-24"
+          >
+            <div class="w-full">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-accent-400 tracking-wide uppercase"
+              >
+HCAIF — Not Just a Framework, a Philosophy
+              </Text>
+              <Text
+                tag="h2"
+                variant="displayLG"
+                class="text-white font-display text-balance mt-12"
+              >
+                How We Work
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-300 mt-2">
+Our Human-Centric AI Integration Framework isn't theoretical—it's the battle-tested methodology we use to deploy AI across five industry verticals. It ensures every automation we build preserves the human elements that matter while eliminating the busywork that doesn't.
+              </Text>
+              <div
+                class="mt-12 grid grid-cols-1 overflow-hidden lg:grid-cols-2 bg-white/5 backdrop-blur-sm"
+              >
+                <Image
+                  src={testimonialImage}
+                  width={500}
+                  height={500}
+                  loading="eager"
+                  decoding="async"
+                  alt="Client testimonial"
+                  class="object-cover h-60 size-full object-top"
+                />
+                <figure class="p-4 flex flex-col h-full justify-between">
+                  <blockquote>
+                    <Text tag="p" variant="textSM" class="text-base-300 italic">
+                      "Madavi transformed how we approach AI. Their strategic guidance and hands-on support gave us confidence to move forward. We've already seen significant improvements."
+                    </Text>
+                  </blockquote>
+                  <figcaption class="mt-3 flex items-center gap-3">
+                    <Text
+                      tag="p"
+                      variant="textXS"
+                      class="text-accent-400 font-medium"
+                    >
+                      Sarah Chen, CTO,
+                      <br />
+                      Tech Innovations Inc.
+                    </Text>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 lg:p-20 bg-base-50">
+        <dl class="flex flex-col gap-8">
+          {
+            methodologySteps.map((step, idx) => (
+              <>
+                <div class="bg-white p-8 flex flex-col items-start sticky top-8 lg:top-20">
+                  <dt>
+                    <Text
+                      tag="p"
+                      variant="displayXL"
+                      class="text-accent-800 font-display italic font-medium"
+                    >
+                      {idx + 1}
+                    </Text>
+                    <Text
+                      tag="h3"
+                      variant="displaySM"
+                      class="text-base-800 font-display mt-12"
+                    >
+                      {step.title}
+                    </Text>
+                    <Text
+                      tag="p"
+                      variant="textBase"
+                      class="text-base-700 font-medium mt-4"
+                    >
+                      {step.subtitle}
+                    </Text>
+                  </dt>
+                  <dd>
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-600 text-balance mt-4"
+                    >
+                      {step.description}
+                    </Text>
+                  </dd>
+                </div>
+              </>
+            ))
+          }
+        </dl>
+        <div class="mt-4 pt-4 border-t border-base-200">
+          <Text tag="p" variant="textSM" class="text-base-700 lg:w-1/2">
+            Ready to accelerate your AI adoption with a proven methodology?
+          </Text>
+          <div class="flex items-center gap-2 flex-col lg:flex-row mt-4">
+            <Button variant="default" size="xs" class="w-full lg:w-fit" isLink href="/contact">
+              Start Your Journey
+            </Button>
+            <Button variant="muted" size="xs" class="w-full lg:w-fit" isLink href="/ai-services">
+              Explore Our Services
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

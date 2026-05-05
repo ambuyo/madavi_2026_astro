@@ -22,32 +22,24 @@ const megamenuSections = [
   },
   {
     title: "Services",
-    href: "/services",
+    href: "/ai-services",
     links: [
-      { href: "/services", label: "Explore All Services" },
+      { href: "/ai-services", label: "Explore All Services" },
       {
-        href: "/services/bookkeeping-accounting",
-        label: "Bookkeeping & Accounting",
+        href: "/ai-services/readiness-diagnostic",
+        label: "AI Readiness Diagnostic",
       },
       {
-        href: "/services/business-valuation-appraisal",
-        label: "Business Valuation",
+        href: "/ai-services/advisory",
+        label: "Executive Advisory Retainer",
       },
       {
-        href: "/services/audit-support-assurance",
-        label: "Audit Support & Assurance",
+        href: "/ai-services/leadership-ai-fluency",
+        label: "Leadership AI Fluency Cohort",
       },
       {
-        href: "/services/business-formation-setup",
-        label: "Business Formation & Setup",
-      },
-      {
-        href: "/services/bankruptcy-financial-restructuring-accounting",
-        label: "Bankruptcy & Restructuring",
-      },
-      {
-        href: "/services/agricultural-accounting-farm-management",
-        label: "Agricultural Accounting",
+        href: "/ai-services/keynote-speaking",
+        label: "Keynote & Speaking",
       },
     ],
   },
@@ -57,43 +49,68 @@ const megamenuSections = [
     links: [
       { href: "/industries", label: "All Industries" },
       {
-        href: "/industries/technology-software",
-        label: "Technology & Software",
+        href: "/industries/legal",  label: "Legal Services",
       },
-      { href: "/industries/healthcare-medical", label: "Healthcare & Medical" },
+      { href: "/industries/healthcare", label: "Healthcare" },
       {
-        href: "/industries/manufacturing-industrial",
-        label: "Manufacturing & Industrial",
+        href: "/industries/nonprofits", label: "Non Profits",
       },
-      { href: "/industries/retail-ecommerce", label: "Retail & E-commerce" },
+      { href: "/industries/retail", label: "Ecommerce & Retail " },
       {
-        href: "/industries/professional-services",
-        label: "Professional Services",
+        href: "/industries/professional-services",  label: "Professional Services",
       },
-      {
-        href: "/industries/real-estate-property",
-        label: "Real Estate & Property",
+            {
+        href: "/industries/real-estate",  label: "Real Estate",
       },
-      {
-        href: "/industries/construction-development",
-        label: "Construction & Development",
-      },
-    ],
-  },
-  {
-    title: "Resources",
-    href: "/blog",
-    links: [
-      { href: "/blog", label: "Blog & Insights" },
-      { href: "/case-studies", label: "Case Studies" },
-      { href: "/pricing", label: "Pricing & Plans" },
-      { href: "/faq", label: "Help Center & FAQs" },
-      { href: "/about", label: "About Us" },
-      { href: "/contact", label: "Contact" },
-      { href: "/faq", label: "FAQ" },
     ],
   },
 ];
+
+// Resources megamenu sections
+const resourcesMegamenuSections = [
+  {
+    title: "Reports",
+    href: "/resources/reports",
+    links: [
+      { href: "/resources/reports", label: "All Reports" },
+      { href: "/resources/reports?industry=healthtech", label: "HealthTech Reports" },
+      { href: "/resources/reports?industry=fintech", label: "FinTech Reports" },
+      { href: "/resources/reports?industry=dfi", label: "Development Finance Reports" },
+    ],
+  },
+  {
+    title: "Resource Library",
+    href: "/resources",
+    links: [
+      { href: "/blog", label: "Blog" },
+      { href: "/resources/webinars", label: "Webinars" },
+      { href: "/resources/guides", label: "AI Guides" },
+      { href: "/resources/templates", label: "Templates" },
+    ],
+  },
+  {
+    title: "Impact",
+    href: "/impact",
+    links: [
+      { href: "/case-studies", label: "Case Studies" },
+      { href: "/resources/customer-stories", label: "Customer Stories" },
+      { href: "/resources/testimonials", label: "Testimonials" },
+    ],
+  },
+  {
+    title: "Industries We Serve",
+    href: "/industries",
+    links: [
+      { href: "/industries", label: "All Industries" },
+      { href: "/industries/technology-software", label: "Technology & Software" },
+      { href: "/industries/healthcare-medical", label: "Healthcare & Medical" },
+      { href: "/industries/manufacturing-industrial", label: "Manufacturing & Industrial" },
+      { href: "/industries/retail-ecommerce", label: "Retail & E-commerce" },
+      { href: "/industries/professional-services", label: "Professional Services" },
+    ],
+  },
+];
+
 ---
 
 <div
@@ -168,11 +185,11 @@ const megamenuSections = [
             href="tel:+1-555-123-4567"
             class="text-base-400 text-xs hover:text-white-400 transition-colors"
           >
-            +1 (555) 123-4567
+            +254 (718) 735-565
           </a>
           <span class="hidden md:flex text-base-900">|</span>
           <address class="text-base-400 not-italic text-xs">
-            123 Business Street, Suite 100, New York, NY 10001
+            2595, 1007 N Orange St. 4th Floor, DE, Wilmington, USA
           </address>
         </div>
         <div
@@ -192,6 +209,133 @@ const megamenuSections = [
           </a>
           <a
             href="#_"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Resources Megamenu -->
+<div
+  id="resources-megamenu"
+  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto bg-black"
+>
+  <div class="flex justify-center">
+    <div class="w-full max-w-7xl px-12 py-12">
+      <div
+        class="grid grid-cols-2 gap-y-8 lg:grid-cols-5 lg:divide-x divide-base-900 p-0"
+      >
+        {
+          resourcesMegamenuSections.map((section) => (
+            <div class="px-6">
+              <a
+                href={section.href}
+                class="group flex items-center justify-between text-white uppercase hover:text-accent-400 transition-colors"
+              >
+                <Text tag="h3" variant="textSM">
+                  {section.title}
+                </Text>
+                <ArrowRight class="size-4 " />
+              </a>
+              <ul class="space-y-2 mt-4 lg:mt-12">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="group text-xs flex items-center text-base-300 hover:text-accent-500 transition-colors duration-300 justify-between"
+                    >
+                      {link.label}
+                      <ArrowRight class="size-4 hidden group-hover:flex duration-300" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+        <div
+          class="p-8 bg-accent-400 flex flex-col h-full justify-between gap-12 lg:gap-18 col-span-full lg:col-span-1"
+        >
+          <div>
+            <Shield class="h-6 text-white" />
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base text-white mt-8 font-display font-medium"
+            >
+              Get in touch
+            </Text>
+            <Text tag="p" variant="textSM" class="text-white font-medium mt-2">
+              Ready to accelerate your AI adoption? Let's talk.
+            </Text>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/contact"
+            class="w-fit"
+          >
+            Contact Us
+          </Button>
+        </div>
+      </div>
+      <div
+        class="border-t pt-4 border-base-900 col-span-full flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between"
+      >
+        <div class="flex flex-wrap gap-4 items-center">
+          <a
+            href="tel:+1-555-123-4567"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            +1 (555) 123-4567
+          </a>
+          <span class="hidden md:flex text-base-900">|</span>
+          <address class="text-base-400 not-italic text-xs">
+            123 Business Street, Suite 100, New York, NY 10001
+          </address>
+        </div>
+        <div
+          class="flex flex-wrap gap-4 items-center order-first lg:order-none"
+        >
+          <a
+            href="https://x.com/madavihq"
+             target="_blank"
+             rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            X
+          </a>
+                    <a
+            href="https://x.com/madavihq"
+             target="_blank"
+             rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            X
+          </a>
+          <a
+            href="https://www.linkedin.com/company/madavihq/"
+             target="_blank"
+             rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            LinkedIn
+          </a>
+                    <a
+            href="https://www.facebook.com/madavihq"
+             target="_blank"
+             rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            FB
+          </a>
+          <a
+            href="mailto:hi@madavi.co"
             class="text-base-400 text-xs hover:text-white-400 transition-colors"
           >
             Email

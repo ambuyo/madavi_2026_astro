@@ -6,6 +6,7 @@ import { caseStudy } from "./caseStudy";
 import { infoPage } from "./infoPage";
 import { siteSettings } from "./siteSettings";
 import { clientLogo } from "./clientLogo";
+import { report } from "./report";
 
 export const schemaTypes = [
   // Documents
@@ -17,4 +18,5 @@ export const schemaTypes = [
   infoPage,
   siteSettings,
   clientLogo,
+  report,
 ];

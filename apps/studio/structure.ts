@@ -59,6 +59,13 @@ export const structure = (S: StructureBuilder) =>
         .schemaType("clientLogo")
         .child(S.documentTypeList("clientLogo").title("Client Logos")),
 
+      // Reports
+      S.listItem()
+        .title("Reports")
+        .icon(DocumentTextIcon)
+        .schemaType("report")
+        .child(S.documentTypeList("report").title("Reports")),
+
       // Info Pages (Legal)
       S.listItem()
         .title("Info Pages")

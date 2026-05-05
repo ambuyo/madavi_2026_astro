@@ -11,8 +11,9 @@ import MegaMenu from "@/components/global/MegaMenu.astro";
 
 // Navigation links
 const navLinks = [
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/ai-services" },
   { label: "Industries", href: "/industries" },
+    { label: "Resources", href: "#" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Team", href: "/team" },
   { label: "Blog", href: "/blog" },
@@ -29,7 +30,7 @@ const navLinks = [
       <nav class="hidden items-center gap-8 lg:flex group" aria-label="Primary">
         {
           navLinks.map((link) => {
-            const hasMegamenu = link.label === "Services" || link.label === "Industries";
+            const hasMegamenu = link.label === "Services" || link.label === "Industries" || link.label === "Resources";
             return (
               <a
                 href={link.href}
@@ -50,7 +51,7 @@ const navLinks = [
           href="/contact"
           class="hidden lg:flex"
         >
-          Get Started
+          Get My AI Audit
         </Button>
         <MobileNav links={navLinks} />
       </div>
@@ -62,28 +63,53 @@ const navLinks = [
 </header>
 
 <script is:inline>
-  {
+  document.addEventListener("DOMContentLoaded", function() {
     const header = document.querySelector("header");
-    if (header) {
-      const navLinks = header.querySelectorAll("a.has-megamenu");
-      const megamenu = header.querySelector("#megamenu");
+    if (!header) return;
 
-      navLinks.forEach((link) => {
-        link.addEventListener("mouseenter", () => {
-          megamenu?.classList.remove("hidden");
-        });
-        link.addEventListener("mouseleave", () => {
-          megamenu?.classList.add("hidden");
-        });
-      });
+    const servicesLink = header.querySelector('a[href="/ai-services"]');
+    const industriesLink = header.querySelector('a[href="/industries"]');
+    const resourcesLink = header.querySelector('a[href="#"]');
+    const megamenu = header.querySelector("#megamenu");
+    const resourcesMegamenu = header.querySelector("#resources-megamenu");
 
-      megamenu?.addEventListener("mouseenter", () => {
-        megamenu?.classList.remove("hidden");
-      });
+    console.log("Navigation script loaded");
+    console.log("Header:", header);
 
-      megamenu?.addEventListener("mouseleave", () => {
-        megamenu?.classList.add("hidden");
+    const hideAllMenus = () => {
+      megamenu?.classList.add("hidden");
+      megamenu?.classList.remove("block");
+      resourcesMegamenu?.classList.add("hidden");
+      resourcesMegamenu?.classList.remove("block");
+    };
+
+    const showMenu = (menu) => {
+      hideAllMenus();
+      menu?.classList.remove("hidden");
+      menu?.classList.add("block");
+    };
+
+    // Services and Industries links
+    [servicesLink, industriesLink].forEach((link) => {
+      if (!link) return;
+      link.addEventListener("mouseenter", () => showMenu(megamenu));
+      link.addEventListener("mouseleave", () => hideAllMenus());
+    });
+
+    // Resources link
+    if (resourcesLink) {
+      resourcesLink.addEventListener("click", (e) => {
+        e.preventDefault();
       });
+      resourcesLink.addEventListener("mouseenter", () => showMenu(resourcesMegamenu));
+      resourcesLink.addEventListener("mouseleave", () => hideAllMenus());
     }
-  }
+
+    // Megamenu hover states
+    megamenu?.addEventListener("mouseenter", () => megamenu?.classList.remove("hidden"));
+    megamenu?.addEventListener("mouseleave", () => hideAllMenus());
+
+    resourcesMegamenu?.addEventListener("mouseenter", () => resourcesMegamenu?.classList.remove("hidden"));
+    resourcesMegamenu?.addEventListener("mouseleave", () => hideAllMenus());
+  });
 </script>
