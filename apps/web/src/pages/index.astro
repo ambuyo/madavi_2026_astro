@@ -13,9 +13,15 @@ import Why from "@/components/landing/Why.astro";
 import TestimonialsPreview from "@/components/landing/TestimonialsPreview.astro";
 
 import BlogPreview from "@/components/landing/BlogPreview.astro";
+
+const seo = {
+  title: "AI Consulting & Digital Transformation",
+  description: "Transform your business with AI-driven strategy and implementation. Madavi helps organizations leverage AI for competitive advantage.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <HOAHero />
   <HeroVT2 />
   <Stats1 />

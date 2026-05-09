@@ -12,11 +12,15 @@ import Evolution from "@/components/about/Evolution.astro";
 import Mission from "@/components/about/Mission.astro";
 import Methodology from "@/components/about/Methodology.astro";
 
-
+const seo = {
+  title: "About Us",
+  description: "Learn about Madavi's mission, team, and approach to AI consulting and digital transformation. Discover our values and expertise.",
+  type: "website" as const,
+};
 
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <AboutHero />
   <AboutStory />
   <Evolution />

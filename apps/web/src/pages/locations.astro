@@ -6,9 +6,15 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import LocationsHero from "@/components/locations/LocationsHero.astro";
 import LocationsMap from "@/components/locations/LocationsMap.astro";
 import LocationsList from "@/components/locations/LocationsList.astro";
+
+const seo = {
+  title: "Locations",
+  description: "Find Madavi offices in Nairobi, Kigali, and Wilmington. Connect with our team across Africa and North America.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <LocationsHero />
   <LocationsMap />
   <LocationsList />

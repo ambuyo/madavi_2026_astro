@@ -33,8 +33,14 @@ const officeLocations = [
     coordinates: { lat: 39.7390, lng: -75.5453 },
   },
 ];
+
+const seo = {
+  title: "Contact Us",
+  description: "Get in touch with Madavi. Find our office locations in Nairobi, Kigali, and Wilmington. Let's discuss your AI transformation needs.",
+  type: "website" as const,
+};
 ---
-<BaseLayout>
+<BaseLayout seo={seo}>
   <ContactHero />
   <ContactMain />
 

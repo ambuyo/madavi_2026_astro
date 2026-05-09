@@ -9,9 +9,15 @@ import IndustryCard from "@/components/industries/IndustryCard.astro";
 // Data
 import { getIndustries } from "@/lib/data";
 const allIndustries = await getIndustries();
+
+const seo = {
+  title: "Industries",
+  description: "Explore how Madavi serves different industries with specialized AI consulting and digital transformation services.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

@@ -23,9 +23,15 @@ export async function getStaticPaths() {
 }
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+
+const seo = {
+  title: `Articles tagged "${tag}"`,
+  description: `Read articles about ${tag} from Madavi's blog on AI consulting and digital transformation.`,
+  type: "website" as const,
+};
 ---
 
-<BaseLayout pageTitle={tag}>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

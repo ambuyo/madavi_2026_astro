@@ -8,7 +8,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Sections
 import BlogCard from "@/components/blog/BlogCard.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
-const { frontmatter } = Astro.props;
+const { frontmatter, seo } = Astro.props;
 // Data
 import { getTeamMemberBySlug, getPosts } from "@/lib/data";
 const team = frontmatter.team
@@ -20,7 +20,7 @@ const relatedPosts = allPosts.filter((post) =>
 );
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12 relative">
       <div class="max-w-3xl">

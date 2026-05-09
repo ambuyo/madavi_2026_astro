@@ -94,9 +94,15 @@ const faqData = [
     ],
   },
 ];
+
+const seo = {
+  title: "FAQ",
+  description: "Frequently asked questions about Madavi's AI consulting services, pricing, and implementation process.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

@@ -44,9 +44,15 @@ const groupedLogos = allLogos.reduce((acc: Record<string, any[]>, logo: any) => 
   acc[industry].push(logo);
   return acc;
 }, {});
+
+const seo = {
+  title: "Our Clients",
+  description: "See the companies and organizations that trust Madavi for AI consulting and digital transformation.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

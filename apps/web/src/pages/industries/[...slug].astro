@@ -15,8 +15,15 @@ if (!industry) {
   return Astro.redirect("/404");
 }
 const Content = industry.render ? (await industry.render()).Content : null;
+
+const seo = {
+  title: industry.data.title,
+  description: industry.data.summary || `Discover how Madavi serves the ${industry.data.title} industry with specialized AI consulting and digital transformation services.`,
+  image: industry.data.image,
+  type: "article" as const,
+};
 ---
 
-<IndustriesLayout frontmatter={industry.data}>
+<IndustriesLayout frontmatter={industry.data} seo={seo}>
   {Content ? <Content /> : <div set:html={industry.body} />}
 </IndustriesLayout>

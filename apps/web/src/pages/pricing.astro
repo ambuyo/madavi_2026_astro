@@ -6,9 +6,15 @@ import PricingHero from "@/components/pricing/PricingHero.astro";
 import PricingPackages from "@/components/pricing/PricingPackages.astro";
 import IndividualServices from "@/components/pricing/IndividualServices.astro";
 import PricingFAQ from "@/components/pricing/PricingFAQ.astro";
+
+const seo = {
+  title: "Pricing",
+  description: "Transparent pricing for AI consulting services. Explore our flexible service packages and investment options.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <PricingHero />
   <PricingPackages />
   <IndividualServices />

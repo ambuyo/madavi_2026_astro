@@ -14,9 +14,15 @@ allPosts.sort((a, b) => {
   const dateB = new Date(b.data.pubDate).getTime();
   return dateB - dateA;
 });
+
+const seo = {
+  title: "Blog",
+  description: "Read insights and articles about AI consulting, digital transformation, and business strategy from Madavi.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

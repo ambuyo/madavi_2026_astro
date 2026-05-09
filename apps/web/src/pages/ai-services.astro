@@ -5,9 +5,15 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const seo = {
+  title: "AI Services",
+  description: "Explore Madavi's comprehensive AI consulting and implementation services for business transformation.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <!-- SECTION 1: SERVICES HERO -->
   <section>
     <Wrapper variant="standard" class="py-16">

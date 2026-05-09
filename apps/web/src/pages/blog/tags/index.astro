@@ -9,10 +9,15 @@ import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 // Content
 import { getAllTags } from "@/lib/data";
 const tags = await getAllTags();
-const pageTitle = "Tag Index";
+
+const seo = {
+  title: "Blog Tags",
+  description: "Browse all topics covered in Madavi's blog on AI consulting, digital transformation, and business strategy.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

@@ -15,7 +15,7 @@ const allIndustries = await getIndustries();
 // Get the industry slug from the URL
 const industrySlug = Astro.url.pathname.split("/").filter(Boolean).pop();
 // Filter related industries (excluding current one) - maybe by shared services
-const { frontmatter } = Astro.props;
+const { frontmatter, seo } = Astro.props;
 const relatedIndustries = allIndustries
   .filter(
     (industry) =>
@@ -26,7 +26,7 @@ const relatedIndustries = allIndustries
   .slice(0, 2);
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

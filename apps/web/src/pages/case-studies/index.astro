@@ -9,9 +9,15 @@ import CasesCard from "@/components/cases/CasesCard.astro";
 // Data
 import { getCaseStudies } from "@/lib/data";
 const allCaseStudies = await getCaseStudies();
+
+const seo = {
+  title: "Case Studies",
+  description: "Real results from real clients. Explore our case studies showcasing successful AI consulting and digital transformation projects.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">

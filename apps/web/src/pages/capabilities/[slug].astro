@@ -35,9 +35,15 @@ const { service } = Astro.props;
 if (!service) {
   return Astro.redirect("/404");
 }
+
+const seo = {
+  title: service.title,
+  description: service.shortDescription || `Explore ${service.title} from Madavi. Transform your business with our specialized consulting and implementation services.`,
+  type: "article" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <!-- Hero Section -->
   <section>
     <div class="relative overflow-hidden">

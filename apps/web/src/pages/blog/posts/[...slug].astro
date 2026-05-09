@@ -15,8 +15,16 @@ if (!post) {
   return Astro.redirect("/404");
 }
 const Content = post.render ? (await post.render()).Content : null;
+
+const seo = {
+  title: post.data.title,
+  description: post.data.description,
+  image: post.data.image,
+  type: "article" as const,
+  publishedTime: post.data.pubDate?.toISOString(),
+};
 ---
 
-<BlogLayout frontmatter={post.data}>
+<BlogLayout frontmatter={post.data} seo={seo}>
   {Content ? <Content /> : <div set:html={post.body} />}
 </BlogLayout>

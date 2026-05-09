@@ -41,9 +41,15 @@ const testimonials = [
     image: testimonial3,
   },
 ];
+
+const seo = {
+  title: "Testimonials",
+  description: "Read what our clients say about working with Madavi. Discover how we've helped businesses transform with AI.",
+  type: "website" as const,
+};
 ---
 
-<BaseLayout>
+<BaseLayout seo={seo}>
   <section>
     <Wrapper variant="standard" class="py-12 lg:py-24">
       <div class="max-w-2xl">
