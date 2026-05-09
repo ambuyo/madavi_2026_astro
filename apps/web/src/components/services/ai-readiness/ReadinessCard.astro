@@ -1,0 +1,51 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+
+const post = Astro.props.post;
+const isCollectionItem = post && post.id && post.data;
+
+// Handle both content collection and Sanity formats
+const slug = isCollectionItem ? post?.id : (post?.slug?.current || post?.slug);
+const title = isCollectionItem ? post?.data?.title : post?.title;
+const summary = isCollectionItem ? post?.data?.summary : post?.description;
+const category = isCollectionItem ? post?.data?.category : post?.category;
+const icon = isCollectionItem ? post?.data?.icon : post?.icon;
+const url = `/services/${slug}`;
+---
+
+<article
+  class="relative group bg-white flex flex-col overflow-hidden p-8 gap-24 lg:gap-62 h-full justify-between"
+>
+  <a
+    href={url}
+    title={`Learn more: ${title}`}
+    aria-label={`Learn more about: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <div>
+    {category && (
+      <Text tag="p" variant="textXS" class="text-base-700 uppercase font-medium">
+        {category}
+      </Text>
+    )}
+    <div>
+      {title && (
+        <Text tag="h3" variant="displaySM" class="text-base-900 mt-8 font-display">
+          {title}
+        </Text>
+      )}
+      {summary && (
+        <Text tag="p" variant="textBase" class="text-base-600 mt-4 text-pretty">
+          {summary}
+        </Text>
+      )}
+    </div>
+  </div>
+
+  <Text
+    tag="p"
+    variant="textSM"
+    class="uppercase font-medium text-base-900 group-hover:text-accent-400 mt-4"
+    >Read further</Text
+  >
+</article>

@@ -1,0 +1,136 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const stats = [
+  { value: "20+", label: "Years Experience" },
+  { value: "500+", label: "Cases Won" },
+  { value: "98%", label: "Success Rate" },
+  { value: "50M+", label: "In Recoveries" },
+  { value: "4.9/5", label: "Avg. Rating" },
+  { value: "100+", label: "5-Star Reviews" },
+];
+
+const enhancedStats = stats.map((s) => {
+  const str = String(s.value);
+  const match = str.match(/^(\d+[\d,.]*)(.*)$/);
+  const numberPart = match ? match[1] : str;
+  const suffix = match ? match[2] : "";
+  const target = Number(numberPart.replace(/,/g, ""));
+  const decimals = (numberPart.split(".")[1] || "").length;
+  return { ...s, target: isNaN(target) ? 0 : target, suffix, decimals };
+});
+---
+
+<section class="bg-base-50">
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-accent-700 font-semibold tracking-wide uppercase"
+      >
+        Proven Results
+      </Text>
+      <div class="lg:col-span-3">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance"
+        >
+          Results that speak for themselves
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-700 mt-2"
+        >
+          We've built a track record of winning difficult cases and delivering
+          meaningful outcomes for our clients. Here are a few numbers behind our
+          work.
+        </Text>
+      </div>
+    </div>
+    <ul
+      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-8 mt-12 lg:mt-24 lg:divide-x lg:divide-base-200 lg:border-x lg:border-base-200"
+    >
+      {
+        enhancedStats.map((stat) => (
+          <li class="flex flex-col gap-1 lg:gap-4 lg:px-4">
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-700 font-medium uppercase"
+            >
+              {stat.label}
+            </Text>
+            <Text
+              tag="p"
+              variant="displayLG"
+              class="text-accent-800 font-display italic font-medium"
+            >
+              <span
+                class="countup"
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+                data-decimals={stat.decimals}
+                aria-label={`${stat.value} ${stat.label}`}
+              >
+                {stat.value}
+              </span>
+            </Text>
+          </li>
+        ))
+      }
+    </ul>
+  </Wrapper>
+
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".countup");
+      if (!("IntersectionObserver" in window) || items.length === 0) return;
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+      const animate = (el) => {
+        const target = Number(el.dataset.target || "0");
+        const suffix = el.dataset.suffix || "";
+        const decimals = Number(el.dataset.decimals || "0");
+        const duration = 1000;
+        const startTime = performance.now();
+        const step = (now) => {
+          const t = Math.min((now - startTime) / duration, 1);
+          const raw = target * ease(t);
+          const value = decimals
+            ? Number(raw.toFixed(decimals))
+            : Math.round(raw);
+          el.textContent =
+            value.toLocaleString(undefined, {
+              minimumFractionDigits: decimals,
+              maximumFractionDigits: decimals,
+            }) + suffix;
+          if (t < 1) requestAnimationFrame(step);
+        };
+        el.textContent =
+          (0).toLocaleString(undefined, {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals,
+          }) + suffix;
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              io.unobserve(e.target);
+              if (!e.target.dataset.animated) {
+                e.target.dataset.animated = "true";
+                animate(e.target);
+              }
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      items.forEach((el) => io.observe(el));
+    });
+  </script>
+</section>

@@ -1,0 +1,198 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const duringSession = {
+  icon: "📹",
+  time: "60 Minutes",
+  type: "Real-Time Session",
+  title: "During the Session",
+  subtitle: "Real-Time Diagnostic",
+  items: [
+    "Structured interview covering all 7 dimensions",
+    "Real-time pattern identification",
+    "Preliminary findings discussion",
+    "Blocker identification",
+    "Initial recommendations",
+  ],
+};
+
+const afterSession = {
+  icon: "📄",
+  time: "3 Business Days",
+  type: "Detailed Report",
+  title: "Within 3 Business Days",
+  subtitle: "Detailed Audit Report (15-25 pages)",
+  sections: [
+    {
+      name: "Readiness Score",
+      items: ["Overall readiness rating (1-10 scale)", "Dimension-by-dimension breakdown", "Red flags and green lights", "Comparison to similar organizations"],
+    },
+    {
+      name: "Gap Analysis",
+      items: ["What's blocking AI adoption", "Cultural barriers to address", "Process improvements needed", "Infrastructure upgrades required", "Resource constraints to solve"],
+    },
+    {
+      name: "Opportunity Mapping",
+      items: ["Highest-impact automation candidates", "Quick wins (easy + high value)", "Strategic bets (hard + transformative)", "No-go zones (not ready, too risky)"],
+    },
+    {
+      name: "Recommendations",
+      items: ["If ready: What to build first", "If not ready: What to fix first", "Estimated timeline to readiness", "Budget guidance", "Next steps"],
+    },
+  ],
+};
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {/* Featured Card */}
+      <div
+        class="p-4 lg:p-8 rounded-3xl bg-secondary-900 flex flex-col gap-y-4 justify-between"
+      >
+        <div>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-white tracking-tight font-display"
+          >
+            What You Get
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-accent-200 mt-4 text-balance"
+          >
+            The 60-minute diagnostic doesn't end with recommendations. You'll walk away with a clear action plan.
+          </Text>
+        </div>
+        <Button
+          size="xs"
+          variant="muted"
+          isLink={true}
+          href="/capabilities/ai-readiness"
+          class="mt-8 w-fit"
+        >
+          Schedule Assessment
+        </Button>
+      </div>
+
+      {/* During Session Card */}
+      <article
+        class="flex flex-col group h-full justify-between p-4 lg:p-8 rounded-3xl bg-accent-50 transition-colors duration-200"
+      >
+        <Text>
+          <div class="flex items-center gap-3">
+            <div
+              class="flex flex-col items-center justify-center size-14 bg-white rounded-xl text-base-900 shrink-0"
+            >
+              <Text tag="span" variant="textXS" class="font-semibold uppercase"
+                >{duringSession.icon}</Text
+              >
+            </div>
+            <div class="flex flex-col">
+              <Text
+                tag="span"
+                variant="textXS"
+                class="text-base-600 uppercase font-medium"
+              >
+                {duringSession.time}
+              </Text>
+              <Text tag="span" variant="textXS" class="text-base-600">
+                {duringSession.type}
+              </Text>
+            </div>
+          </div>
+
+          <Text tag="h3" variant="textBase" class="font-medium text-base-900 mt-8">
+            {duringSession.title}
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+            {duringSession.subtitle}
+          </Text>
+
+          <ul class="space-y-1 mt-4">
+            {duringSession.items.map((item) => (
+              <li class="text-base-600 text-sm list-disc list-inside">{item}</li>
+            ))}
+          </ul>
+        </Text>
+        <Button
+          isLink
+          size="xs"
+          variant="muted"
+          href="/capabilities/ai-readiness"
+          title="Learn more about what you get"
+          aria-label="Learn more about what you get"
+          class="w-fit mt-8"
+        >
+          Learn more
+        </Button>
+      </article>
+
+      {/* After Session Card */}
+      <article
+        class="flex flex-col group h-full justify-between p-4 lg:p-8 rounded-3xl bg-accent-900 transition-colors duration-200"
+      >
+        <Text>
+          <div class="flex items-center gap-3">
+            <div
+              class="flex flex-col items-center justify-center size-14 bg-white/10 rounded-xl text-white shrink-0"
+            >
+              <Text tag="span" variant="textXS" class="font-semibold uppercase"
+                >{afterSession.icon}</Text
+              >
+            </div>
+            <div class="flex flex-col">
+              <Text
+                tag="span"
+                variant="textXS"
+                class="text-base-400 uppercase font-medium"
+              >
+                {afterSession.time}
+              </Text>
+              <Text tag="span" variant="textXS" class="text-base-400">
+                {afterSession.type}
+              </Text>
+            </div>
+          </div>
+
+          <Text tag="h3" variant="textBase" class="font-medium text-white mt-8">
+            {afterSession.title}
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-300 mt-2">
+            {afterSession.subtitle}
+          </Text>
+
+          <div class="mt-4 space-y-3 text-xs">
+            {afterSession.sections.map((section) => (
+              <div>
+                <Text tag="span" class="text-accent-300 font-semibold">
+                  {section.name}
+                </Text>
+                <ul class="space-y-1 mt-2">
+                  {section.items.map((item) => (
+                    <li class="text-base-400 text-xs list-disc list-inside">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Text>
+        <Button
+          isLink
+          size="xs"
+          variant="muted"
+          href="/capabilities/ai-readiness"
+          title="Learn more about what you get"
+          aria-label="Learn more about what you get"
+          class="w-fit mt-8"
+        >
+          Learn more
+        </Button>
+      </article>
+    </div>
+  </Wrapper>
+</section>

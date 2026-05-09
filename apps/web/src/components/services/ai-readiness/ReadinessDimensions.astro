@@ -1,0 +1,346 @@
+---
+import { Image } from "astro:assets";
+import testimonial from "@/images/assets/testimonial.png";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const readinessDimensions = [
+  {
+    number: 1,
+    title: "Cultural Readiness",
+    question: "Will your team actually use AI if you deploy it?",
+    evaluate: [
+      "Leadership support and championship (budget approval ≠ active championing)",
+      "Team openness to automation (fear vs. curiosity ratio)",
+      "Previous technology adoption patterns (what worked, what failed)",
+      "Change resistance indicators (how fast does your org adapt?)",
+      "Innovation culture (first mover or wait-and-see?)",
+    ],
+    whyMatters: "The best AI tool fails if your culture rejects it. We identify cultural blockers before you invest.",
+    positives: [
+      "At least one executive champion who will actively advocate",
+      "Team curiosity about AI (questions, not just resistance)",
+      "History of successful technology adoption",
+    ],
+    negatives: [
+      '"Let\'s wait and see what others do first" mentality',
+      "Staff worried about job elimination with no reassurance",
+    ],
+  },
+  {
+    number: 2,
+    title: "Process Maturity",
+    question: "Are your workflows documented and consistent enough to automate?",
+    evaluate: [
+      "Process documentation status (written down or tribal knowledge?)",
+      "Workflow consistency across teams (everyone does it differently?)",
+      "Exception handling frequency (how often do 'special cases' happen?)",
+      "Manual touchpoint identification (where humans currently intervene)",
+      "Standardization level (one way or ten ways to do the same thing?)",
+    ],
+    whyMatters: "You can't automate chaos. We identify which processes are ready and which need cleanup first.",
+    positives: [
+      "Documented workflows (even if informal)",
+      "Consistency across team members (mostly the same way)",
+      "Predictable exception handling (known edge cases)",
+    ],
+    negatives: [
+      '"Everyone has their own system" approach',
+      "Processes that change every month",
+    ],
+  },
+  {
+    number: 3,
+    title: "Technical Infrastructure",
+    question: "Can your current systems support AI integration?",
+    evaluate: [
+      "Existing tool ecosystem (what you're already using)",
+      "Integration capabilities (APIs available? Custom connections possible?)",
+      "Data quality and accessibility (can AI access the data it needs?)",
+      "Security and compliance requirements (industry regulations, data protection)",
+      "Infrastructure constraints (bandwidth, processing power, storage)",
+    ],
+    whyMatters: "Building AI on broken infrastructure wastes money. We assess feasibility before you commit.",
+    positives: [
+      "Modern tools with API access",
+      "Clean, accessible data",
+      "Adequate infrastructure capacity",
+    ],
+    negatives: [
+      "Legacy systems with no integration options",
+      "Data scattered across incompatible systems",
+    ],
+  },
+  {
+    number: 4,
+    title: "Resource Capacity",
+    question: "Does your team have time and bandwidth to adopt AI?",
+    evaluate: [
+      "Current team utilization rates (at capacity or room to spare?)",
+      "Learning time availability (can people take 10 hours to learn?)",
+      "Budget allocation capacity (one-time cost vs. ongoing investment)",
+      "Implementation bandwidth (who will manage this?)",
+      "Ongoing maintenance capability (who maintains after launch?)",
+    ],
+    whyMatters: '"Learn this AI tool" competes with "do your job." If your team is at 120% capacity, adoption fails.',
+    positives: [
+      "Realistic team capacity assessment",
+      "Protected learning time budget",
+      "Dedicated implementation ownership",
+    ],
+    negatives: [
+      '"Staff will figure it out on their own time" assumption',
+      "No capacity adjustment during adoption period",
+    ],
+  },
+  {
+    number: 5,
+    title: "Decision Authority",
+    question: "Who actually approves AI investment and deployment?",
+    evaluate: [
+      "Stakeholder mapping (who decides, who influences, who blocks)",
+      "Approval process complexity (one decision-maker or committee?)",
+      "Budget authority identification (who controls spending?)",
+      "Veto power distribution (who can kill this initiative?)",
+      "Consensus requirements (unanimous vote or majority rule?)",
+    ],
+    whyMatters: "Pitching to the wrong stakeholder wastes months. We identify who really needs to approve.",
+    positives: [
+      "Clear decision authority identified",
+      "Streamlined approval process (<30 days)",
+      "Budget holder aligned with initiative",
+    ],
+    negatives: [
+      "Consensus-driven approval requiring unanimous vote",
+      "Multiple stakeholders with veto power",
+    ],
+  },
+  {
+    number: 6,
+    title: "Risk Tolerance",
+    question: "How much uncertainty can your organization handle?",
+    evaluate: [
+      "Industry risk culture (law firms vs. startups have different tolerances)",
+      "Previous technology failures (burned once, twice shy?)",
+      "Error tolerance levels (how bad is one AI mistake?)",
+      "Experimentation willingness (pilot mentality or need certainty?)",
+      "Compliance and regulatory constraints (healthcare, finance regulations)",
+    ],
+    whyMatters: "High-risk AI (customer-facing) in low-risk cultures (healthcare, law) fails. We match AI strategy to risk tolerance.",
+    positives: [
+      "Willingness to pilot in low-stakes areas first",
+      "Understanding that AI won't be perfect immediately",
+      "Tolerance for iteration and learning",
+    ],
+    negatives: [
+      '"One mistake and we\'re done" mentality',
+      "Zero experimentation tolerance",
+    ],
+  },
+  {
+    number: 7,
+    title: "Strategic Alignment",
+    question: "Does AI support your actual business goals?",
+    evaluate: [
+      "Current business priorities (what matters most right now?)",
+      "Growth bottlenecks (what's actually holding you back?)",
+      "Competitive pressure (what are competitors doing?)",
+      "Resource constraints (time, money, talent limitations)",
+      "Strategic initiatives (how does AI fit into your roadmap?)",
+    ],
+    whyMatters: "AI for AI's sake fails. We ensure automation serves real business objectives.",
+    positives: [
+      "Clear connection between AI and business goals",
+      "Automation addresses actual bottlenecks (not nice-to-haves)",
+      "Competitive or client pressure creating urgency",
+    ],
+    negatives: [
+      '"We should do AI because everyone else is" thinking',
+      "No clear ROI or business case",
+    ],
+  },
+];
+---
+
+<section>
+  <Wrapper variant="paddingLess" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div>
+        <div class="relative w-full lg:sticky lg:top-16 lg:h-screen">
+          <Image
+            src={testimonial}
+            width={1440}
+            height={900}
+            alt="Our Approach"
+            class="object-cover object-center w-full h-full bg-base-50"
+            loading="eager"
+            decoding="async"
+          />
+          <div
+            class="lg:absolute lg:inset-0 size-full bg-accent-900 lg:bg-accent-900/90 flex flex-col items-start justify-start px-8 md:px-12 lg:px-24 z-10 py-24"
+          >
+            <div class="w-full">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-secondary-400 tracking-wide uppercase"
+              >
+                our way
+              </Text>
+              <Text
+                tag="h2"
+                variant="displayLG"
+                class="text-white font-display text-balance mt-12"
+              >
+What We Assess: 7 Readiness Dimensions
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-300 mt-2">
+              We evaluate your organization across seven critical dimensions. Each one can make or break AI adoption—regardless of which tools you buy.
+
+              </Text>
+              <div
+                class="mt-12 grid grid-cols-1 overflow-hidden lg:grid-cols-2 bg-white/5 backdrop-blur-sm"
+              >
+                <Image
+                  src={testimonial}
+                  width={500}
+                  height={500}
+                  loading="eager"
+                  decoding="async"
+                  alt="Customer testimonial"
+                  class="object-cover h-60 w-full object-top"
+                />
+                <figure class="p-4 flex flex-col h-full justify-between">
+                  <blockquote>
+                    <Text tag="p" variant="textSM" class="text-base-300 italic">
+                      "Carrington guided us through a complex dispute with
+                      clarity and confidence. We always knew our options and
+                      felt genuinely supported."
+                    </Text>
+                  </blockquote>
+                  <figcaption class="mt-3 flex items-center gap-3">
+                    <Text
+                      tag="p"
+                      variant="textXS"
+                      class="text-secondary-300 font-medium"
+                    >
+                      Alex Rivera, COO,
+                      <br />
+                      Northshore Holdings
+                    </Text>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 lg:p-20 bg-base-50">
+        <dl class="flex flex-col gap-12">
+          {
+            readinessDimensions.map((dimension) => (
+              <div class="bg-white p-8 flex flex-col items-start sticky top-8 lg:top-20">
+                <dt>
+                  <Text
+                    tag="p"
+                    variant="displayXL"
+                    class="text-accent-800 font-display italic font-medium"
+                  >
+                    {dimension.number}
+                  </Text>
+                  <Text
+                    tag="h3"
+                    variant="displaySM"
+                    class="text-base-800 font-display mt-12"
+                  >
+                    {dimension.title}
+                  </Text>
+                </dt>
+                <dd class="w-full">
+                  <Text
+                    tag="p"
+                    variant="textBase"
+                    class="text-accent-700 font-semibold mt-6 mb-4"
+                  >
+                    {dimension.question}
+                  </Text>
+
+                  <div class="mt-6">
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="text-base-800 font-bold uppercase tracking-wide"
+                    >
+                      What we evaluate:
+                    </Text>
+                    <ul class="list-disc space-y-1 list-inside mt-2 mb-6">
+                      {dimension.evaluate.map((item) => (
+                        <li class="text-base-600 text-sm">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="mt-6 p-4 bg-base-50 rounded-lg">
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="text-base-800 font-bold"
+                    >
+                      Why it matters:
+                    </Text>
+                    <Text tag="p" variant="textSM" class="text-base-700 mt-2">
+                      {dimension.whyMatters}
+                    </Text>
+                  </div>
+
+                  <div class="mt-6">
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="text-base-800 font-bold uppercase tracking-wide"
+                    >
+                      What we look for:
+                    </Text>
+                    <div class="mt-3 space-y-2">
+                      {dimension.positives.map((item) => (
+                        <div class="flex gap-2">
+                          <span class="flex-shrink-0 text-green-600 font-bold">✓</span>
+                          <Text tag="span" variant="textSM" class="text-base-700">
+                            {item}
+                          </Text>
+                        </div>
+                      ))}
+                      {dimension.negatives.map((item) => (
+                        <div class="flex gap-2">
+                          <span class="flex-shrink-0 text-red-600 font-bold">✗</span>
+                          <Text tag="span" variant="textSM" class="text-base-700">
+                            {item}
+                          </Text>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="mt-4 pt-4 border-t border-base-200">
+          <Text tag="p" variant="textSM" class="text-base-700 lg:w-1/2">
+            Ready to experience legal representation that puts your interests
+            first?
+          </Text>
+          <div class="flex items-center gap-2 flex-col lg:flex-row mt-4">
+            <Button variant="default" size="xs" class="w-full lg:w-fit">
+              Schedule Consultation
+            </Button>
+            <Button variant="muted" size="xs" class="w-full lg:w-fit">
+              Learn more about us
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

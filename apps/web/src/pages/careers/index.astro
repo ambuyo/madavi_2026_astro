@@ -1,0 +1,112 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import CareerCard from "@/components/careers/CareerCard.astro";
+// Data
+import { getCareers } from "@/lib/sanity/careers";
+
+const careers = await getCareers();
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="pb-12 pt-48">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div>
+          <div class="lg:sticky lg:top-48">
+            <Text
+              tag="p"
+              variant="textXS"
+              class="text-secondary-500 tracking-wide uppercase"
+            >
+              Join us
+            </Text>
+            <Text
+              tag="h1"
+              variant="displayMD"
+              class="text-accent-800 font-display text-balance mt-4"
+            >
+              Career Opportunities
+            </Text>
+            <Text tag="p" variant="textSM" class="text-base-700 mt-4">
+              Join Madavi Advisory and help transform organizations across Africa
+              through human-centric AI adoption. We're building a team of
+              strategic thinkers and change makers.
+            </Text>
+
+            <div class="mt-12 space-y-4">
+              <Text
+                tag="h3"
+                variant="textSM"
+                class="font-medium text-accent-800"
+              >
+                Why Madavi?
+              </Text>
+              <ul class="space-y-2 text-xs text-base-600">
+                <li class="flex items-start gap-2">
+                  <span class="text-secondary-400 mt-1">•</span>
+                  <span>Impact-driven work helping organizations transform</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-secondary-400 mt-1">•</span>
+                  <span>Flexible work arrangements</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-secondary-400 mt-1">•</span>
+                  <span>Continuous learning and development</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-secondary-400 mt-1">•</span>
+                  <span>Competitive compensation and benefits</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-12">
+              <Text
+                tag="h3"
+                variant="textSM"
+                class="font-medium text-accent-800 mb-4"
+              >
+                Don't see what you're looking for?
+              </Text>
+              <Button
+                isLink={true}
+                href="mailto:careers@madavi.ai"
+                variant="muted"
+                size="sm"
+                class="w-full"
+              >
+                Send us your resume
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <Text
+            tag="h2"
+            variant="displayXS"
+            class="text-accent-800 font-display"
+          >
+            Open Positions
+          </Text>
+          <div class="space-y-6 mt-8">
+            {
+              careers.length > 0 ? (
+                careers.map((career) => <CareerCard post={career} />)
+              ) : (
+                <Text tag="p" variant="textBase" class="text-base-600">
+                  No open positions at the moment. Check back soon!
+                </Text>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

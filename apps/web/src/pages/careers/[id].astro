@@ -1,0 +1,37 @@
+---
+import CareerLayout from "@/layouts/CareerLayout.astro";
+import { getCareers, getCareerById } from "@/lib/sanity/careers";
+
+export async function getStaticPaths() {
+  const careers = await getCareers();
+  return careers.map((career) => ({
+    params: { id: career._id },
+    props: { career },
+  }));
+}
+
+interface Props {
+  career: any;
+}
+
+const { career } = Astro.props;
+
+const frontmatter = {
+  title: career.title,
+  location: career.location,
+  type: career.type,
+  workSetup: career.remote,
+  postedDate: career.postedDate,
+  salary: career.salary,
+  description: career.description,
+  responsibilities: career.responsibilities || [],
+  requirements: career.requirements || [],
+  benefits: career.benefits || [],
+  applyUrl: career.applyUrl,
+  applyEmail: career.applyEmail,
+};
+---
+
+<CareerLayout frontmatter={frontmatter}>
+  {career.content && <Fragment set:html={career.content} />}
+</CareerLayout>

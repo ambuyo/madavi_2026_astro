@@ -1,0 +1,344 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Updates from "@/components/fundations/icons/Updates.astro";
+import Insights from "@/components/fundations/icons/Insights.astro";
+import Clients from "@/components/fundations/icons/Clients.astro";
+import Industry from "@/components/fundations/icons/Industry.astro";
+
+const newsletterBenefits = [
+  {
+    title: "AI Strategy Updates",
+    description:
+      "Stay informed about changes in AI policy, governance, and adoption trends that may affect your organization.",
+    icon: Updates,
+  },
+  {
+    title: "Expert Insights",
+    description:
+      "Get expert analysis and insights into AI implementation, human-centric transformation, and organizational readiness.",
+    icon: Insights,
+  },
+  {
+    title: "Client Success Stories",
+    description:
+      "Read about real cases and how our HCAIF Framework helped clients achieve their AI adoption goals.",
+    icon: Clients,
+  },
+  {
+    title: "Industry Trends",
+    description:
+      "Learn about emerging trends in AI adoption across sectors and how they impact businesses and leaders.",
+    icon: Industry,
+  },
+];
+
+const newsletterTopics = [
+  "AI Governance & Compliance",
+  "Human-Centric Implementation",
+  "Leadership Readiness",
+  "Organizational Transformation",
+  "AI Ethics & Responsibility",
+  "Industry Case Studies",
+  "Emerging AI Trends",
+  "Best Practices & Strategies",
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="pb-12 pt-48">
+      <div class="overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+        <div class="p-8 h-full flex flex-col justify-start bg-base-50">
+          <Text
+            tag="h1"
+            variant="displayMD"
+            class="text-accent-800 font-display text-balance lg:col-span-2"
+          >
+            Stay Informed with Our Newsletter
+          </Text>
+          <Text
+            tag="p"
+            variant="textSM"
+            class="text-base-600 max-w-3xl mx-auto leading-relaxed mt-2"
+          >
+            Subscribe to Madavi's newsletter and receive expert AI strategy
+            insights, industry updates, and valuable information delivered
+            directly to your inbox. Join thousands of professionals who stay
+            ahead of AI developments and organizational transformation trends.
+          </Text>
+          <Text
+            tag="h2"
+            variant="textXL"
+            class="text-accent-800 font-display text-balance mt-8"
+          >
+            Featured Topics
+          </Text>
+          <div class="space-y-1 mt-2">
+            {
+              newsletterTopics.map((topic) => (
+                <Text tag="p" variant="textXS" class="text-base-600">
+                  {topic}
+                </Text>
+              ))
+            }
+          </div>
+        </div>
+        <div class="mx-auto">
+          <form class="space-y-4 p-8 bg-accent-900 h-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label
+                  for="firstName"
+                  class="block text-xs font-medium text-base-300"
+                >
+                  First Name *
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                  class="w-full px-3 py-2 border-b border-transparent h-12 bg-white/5 focus:outline-none focus:bg-white/8 text-white text-xs focus:ring-0"
+                  placeholder="John"
+                />
+              </div>
+              <div class="space-y-1">
+                <label
+                  for="lastName"
+                  class="block text-xs font-medium text-base-300"
+                >
+                  Last Name *
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  required
+                  class="w-full px-3 py-2 border-b border-transparent h-12 bg-white/5 focus:outline-none focus:bg-white/8 text-white text-xs focus:ring-0"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-xs font-medium text-base-300"
+              >
+                Email Address *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-3 py-2 border-b border-transparent h-12 bg-white/5 focus:outline-none focus:bg-white/8 text-white text-xs focus:ring-0"
+                placeholder="john.doe@example.com"
+              />
+            </div>
+            <div>
+              <label
+                for="interest"
+                class="block text-xs font-medium text-base-300"
+              >
+                Areas of Interest (Optional)
+              </label>
+              <select
+                id="interest"
+                name="interest"
+                class="w-full px-3 py-2 border-b border-transparent h-12 bg-white/5 focus:outline-none focus:bg-white/8 text-white text-xs focus:ring-0"
+              >
+                <option value="">Select areas of interest</option>
+                <option value="strategy">AI Strategy</option>
+                <option value="leadership">Leadership Development</option>
+                <option value="implementation">Implementation</option>
+                <option value="governance">Governance & Risk</option>
+                <option value="organizational">Organizational Change</option>
+                <option value="industry">Industry Insights</option>
+                <option value="case-studies">Case Studies</option>
+                <option value="all">All Topics</option>
+              </select>
+            </div>
+            <div class="flex items-start space-x-3">
+              <input
+                type="checkbox"
+                id="privacy"
+                name="privacy"
+                required
+                class="mt-1 size-4 text-accent-600 focus:ring-accent-500 ring-offset-accent-900 border-white/10 rounded bg-accent-800"
+              />
+              <label for="privacy" class="text-xs text-base-400">
+                I agree to receive newsletters from Madavi Advisory. I
+                understand I can unsubscribe at any time. View our <a
+                  href="/privacy"
+                  class="text-secondary-400 hover:text-accent-700 underline"
+                  >Privacy Policy</a
+                >.
+              </label>
+            </div>
+            <div class="space-y-2">
+              <Button variant="muted" size="sm" type="submit" class="w-full" id="subscribe-btn">
+                Subscribe to Newsletter
+              </Button>
+              <div id="form-message" class="hidden text-xs p-3 rounded"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </Wrapper>
+    <Wrapper class="py-12 lg:py-24">
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-accent-800 font-display text-balance"
+        >What you'll receive
+      </Text>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+        {
+          newsletterBenefits.map((benefit) => (
+            <div class="bg-base-50  p-8 flex flex-col">
+              {benefit.icon && (
+                <benefit.icon class="size-8 text-secondary-400 " />
+              )}
+              <Text
+                tag="h3"
+                variant="displayXS"
+                class="text-accent-800 font-display mt-12"
+              >
+                {benefit.title}
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-600 font-medium mt-2"
+              >
+                {benefit.description}
+              </Text>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+    <Wrapper class="py-12 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+        <Text
+          tag="p"
+          variant="textXS"
+          class="text-secondary-500 tracking-wide uppercase"
+        >
+          join us
+        </Text>
+        <div class="lg:col-span-3">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-accent-800 font-display text-balance"
+          >
+            Join Our Community
+          </Text>
+          <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+            Over 5,000 professionals and leaders trust Madavi for their AI
+            strategy insights and updates. Join our growing community of
+            informed leaders and organizational transformers.
+          </Text>
+        </div>
+      </div>
+      <ul
+        class="grid grid-cols-2 sm:grid-cols-3 gap-y-8 mt-12 lg:mt-24 lg:divide-x lg:divide-base-200 lg:border-x lg:border-base-200"
+      >
+        {
+          [
+            {
+              label: "Active Subscribers",
+              value: "5,000+",
+            },
+            {
+              label: "Newsletter Delivery",
+              value: "Monthly",
+            },
+            {
+              label: "Years of Insights",
+              value: "5+",
+            },
+          ].map((stat) => (
+            <li class="flex flex-col gap-1 lg:gap-48 lg:px-4">
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-base-700 font-medium uppercase"
+              >
+                {stat.label}
+              </Text>
+              <Text
+                tag="p"
+                variant="displayLG"
+                class="text-accent-800 font-display italic font-medium"
+              >
+                {stat.value}
+              </Text>
+            </li>
+          ))
+        }
+      </ul>
+    </Wrapper>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector("form") as HTMLFormElement;
+  const messageDiv = document.getElementById("form-message");
+  const submitBtn = document.getElementById("subscribe-btn") as HTMLButtonElement;
+
+  if (form && messageDiv && submitBtn) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        interest: formData.get("interest"),
+        privacy: formData.get("privacy") === "on",
+      };
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Subscribing...";
+        messageDiv.classList.add("hidden");
+
+        const response = await fetch("/api/newsletter-subscribe.json", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        messageDiv.classList.remove("hidden");
+
+        if (response.ok) {
+          messageDiv.classList.add("bg-green-50", "text-green-800", "border", "border-green-200");
+          messageDiv.classList.remove("bg-red-50", "text-red-800", "border-red-200");
+          messageDiv.textContent = `Success! Welcome ${data.firstName}. Check your inbox for updates.`;
+          form.reset();
+        } else {
+          messageDiv.classList.add("bg-red-50", "text-red-800", "border", "border-red-200");
+          messageDiv.classList.remove("bg-green-50", "text-green-800", "border-green-200");
+          messageDiv.textContent = result.message || result.error || "Failed to subscribe";
+        }
+      } catch (error) {
+        messageDiv.classList.remove("hidden", "bg-green-50", "text-green-800", "border-green-200");
+        messageDiv.classList.add("bg-red-50", "text-red-800", "border", "border-red-200");
+        messageDiv.textContent = "An error occurred. Please try again.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Subscribe to Newsletter";
+      }
+    });
+  }
+</script>

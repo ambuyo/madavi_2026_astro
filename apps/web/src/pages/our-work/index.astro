@@ -1,0 +1,41 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import CasesCard from "@/components/cases/CasesCard.astro";
+// Data
+import { getCaseStudies } from "@/lib/data";
+const allCaseStudies = await getCaseStudies();
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="max-w-2xl">
+        <Kicker variant="default">Case studies</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
+          >Case Studies</Text
+        >
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-600 lg:text-balance mt-4"
+        >
+          Real results from real clients. See how we've helped businesses across
+          industries achieve their financial goals.
+        </Text>
+      </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 mt-12 gap-2 p-8 lg:p-12 bg-base-50"
+      >
+        {allCaseStudies.map((caseStudy) => <CasesCard post={caseStudy} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

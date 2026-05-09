@@ -1,0 +1,46 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Icons
+import Download from "@/components/fundations/icons/Download.astro";
+
+const { title, documentType, year, file, description } = Astro.props.post.data;
+const url = `/resources/reports/${Astro.props.post.id}`;
+---
+
+<article class="relative bg-base-50 p-8 flex flex-col group hover:shadow-md transition-shadow duration-200">
+  <a href={url} class="absolute inset-0 z-10"></a>
+
+  <div class="flex items-start justify-between">
+    <div class="flex-1">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-secondary-500 uppercase font-medium"
+      >
+        {documentType} • {year}
+      </Text>
+
+      <Text
+        tag="h3"
+        variant="displaySM"
+        class="text-accent-800 font-display mt-4 group-hover:text-accent-900 transition-colors"
+      >
+        {title}
+      </Text>
+
+      <Text tag="p" variant="textSM" class="text-base-600 mt-3 line-clamp-2">
+        {description}
+      </Text>
+    </div>
+
+    <a
+      href={file}
+      download
+      class="ml-4 p-3 bg-white rounded border border-base-100 hover:border-accent-400 hover:bg-accent-50 transition-all z-20 flex-shrink-0"
+      aria-label={`Download ${title}`}
+    >
+      <Download class="size-5 text-accent-800" />
+    </a>
+  </div>
+</article>

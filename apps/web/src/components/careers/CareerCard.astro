@@ -1,0 +1,56 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Content
+const { title, location, type, remote, postedDate, salary, id } = {
+  id: Astro.props.post._id,
+  title: Astro.props.post.title,
+  location: Astro.props.post.location,
+  type: Astro.props.post.type,
+  remote: Astro.props.post.remote,
+  postedDate: Astro.props.post.postedDate,
+  salary: Astro.props.post.salary,
+};
+
+const url = `/careers/${id}`;
+
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+  const weekday = date.toLocaleString("default", { weekday: "short" });
+  return `${weekday}, ${day} of ${month} ${year}`;
+}
+---
+
+<article class="relative bg-base-50 p-8 flex flex-col">
+  <a
+    href={url}
+    title={`View job details: ${title}`}
+    aria-label={`View job details for ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <Text
+    tag="p"
+    variant="textXS"
+    class="text-secondary-500 uppercase font-medium"
+  >
+    <time datetime={postedDate}>{formatDate(postedDate)}</time>
+  </Text>
+
+  <Text tag="h3" variant="displaySM" class="text-accent-800 font-display mt-12">
+    {title}
+  </Text>
+  <div class="flex flex-wrap items-center gap-2 text-xs text-base-600 mt-4">
+    <span>{location}</span>
+    <span aria-hidden="true">•</span>
+    <span>{type}</span>
+    <span aria-hidden="true">•</span>
+    <span class="text-secondary-500">
+      {remote}
+    </span>
+  </div>
+  <div class="flex items-center justify-between text-xs text-accent-800 mt-1">
+    <span class="font-medium text-base-700">{salary}</span>
+  </div>
+</article>

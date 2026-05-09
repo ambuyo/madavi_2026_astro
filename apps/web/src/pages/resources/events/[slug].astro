@@ -1,0 +1,63 @@
+---
+import EventsLayout from "@/layouts/EventsLayout.astro";
+import { getEvents, getEventBySlug } from "@/lib/sanity/events";
+import Text from "@/components/fundations/elements/Text.astro";
+
+export async function getStaticPaths() {
+  const events = await getEvents();
+  const paths = events.map((event) => {
+    return {
+      params: { slug: event.slug.current },
+      props: { event },
+      trailingSlash: false,
+    };
+  });
+  return paths;
+}
+
+interface Props {
+  event: any;
+}
+
+const { slug } = Astro.params;
+const event = Astro.props.event || (slug ? await getEventBySlug(slug) : null);
+
+if (!event) {
+  return Astro.redirect("/resources/events");
+}
+---
+
+<EventsLayout frontmatter={event}>
+  <Text tag="h2" variant="displayMD" class="text-accent-800 font-display mt-8">
+    Event Details
+  </Text>
+
+  <div class="prose prose-lg mt-6 max-w-none">
+    <p class="text-base-700 leading-relaxed">{event.description}</p>
+
+    {event.speakers && event.speakers.length > 0 && (
+      <div class="mt-8">
+        <h3 class="text-base-900 font-semibold">Speakers</h3>
+        <ul class="list-disc list-inside text-base-700">
+          {event.speakers.map((speaker: string) => (
+            <li key={speaker}>{speaker}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {event.agenda && event.agenda.length > 0 && (
+      <div class="mt-8">
+        <h3 class="text-base-900 font-semibold">Agenda</h3>
+        <div class="space-y-3">
+          {event.agenda.map((item: any) => (
+            <div key={item.time} class="border-l-2 border-accent-300 pl-4">
+              <p class="font-semibold text-base-900">{item.time}</p>
+              <p class="text-base-700">{item.activity}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</EventsLayout>

@@ -1,0 +1,106 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const columns = [
+  {
+    icon: "Team",
+    title: "Cultural Barriers",
+    bullets: [
+      "Team doesn't trust it",
+      "Leadership doesn't champion it",
+      "Previous tech failures created skepticism",
+    ],
+  },
+  {
+    icon: "Process",
+    title: "Process Chaos",
+    bullets: [
+      "Workflows too messy to automate",
+      "Every person does things differently",
+      "No standardization or documentation",
+    ],
+  },
+  {
+    icon: "Infrastructure",
+    title: "Technical Gaps",
+    bullets: [
+      "Systems don't integrate",
+      "Data quality is poor",
+      "Infrastructure can't handle it",
+    ],
+  },
+  {
+    icon: "Resources",
+    title: "Capacity Issues",
+    bullets: [
+      "Team already at 120% capacity",
+      "No bandwidth for learning",
+      "No time for implementation",
+    ],
+  },
+];
+---
+
+<section class="bg-base-50">
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-accent-700 font-semibold tracking-wide uppercase"
+      >
+        Common Barriers
+      </Text>
+      <div class="lg:col-span-3">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance"
+        >
+          Most Businesses Jump Straight to Tools
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="text-base-700 mt-2"
+        >
+          Understanding these barriers is the first step to building a successful AI readiness program.
+        </Text>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        columns.map((column) => (
+          <div class="flex flex-col h-full p-6 border border-base-200 rounded-lg">
+            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-accent-100 mb-4">
+              <span class="text-xl text-accent-700">→</span>
+            </div>
+            <Text
+              tag="h3"
+              variant="textBase"
+              class="text-accent-900 font-bold mb-4"
+            >
+              {column.title}
+            </Text>
+            <ul class="space-y-3 flex-grow">
+              {column.bullets.map((bullet) => (
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 text-accent-600 font-bold">•</span>
+                  <Text
+                    tag="span"
+                    variant="textSM"
+                    class="text-base-700"
+                  >
+                    {bullet}
+                  </Text>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

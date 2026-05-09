@@ -1,0 +1,304 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+import { getCaseStudies, getCaseStudyBySlug } from "@/lib/data";
+// Utils
+import { getIndustryDisplayName } from "@/lib/industries";
+
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const caseStudy = await getCaseStudyBySlug(slug!);
+if (!caseStudy) {
+  return Astro.redirect("/404");
+}
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-48">
+      <Text
+        tag="h1"
+        variant="display6XL"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        class="dark:text-white text-base-900 font-medium tracking-tighter lowercase"
+      >
+        {caseStudy.data.title}
+      </Text>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-start mt-12">
+        {caseStudy.data.projectUrl && (
+          <Text
+            href={caseStudy.data.projectUrl}
+            tag="a"
+            variant="displayXL"
+            data-aos="fade-up"
+            data-aos-duration="1500"
+            class="dark:text-white text-base-900 font-medium tracking-tighter flex items-center gap-2 w-full justify-between"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            visit <span
+              ><svg
+                class="size-8 lg:size-14"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                ><path
+                  d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"
+                ></path></svg
+              ></span
+            >
+          </Text>
+        )}
+        <div class="relative overflow-hidden lg:col-span-3">
+          <Image
+            width={1000}
+            height={100}
+            src={caseStudy.data.image.url}
+            alt={caseStudy.data.image.alt}
+            data-aos="fade-up"
+            data-aos-duration="2000"
+            class="w-full aspect-[8/4] object-cover object-center"
+          />
+        </div>
+      </div>
+    </Wrapper>
+    <Wrapper variant="standard" class="py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
+        <Text
+          tag="h4"
+          variant="displayXL"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="dark:text-white text-base-900 font-medium tracking-tighter"
+        >
+Intro        </Text>
+        <Wrapper variant="prose" class="-mt-8 lg:col-span-3">
+          <Text
+            tag="p"
+            variant="displayMD"
+            class="dark:text-white tracking-tight font-medium text-black"
+          >
+            {caseStudy.data.aboutClient}
+          </Text>
+        </Wrapper>
+      </div>
+      <div>
+        <div class="flex flex-col divide-y divide-base-200 dark:divide-base-800 border-t border-base-200 dark:border-base-800">
+          <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
+            <Text
+              tag="h4"
+              variant="displayXL"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              class="dark:text-white text-base-900 font-medium tracking-tighter"
+            >
+              Name
+            </Text>
+            <Text
+              tag="p"
+              variant="textXL"
+              class="text-base-500 dark:text-base-400 lg:col-span-3"
+            >
+              {caseStudy.data.client}
+            </Text>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
+            <Text
+              tag="h4"
+              variant="displayXL"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              class="dark:text-white text-base-900 font-medium tracking-tighter"
+            >
+              Year
+            </Text>
+            <Text
+              tag="p"
+              variant="textXL"
+              class="text-base-500 dark:text-base-400 lg:col-span-3"
+            >
+              {caseStudy.data.year}
+            </Text>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
+            <Text
+              tag="h4"
+              variant="displayXL"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              class="dark:text-white text-base-900 font-medium tracking-tighter"
+            >
+              Industry
+            </Text>
+            <Text
+              tag="p"
+              variant="textXL"
+              class="text-base-500 dark:text-base-400 lg:col-span-3"
+            >
+              {getIndustryDisplayName(caseStudy.data.industry)}
+            </Text>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
+            <Text
+              tag="h4"
+              variant="displayXL"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              class="dark:text-white text-base-900 font-medium tracking-tighter"
+            >
+              Services
+            </Text>
+            <Text
+              tag="p"
+              variant="textXL"
+              class="text-base-500 dark:text-base-400 lg:col-span-3"
+            >
+              {caseStudy.data.services?.join(", ")}
+            </Text>
+          </div>
+        </div>
+      </div>
+      <div
+        class="py-4 border-y border-base-200 dark:border-base-800 grid grid-cols-1 lg:grid-cols-4 gap-2"
+      >
+        <Text
+          tag="h4"
+          variant="displayXL"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="dark:text-white text-base-900 font-medium tracking-tighter"
+        >
+          Scope
+        </Text>
+        <div class="lg:col-span-3">
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-500 dark:text-base-400"
+          >
+            {caseStudy.data.scopeOfWork}
+          </Text>
+        </div>
+      </div>
+      <div
+        class="py-4 border-y border-base-200 dark:border-base-800 grid grid-cols-1 lg:grid-cols-4 gap-2"
+      >
+        <Text
+          tag="h4"
+          variant="displayXL"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="dark:text-white text-base-900 font-medium tracking-tighter"
+        >
+          Our Process
+        </Text>
+        <div class="lg:col-span-3">
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-500 dark:text-base-400"
+          >
+            {caseStudy.data.whatWeDid}
+          </Text>
+        </div>
+      </div>
+      <div class="mt-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-2 items-baseline">
+          <Text
+            tag="h4"
+            variant="displayXL"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            class="dark:text-white text-base-900 font-medium tracking-tighter"
+          >
+            Results
+          </Text>
+          <div class="lg:col-span-3">
+            {
+              caseStudy.data.results?.map((result) => (
+                <div class="mb-4">
+                  <Text
+                    tag="p"
+                    variant="displayMD"
+                    class="dark:text-white tracking-tight font-medium text-black"
+                  >
+                    {result.label}
+                  </Text>
+                  <Text
+                    tag="p"
+                    variant="textBase"
+                    class="text-base-500 dark:text-base-400"
+                  >
+                    {result.value}
+                  </Text>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        {
+          caseStudy.data.projectImages && caseStudy.data.projectImages.length > 0 && (
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+              {
+                caseStudy.data.projectImages.map((image) => (
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    width={400}
+                    height={400}
+                    class="w-full aspect-square object-cover object-center"
+                  />
+                ))
+              }
+            </div>
+          )
+        }
+        {
+          caseStudy.data.testimonial && (
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-4 gap-2">
+              <Text
+                tag="h4"
+                variant="displayXL"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                class="dark:text-white text-base-900 font-medium tracking-tighter"
+              >
+                Testimonial
+              </Text>
+              <div class="lg:col-span-3">
+                <Text
+                  tag="p"
+                  variant="displayMD"
+                  class="dark:text-white tracking-tight font-medium text-black italic"
+                >
+                  "{caseStudy.data.testimonial.quote}"
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textBase"
+                  class="text-base-500 dark:text-base-400 mt-4"
+                >
+                  {caseStudy.data.testimonial.author}
+                  {caseStudy.data.testimonial.role && `, ${caseStudy.data.testimonial.role}`}
+                </Text>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

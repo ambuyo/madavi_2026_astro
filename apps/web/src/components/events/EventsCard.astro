@@ -1,0 +1,72 @@
+---
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+
+const post = Astro.props.post;
+const isSanityEvent = post.slug && typeof post.slug === "object" && post.slug.current;
+
+const { title, description, startDate, location, url } = isSanityEvent
+  ? {
+      title: post.title,
+      description: post.description,
+      startDate: new Date(post.startDate),
+      location: post.location,
+      url: "/resources/events/" + post.slug.current,
+    }
+  : {
+      title: post.data.title,
+      description: post.data.description,
+      startDate: new Date(post.data.startDate),
+      location: post.data.location,
+      url: "/resources/events/" + post.id,
+    };
+
+const formattedTime = startDate.toLocaleTimeString("en-US", {
+  hour: "numeric",
+  minute: "2-digit",
+});
+const monthLabel = startDate.toLocaleDateString("en-US", { month: "short" });
+const dayLabel = startDate.getDate();
+---
+
+<article class="flex flex-col group h-full justify-between p-4 lg:p-8 rounded-3xl bg-accent-50 transition-colors duration-200 hover:bg-accent-100">
+  <div>
+    <div class="flex items-center gap-3">
+      <div class="flex flex-col items-center justify-center size-14 bg-white rounded-xl text-base-900 shrink-0">
+        <Text tag="span" variant="textXS" class="font-semibold uppercase">
+          {monthLabel}
+        </Text>
+        <Text tag="span" variant="textXL" class="font-medium text-base-600 font-display">
+          {dayLabel}
+        </Text>
+      </div>
+      <div class="flex flex-col">
+        <Text tag="span" variant="textXS" class="text-base-600 uppercase font-medium">
+          <time datetime={startDate.toISOString()}>{formattedTime}</time>
+        </Text>
+        <Text tag="span" variant="textXS" class="text-base-600">
+          {location}
+        </Text>
+      </div>
+    </div>
+
+    <Text tag="h3" variant="textBase" class="font-medium text-base-900 mt-8">
+      {title}
+    </Text>
+    <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+      {description}
+    </Text>
+  </div>
+  <Button
+    isLink
+    size="xs"
+    variant="muted"
+    href={url}
+    title={`View event: ${title}`}
+    aria-label={`View event: ${title}`}
+    class="w-fit mt-8"
+  >
+    View event
+  </Button>
+</article>

@@ -1,0 +1,55 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+
+---
+
+<section>
+  <Wrapper variant="paddingLess">
+    <div class="relative overflow-hidden">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="object-cover object-center w-full h-[60dvh] lg:h-[72dvh] bg-base-50"
+      >
+        <source src="/services/bgvideo2.mp4" type="video/mp4" />
+      </video>
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-accent-950/70"
+      >
+      </div>
+    </div>
+  </Wrapper>
+  <Wrapper variant="standard" class="py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-y-4">
+      <Text
+        tag="h2"
+        variant="displayXL"
+        class="text-accent-800 font-display text-balance lg:col-span-2"
+      >
+AI Readiness Audit: Honest Assessment Before You Waste Money
+      </Text>
+      <Text
+        tag="p"
+        variant="textSM"
+        class="text-base-600 leading-relaxed"
+      >
+60% of businesses that buy AI tools aren't ready to use them. Find out if you're in the 40% that are—before you invest. <br /><br />
+Most businesses jump straight to buying AI platforms. They see impressive demos. They approve the budget. Six months later? 28% adoption rate and $80K wasted.
+<br/><br/>
+The problem isn't the AI. It's readiness.
+
+      </Text>
+                  <div class="flex items-center gap-2 flex-col lg:flex-row mt-4">
+            <Button variant="default" size="xs" class="w-full lg:w-fit">
+              Schedule Consultation
+            </Button>
+          </div>
+    </div>
+  </Wrapper>
+  
+</section>

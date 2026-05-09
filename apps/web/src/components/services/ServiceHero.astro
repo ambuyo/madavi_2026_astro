@@ -1,0 +1,45 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="paddingLess">
+    <div class="relative overflow-hidden">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="object-cover object-center w-full h-[60dvh] lg:h-[72dvh] bg-base-50"
+      >
+        <source src="/services/bgvideo2.mp4" type="video/mp4" />
+      </video>
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-accent-950/70"
+      >
+      </div>
+    </div>
+  </Wrapper>
+  <Wrapper variant="standard" class="py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-y-4">
+      <Text
+        tag="h1"
+        variant="displayXL"
+        class="text-accent-800 font-display text-balance lg:col-span-2"
+      >
+        Experienced legal counsel you can trust.
+      </Text>
+      <Text
+        tag="p"
+        variant="textSM"
+        class="text-base-600 leading-relaxed"
+      >
+        For over two decades, Carrington Law has been the trusted partner for
+        businesses and individuals facing complex legal challenges. We deliver
+        strategic solutions with unwavering commitment to your success.
+      </Text>
+    </div>
+  </Wrapper>
+</section>

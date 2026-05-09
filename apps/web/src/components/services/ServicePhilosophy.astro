@@ -1,0 +1,86 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Action from "@/components/fundations/icons/Action.astro";
+import Integrity from "@/components/fundations/icons/Integrity.astro";
+import Partnership from "@/components/fundations/icons/Partnership.astro";
+
+const philosophyCards = [
+  {
+    icon: Integrity,
+    title: "Integrity First",
+    description:
+      "We uphold the highest ethical standards in every case, ensuring honest communication and principled advocacy that serves justice and our clients' best interests.",
+  },
+  {
+    icon: Action,
+    title: "Excellence in Action",
+    description:
+      "Our commitment to excellence drives us to continuously innovate, learn, and deliver superior results through meticulous preparation and strategic thinking.",
+  },
+  {
+    icon: Partnership,
+    title: "True Partnership",
+    description:
+      "We work alongside our clients as trusted advisors, understanding their unique challenges and collaborating to achieve outcomes that align with their goals and values.",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-secondary-500 tracking-wide uppercase"
+      >
+        Firm Values
+      </Text>
+      <div class="lg:col-span-3">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance"
+        >
+          Our Philosophy
+        </Text>
+        <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+          At Carrington Law, we believe that exceptional legal representation
+          begins with genuine partnership. We don't just practice law—we build
+          lasting relationships founded on trust, transparency, and an
+          unwavering commitment to our clients' success.
+        </Text>
+        <Text tag="p" variant="textBase" class="text-base-700 mt-2">
+          We pair meticulous preparation with clear communication and practical
+          strategy. From the first conversation to final resolution, you can
+          expect proactive updates, straightforward advice, and solutions
+          aligned with your goals.
+        </Text>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 lg:mt-24 gap-8">
+      {
+        philosophyCards.map((card) => (
+          <div class="bg-base-50 p-8 flex flex-col">
+            {card.icon && <card.icon class="size-8 text-secondary-400" />}
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-accent-800 font-display mt-12"
+            >
+              {card.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 font-medium mt-2"
+            >
+              {card.description}
+            </Text>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

@@ -1,0 +1,8 @@
+# Content snapshots are tracked in git for resilience against Sanity downtime.
+# During builds, if Sanity is unavailable, the site uses these cached snapshots
+# to generate pages instead of failing the entire build.
+#
+# To update snapshots:
+#   npm run snapshot:update
+#
+# See /docs/SNAPSHOTS.md for full documentation.

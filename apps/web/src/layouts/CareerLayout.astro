@@ -1,0 +1,167 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    location: string;
+    type: string;
+    workSetup: string;
+    postedDate: string;
+    salary: string;
+    description: string;
+    responsibilities: string[];
+    requirements: string[];
+    benefits: string[];
+    applyUrl: string;
+    applyEmail: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div>
+          <div class="lg:sticky lg:top-48">
+            <Text
+              tag="p"
+              variant="textXS"
+              class="text-secondary-500 uppercase font-medium"
+            >
+              Posted on {
+                new Date(frontmatter.postedDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              }
+            </Text>
+            <Text
+              tag="h1"
+              variant="displaySM"
+              class="text-accent-800 font-display text-balance mt-12"
+            >
+              {frontmatter.title}
+            </Text>
+            <div class="space-y-2 text-xs text-base-600 mt-4">
+              <span class="block flex items-center justify-between">
+                <span>Location:</span>
+                <span>{frontmatter.location}</span>
+              </span>
+
+              <span class="block flex items-center justify-between">
+                <span>Employment:</span>
+                <span>{frontmatter.type}</span>
+              </span>
+
+              <span class="block flex items-center justify-between">
+                <span>Work setup:</span>
+                <span>{frontmatter.workSetup}</span>
+              </span>
+
+              <span class="block flex items-center justify-between capitalize">
+                <span>Compensation:</span>
+                <span>{frontmatter.salary}</span>
+              </span>
+            </div>
+
+            <div class="mt-12">
+              <Text
+                tag="h3"
+                variant="textSM"
+                class="font-medium text-accent-800"
+              >
+                Apply for this position
+              </Text>
+              <div
+                class="mt-4 pt-4 border-t border-base-100 flex flex-wrap gap-2"
+              >
+                <Button
+                  size="xs"
+                  variant="default"
+                  href={frontmatter.applyUrl}
+                  target="_blank"
+                  class="w-full lg:w-fit"
+                >
+                  Apply Online
+                </Button>
+                <Button
+                  size="xs"
+                  variant="muted"
+                  href={`mailto:${frontmatter.applyEmail}?subject=Application for ${frontmatter.title}`}
+                  class="w-full lg:w-fit"
+                >
+                  Apply via Email
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <div>
+            <Text
+              tag="h2"
+              variant="displaySM"
+              class="text-accent-800 font-display"
+            >
+              Job Description
+            </Text>
+            <Text tag="p" variant="textSM" class="text-base-700 mt-1"
+              >{frontmatter.description}</Text
+            >
+          </div>
+          <div class="space-y-8 mt-8">
+            <div>
+              <Text
+                tag="h2"
+                variant="textBase"
+                class="font-medium text-accent-800"
+              >
+                Responsibilities
+              </Text>
+              <ul class="list-disc list-inside space-y-2 text-base-700 mt-4">
+                {frontmatter.responsibilities.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div>
+              <Text
+                tag="h2"
+                variant="textBase"
+                class="font-medium text-accent-800"
+              >
+                Requirements
+              </Text>
+              <ul class="list-disc list-inside space-y-2 text-base-700 mt-4">
+                {frontmatter.requirements.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div>
+              <Text
+                tag="h2"
+                variant="textBase"
+                class="font-medium text-accent-800"
+              >
+                Benefits
+              </Text>
+              <ul class="list-disc list-inside space-y-2 text-base-700 mt-4">
+                {frontmatter.benefits.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <Wrapper variant="prose" class="mt-12">
+            <slot />
+          </Wrapper>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,171 @@
+---
+// Assets
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Icons
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+
+const megamenuSections = [
+  {
+    title: "Services",
+    href: "/ai-services",
+    links: [
+      { href: "/ai-services", label: "Explore All Services" },
+      {
+        href: "/ai-services/readiness-diagnostic",
+        label: "AI Readiness Diagnostic",
+      },
+      {
+        href: "/ai-services/advisory",
+        label: "Executive Advisory Retainer",
+      },
+      {
+        href: "/ai-services/leadership-ai-fluency",
+        label: "Leadership AI Fluency Cohort",
+      },
+      {
+        href: "/ai-services/keynote-speaking",
+        label: "Keynote & Speaking",
+      },
+    ],
+  },
+  {
+    title: "Industries We Serve",
+    href: "/industries",
+    links: [
+      { href: "/industries", label: "All Industries" },
+      {
+        href: "/industries/legal",
+        label: "Legal Services",
+      },
+      { href: "/industries/healthcare", label: "Healthcare" },
+      {
+        href: "/industries/nonprofits",
+        label: "Non Profits",
+      },
+      { href: "/industries/retail", label: "Ecommerce & Retail " },
+      {
+        href: "/industries/professional-services",
+        label: "Professional Services",
+      },
+      {
+        href: "/industries/real-estate",
+        label: "Real Estate",
+      },
+    ],
+  },
+];
+---
+
+<div
+  id="services-megamenu"
+  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto bg-black"
+>
+  <div class="flex justify-center">
+    <div class="w-full max-w-7xl px-12 py-12">
+      <div
+        class="grid grid-cols-2 gap-y-8 lg:grid-cols-4 lg:divide-x divide-base-900 p-0"
+      >
+        <div
+          class="p-8 bg-accent-400 flex flex-col h-full justify-between gap-12 lg:gap-18 col-span-full lg:col-span-1"
+        >
+          <div>
+            <Shield class="h-6 text-white" />
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-base text-white mt-8 font-display font-medium"
+            >
+              Get in touch
+            </Text>
+            <Text tag="p" variant="textSM" class="text-white font-medium mt-2">
+              Get in touch with us to learn more about our services and how we can
+              help you.
+            </Text>
+          </div>
+          <Button
+            variant="muted"
+            size="xs"
+            isLink={true}
+            href="/contact"
+            class="w-fit"
+          >
+            Contact Us
+          </Button>
+        </div>
+        {
+          megamenuSections.map((section) => (
+            <div class="px-6">
+              <a
+                href={section.href}
+                class="group flex items-center justify-between text-white uppercase hover:text-accent-400 transition-colors"
+              >
+                <Text tag="h3" variant="textSM">
+                  {section.title}
+                </Text>
+                <ArrowRight class="size-4 " />
+              </a>
+              <ul class="space-y-2 mt-4 lg:mt-12">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="group text-xs flex items-center text-base-300 hover:text-accent-500 transition-colors duration-300 justify-between"
+                    >
+                      {link.label}
+                      <ArrowRight class="size-4 hidden group-hover:flex duration-300" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <div
+        class="border-t pt-4 border-base-900 col-span-full flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between"
+      >
+        <div class="flex flex-wrap gap-4 items-center">
+          <a
+            href="tel:+254718735565"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            +254 (718) 735-565
+          </a>
+          <span class="hidden md:flex text-base-900">|</span>
+          <address class="text-base-400 not-italic text-xs">
+            2595, 1007 N Orange St. 4th Floor, DE, Wilmington, USA
+          </address>
+        </div>
+        <div
+          class="flex flex-wrap gap-4 items-center order-first lg:order-none"
+        >
+          <a
+            href="https://x.com/madavihq"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            X
+          </a>
+          <a
+            href="https://www.linkedin.com/company/madavihq/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="mailto:hi@madavi.co"
+            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+          >
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

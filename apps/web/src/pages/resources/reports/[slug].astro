@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import DocumentsLayout from "@/layouts/DocumentsLayout.astro";
+
+export async function getStaticPaths() {
+  const documents = await getCollection("documents");
+  const paths = documents.map((page) => {
+    return {
+      params: { slug: page.id },
+      props: { page },
+      trailingSlash: false,
+    };
+  });
+  return paths;
+}
+
+interface Props {
+  page: any;
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<DocumentsLayout frontmatter={page.data}>
+  <Content />
+</DocumentsLayout>

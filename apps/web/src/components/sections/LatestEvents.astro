@@ -1,0 +1,50 @@
+---
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import EventsCard from "@/components/events/EventsCard.astro";
+// Content
+import { getCollection } from "astro:content";
+
+const allEvents = await getCollection("events");
+const upcomingEvents = allEvents
+  .sort((a, b) => a.data.startDate.valueOf() - b.data.startDate.valueOf())
+  .slice(0, 2);
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div class="p-4 lg:p-8 rounded-3xl bg-secondary-900 flex flex-col gap-y-4 justify-between">
+        <div>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-white tracking-tight font-display"
+          >
+            Upcoming Events
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-accent-200 mt-4 text-balance"
+          >
+            Join us for webinars, workshops, and community gatherings focused on AI transformation.
+          </Text>
+        </div>
+        <Button
+          size="xs"
+          variant="muted"
+          isLink={true}
+          href="/resources/events"
+          class="mt-8 w-fit"
+        >
+          Explore all events
+        </Button>
+      </div>
+      {upcomingEvents.map((post) => <EventsCard post={post} />)}
+    </div>
+  </Wrapper>
+</section>

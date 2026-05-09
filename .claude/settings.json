@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm cache:posts)",
+      "Bash(tsx scripts/cache-wordpress-posts.ts)",
+      "Bash(astro build *)",
+      "Bash(pnpm build:web)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s http://localhost:4321/blog)",
+      "Bash(curl -s http://localhost:4321/blog/posts/human-centric-ai-implementation)",
+      "Bash(curl -s http://localhost:4321/blog/tags/ai-strategy)",
+      "Bash(curl -s http://localhost:4321/careers)",
+      "Bash(curl -s http://localhost:4321/resources/reports)",
+      "Bash(curl -s http://localhost:4321/resources/events)",
+      "Bash(pkill -f \"astro dev\")",
+      "Bash(curl -s http://localhost:4322/resources/events)",
+      "Bash(curl -s http://localhost:4322/careers)",
+      "Bash(curl -s http://localhost:4322/services/template)",
+      "Bash(curl -s http://localhost:4321/services/template)"
+    ]
+  }
+}

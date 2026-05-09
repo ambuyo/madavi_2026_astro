@@ -1,0 +1,41 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Content
+const { title, excerpt, date, category, url } = {
+  url: "/resources/press-releases/" + Astro.props.post.id,
+  title: Astro.props.post.data.title,
+  excerpt: Astro.props.post.data.excerpt,
+  date: Astro.props.post.data.pubDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }),
+  category: Astro.props.post.data.category,
+};
+---
+
+<article class="relative bg-base-50 p-8 flex flex-col">
+  <a
+    href={url}
+    title={`Read press release: ${title}`}
+    aria-label={`Read press release: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <div class="flex items-center gap-2 text-xs text-base-600">
+    <span>{date}</span>
+    <span aria-hidden="true">•</span>
+    <span>
+      {category}
+    </span>
+  </div>
+  <Text tag="h3" variant="displaySM" class="text-accent-800 font-display mt-12">
+    {title}
+  </Text>
+  <Text
+    tag="p"
+    variant="textBase"
+    class="text-base-600 leading-relaxed line-clamp-3"
+  >
+    {excerpt}
+  </Text>
+</article>

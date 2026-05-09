@@ -1,0 +1,87 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Icons
+import Download from "@/components/fundations/icons/Download.astro";
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    documentType: string;
+    year: number;
+    file: string;
+    description: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div>
+          <div class="lg:sticky lg:top-48">
+            <Text
+              tag="p"
+              variant="textXS"
+              class="text-secondary-500 uppercase font-medium"
+            >
+              {frontmatter.documentType} • {frontmatter.year}
+            </Text>
+            <Text
+              tag="h1"
+              variant="displaySM"
+              class="text-accent-800 font-display text-balance mt-12"
+            >
+              {frontmatter.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-4 leading-relaxed"
+            >
+              {frontmatter.description}
+            </Text>
+
+            <div class="mt-12 space-y-3">
+              <Button
+                isLink={true}
+                href={frontmatter.file}
+                download
+                variant="default"
+                size="sm"
+                class="w-full flex items-center justify-center gap-2"
+              >
+                <Download class="size-4" />
+                Download Document
+              </Button>
+
+              <Button
+                isLink={true}
+                href="/resources/reports"
+                variant="muted"
+                size="sm"
+                class="w-full flex items-center justify-center gap-2"
+              >
+                Back to Reports
+                <ArrowRight class="size-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <div class="prose prose-sm max-w-none">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

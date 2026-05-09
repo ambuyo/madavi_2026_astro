@@ -1,0 +1,837 @@
+---
+// Foundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+// Data fetching with fallback
+import { fetchAllServices } from "@/sanity/lib/client";
+import type { ServiceSnapshot } from "@/sanity/lib/snapshot";
+
+interface Props {
+  service: ServiceSnapshot;
+}
+
+export async function getStaticPaths() {
+  // Fetch all services (with Sanity → snapshot fallback built in)
+  const services = await fetchAllServices();
+
+  if (!services || services.length === 0) {
+    console.warn("No services available for static generation");
+    return [];
+  }
+
+  // Filter out services without slugs and map to routes
+  return services
+    .filter((service) => service.slug)
+    .map((service) => ({
+      params: { slug: service.slug },
+      props: { service },
+    }));
+}
+
+const { service } = Astro.props;
+
+if (!service) {
+  return Astro.redirect("/404");
+}
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section>
+    <div class="relative overflow-hidden">
+      {service.hero?.videoUrl && (
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          class="object-cover object-center w-full h-[60dvh] lg:h-[72dvh] bg-base-50"
+        >
+          <source src={service.hero.videoUrl} type="video/mp4" />
+        </video>
+      )}
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-accent-950/70"
+      >
+      </div>
+    </div>
+
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-y-4">
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="text-accent-800 font-display text-balance lg:col-span-2"
+        >
+          {service.title}
+        </Text>
+        <Text
+          tag="p"
+          variant="textSM"
+          class="text-base-600 leading-relaxed"
+        >
+          {service.shortDescription}
+        </Text>
+      </div>
+
+      {service.hero?.ctaLink && (
+        <div class="mt-8">
+          <a href={service.hero.ctaLink} class="btn btn-primary">
+            {service.hero.ctaText || "Get Started"}
+          </a>
+        </div>
+      )}
+    </Wrapper>
+  </section>
+
+  <!-- Stats Section -->
+  {service.stats && service.stats.length > 0 && (
+    <section class="bg-base-50">
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12 lg:mb-24">
+          <Text
+            tag="p"
+            variant="textXS"
+            class="text-accent-700 font-semibold tracking-wide uppercase"
+          >
+            Proven Results
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="h2"
+              variant="displayLG"
+              class="text-accent-800 font-display text-balance"
+            >
+              Results that speak for themselves
+            </Text>
+          </div>
+        </div>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-8 lg:divide-x lg:divide-base-200 lg:border-x lg:border-base-200">
+          {service.stats.map((stat) => (
+            <li class="flex flex-col gap-1 lg:gap-4 lg:px-4">
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-base-700 font-medium uppercase"
+              >
+                {stat.label}
+              </Text>
+              <Text
+                tag="p"
+                variant="displayLG"
+                class="text-accent-800 font-display italic font-medium"
+              >
+                {stat.value}
+              </Text>
+            </li>
+          ))}
+        </ul>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Problem Section -->
+  {service.problemSection && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12 lg:mb-24">
+          <Text
+            tag="p"
+            variant="textXS"
+            class="text-secondary-500 tracking-wide uppercase"
+          >
+            The Challenge
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="h2"
+              variant="displayLG"
+              class="text-accent-800 font-display text-balance"
+            >
+              {service.problemSection.headline}
+            </Text>
+            {(service.problemSection.copy) && (
+              <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+                {service.problemSection.copy}
+              </Text>
+            )}
+          </div>
+        </div>
+
+        {service.problemSection.painPoints && (
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+            {service.problemSection.painPoints.map((point) => (
+              <div class="bg-base-50 p-6 text-center">
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-700 font-medium"
+                >
+                  {point.label}
+                </Text>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {service.problemSection.calloutBox && (
+          <div class="bg-accent-50 border-2 border-accent-200 p-8 text-center">
+            <Text
+              tag="p"
+              variant="displayLG"
+              class="text-accent-800 font-display"
+            >
+              {service.problemSection.calloutBox.stat}
+            </Text>
+            <Text tag="p" variant="textBase" class="text-accent-700 mt-2">
+              {service.problemSection.calloutBox.description}
+            </Text>
+          </div>
+        )}
+
+        {service.problemSection.keyStatistic && (
+          <div class="bg-accent-50 border-2 border-accent-200 p-8 text-center">
+            <Text
+              tag="p"
+              variant="displayLG"
+              class="text-accent-800 font-display"
+            >
+              {service.problemSection.keyStatistic.stat}
+            </Text>
+            <Text tag="p" variant="textBase" class="text-accent-700 mt-2">
+              {service.problemSection.keyStatistic.description}
+            </Text>
+          </div>
+        )}
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Philosophy Section -->
+  {service.philosophy && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12 lg:mb-24">
+          <Text
+            tag="p"
+            variant="textXS"
+            class="text-secondary-500 tracking-wide uppercase"
+          >
+            Our Philosophy
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="h2"
+              variant="displayLG"
+              class="text-accent-800 font-display text-balance"
+            >
+              {service.philosophy.title}
+            </Text>
+            <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+              {service.philosophy.description}
+            </Text>
+          </div>
+        </div>
+        {service.philosophy.values && (
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {service.philosophy.values.map((value) => (
+              <div class="bg-base-50 p-8 flex flex-col">
+                <Text
+                  tag="h3"
+                  variant="displaySM"
+                  class="text-accent-800 font-display"
+                >
+                  {value.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-600 font-medium mt-2"
+                >
+                  {value.description}
+                </Text>
+              </div>
+            ))}
+          </div>
+        )}
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Approach Section -->
+  {service.approach && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12 lg:mb-24">
+          <Text
+            tag="p"
+            variant="textXS"
+            class="text-secondary-500 tracking-wide uppercase"
+          >
+            Our Way
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="h2"
+              variant="displayLG"
+              class="text-accent-800 font-display text-balance"
+            >
+              {service.approach.title}
+            </Text>
+            <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+              {service.approach.description}
+            </Text>
+          </div>
+        </div>
+        {service.approach.steps && (
+          <div class="bg-base-50 p-8 lg:p-20">
+            <dl class="flex flex-col gap-8">
+              {service.approach.steps.map((step, idx) => (
+                <div class="bg-white p-8 flex flex-col items-start sticky top-8 lg:top-20">
+                  <dt>
+                    <Text
+                      tag="p"
+                      variant="displayXL"
+                      class="text-accent-800 font-display italic font-medium"
+                    >
+                      {idx + 1}
+                    </Text>
+                    <Text
+                      tag="h3"
+                      variant="displaySM"
+                      class="text-base-800 font-display mt-12"
+                    >
+                      {step.title}
+                    </Text>
+                  </dt>
+                  <dd>
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-600 text-balance"
+                    >
+                      {step.description}
+                    </Text>
+                    {step.bullets && (
+                      <ul class="list-disc space-y-1 list-inside mt-4 pt-4 border-t border-base-100">
+                        {step.bullets.map((bullet) => (
+                          <li class="text-base-600 text-sm">{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Dimensions/Features (Accordion) -->
+  {service.dimensions && service.dimensions.length > 0 && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12 lg:mb-24">
+          <Text
+            tag="p"
+            variant="textXS"
+            class="text-secondary-500 tracking-wide uppercase"
+          >
+            Key Dimensions
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="h2"
+              variant="displayLG"
+              class="text-accent-800 font-display text-balance"
+            >
+              What We Evaluate
+            </Text>
+          </div>
+        </div>
+        <div class="space-y-4">
+          {service.dimensions.map((dimension) => (
+            <details class="bg-base-50 p-6 cursor-pointer group">
+              <summary class="flex justify-between items-center font-medium text-base-800 hover:text-accent-800">
+                <span>{dimension.number}. {dimension.title}</span>
+                <span class="group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div class="mt-4 space-y-3 text-base-600 text-sm">
+                {dimension.question && (
+                  <p class="font-medium text-base-700">Q: {dimension.question}</p>
+                )}
+                {dimension.whatWeEvaluate && (
+                  <div>
+                    <p class="font-medium text-base-700">What we evaluate:</p>
+                    <p>{dimension.whatWeEvaluate}</p>
+                  </div>
+                )}
+                {dimension.whyItMatters && (
+                  <div>
+                    <p class="font-medium text-base-700">Why it matters:</p>
+                    <p>{dimension.whyItMatters}</p>
+                  </div>
+                )}
+                {dimension.lookingFor && (
+                  <div class="space-y-2">
+                    {dimension.lookingFor.positive && dimension.lookingFor.positive.length > 0 && (
+                      <div>
+                        <p class="font-medium text-green-700">✓ Good signs:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                          {dimension.lookingFor.positive.map((indicator) => (
+                            <li>{indicator}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {dimension.lookingFor.negative && dimension.lookingFor.negative.length > 0 && (
+                      <div>
+                        <p class="font-medium text-red-700">✗ Red flags:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                          {dimension.lookingFor.negative.map((indicator) => (
+                            <li>{indicator}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- What You Get Section -->
+  {service.whatYouGet && (
+    <section class="bg-base-50">
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          {service.whatYouGet.headline || "What You Get"}
+        </Text>
+        {service.whatYouGet.columns && (
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {service.whatYouGet.columns.map((column) => (
+              <div class="bg-white p-8">
+                <Text
+                  tag="h3"
+                  variant="displaySM"
+                  class="text-base-800 font-display mb-6"
+                >
+                  {column.title}
+                </Text>
+                <ul class="space-y-3">
+                  {column.items.map((item) => (
+                    <li>
+                      <Text tag="p" variant="textBase" class="text-base-700">
+                        • {item.text}
+                      </Text>
+                      {item.subitems && item.subitems.length > 0 && (
+                        <ul class="ml-4 mt-1 space-y-1">
+                          {item.subitems.map((subitem) => (
+                            <li class="text-sm text-base-600">◦ {subitem}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Who It's For Section -->
+  {service.whoItsFor && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          Who This Is For
+        </Text>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {service.whoItsFor.perfectFor && service.whoItsFor.perfectFor.length > 0 && (
+            <div class="bg-green-50 border-2 border-green-200 p-8">
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-green-900 font-display mb-6"
+              >
+                ✓ Perfect For
+              </Text>
+              <ul class="space-y-2">
+                {service.whoItsFor.perfectFor.map((item) => (
+                  <li class="text-base-700 text-sm">• {item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {service.whoItsFor.notIdealFor && service.whoItsFor.notIdealFor.length > 0 && (
+            <div class="bg-red-50 border-2 border-red-200 p-8">
+              <Text
+                tag="h3"
+                variant="displaySM"
+                class="text-red-900 font-display mb-6"
+              >
+                ✗ Not Ideal For
+              </Text>
+              <ul class="space-y-2">
+                {service.whoItsFor.notIdealFor.map((item) => (
+                  <li class="text-base-700 text-sm">• {item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Scenarios/Outcomes Section -->
+  {service.scenarios && (service.scenarios.scenarioCards?.length ?? 0) > 0 && (
+    <section class="bg-base-50">
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          {service.scenarios.headline || "Possible Outcomes"}
+        </Text>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {service.scenarios.scenarioCards?.map((scenario) => {
+            const colorMap = { green: '#10b981', amber: '#f59e0b', red: '#ef4444' };
+            const borderColor = colorMap[scenario.colorTheme as keyof typeof colorMap] || scenario.color || '#4f46e5';
+            return (
+              <div class="bg-white p-8 border-l-4" style={{borderColor}}>
+                <Text
+                  tag="h3"
+                  variant="displaySM"
+                  class="text-base-800 font-display mb-2"
+                >
+                  {scenario.title || scenario.outcome}
+                </Text>
+                {(scenario.scoreRange || scenario.score) && (
+                  <Text
+                    tag="p"
+                    variant="displayLG"
+                    class="text-accent-800 font-display mb-4"
+                  >
+                    {scenario.scoreRange || `${scenario.score}%`}
+                  </Text>
+                )}
+                {scenario.whatThisMeans && scenario.whatThisMeans.length > 0 && (
+                  <div class="mb-4">
+                    <Text tag="p" variant="textSM" class="text-base-700 font-medium mb-2">
+                      What This Means:
+                    </Text>
+                    <ul class="space-y-1">
+                      {scenario.whatThisMeans.map((item) => (
+                        <li class="text-sm text-base-600">• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {scenario.commonPatterns && scenario.commonPatterns.length > 0 && (
+                  <div class="mb-4">
+                    <Text tag="p" variant="textSM" class="text-base-700 font-medium mb-2">
+                      Common Patterns:
+                    </Text>
+                    <ul class="space-y-1">
+                      {scenario.commonPatterns.map((item) => (
+                        <li class="text-sm text-base-600">⚠️ {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {scenario.nextSteps?.steps && scenario.nextSteps.steps.length > 0 && (
+                  <div class="mb-4">
+                    <Text tag="p" variant="textSM" class="text-base-700 font-medium mb-2">
+                      {scenario.nextSteps.heading || "What Happens Next:"}
+                    </Text>
+                    <ul class="space-y-1">
+                      {scenario.nextSteps.steps.map((step) => (
+                        <li class="text-sm text-base-600">→ {step}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {(scenario.investment || scenario.timeline) && (
+                  <div class="flex flex-col gap-2 text-xs text-base-600 pt-2 border-t border-base-100">
+                    {scenario.investment && <span>💰 <span class="font-medium">Investment:</span> {scenario.investment}</span>}
+                    {scenario.timeline && <span>⏱️ <span class="font-medium">Timeline:</span> {scenario.timeline}</span>}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Case Studies Section -->
+  {service.caseStudies && (service.caseStudies.studies?.length ?? 0) > 0 && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          {service.caseStudies.headline || "Case Studies"}
+        </Text>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {service.caseStudies.studies?.map((study) => (
+            <div class="bg-base-50 p-8">
+              <Text tag="p" variant="textXS" class="text-secondary-500 uppercase font-semibold mb-2">
+                {study.clientType}
+              </Text>
+              {(study.readinessScore || study.score) && (
+                <Text tag="p" variant="displaySM" class="text-accent-800 font-display mb-4">
+                  {study.scoreDimension || `Score: ${study.readinessScore || study.score}`}
+                </Text>
+              )}
+              <div class="space-y-3 mb-4 pb-4 border-b border-base-200">
+                <div>
+                  <Text tag="p" variant="textSM" class="text-base-600 font-medium">Finding:</Text>
+                  <Text tag="p" variant="textSM" class="text-base-600">{study.keyFinding || study.finding}</Text>
+                </div>
+                {study.recommendation && (
+                  <div>
+                    <Text tag="p" variant="textSM" class="text-base-600 font-medium">Recommendations:</Text>
+                    {Array.isArray(study.recommendation) ? (
+                      <ul class="space-y-1 mt-1">
+                        {study.recommendation.map((rec: any) => (
+                          <li class={`text-sm ${rec.type === 'positive' ? 'text-green-700' : 'text-red-700'}`}>
+                            {rec.type === 'positive' ? '✓' : '✗'} {rec.text}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <Text tag="p" variant="textSM" class="text-base-600">{study.recommendation}</Text>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div class="space-y-2">
+                {(study.whatTheyDid) && (
+                  <div>
+                    <Text tag="p" variant="textXS" class="text-base-600 font-medium uppercase">What They Did:</Text>
+                    <Text tag="p" variant="textSM" class="text-base-600">{study.whatTheyDid}</Text>
+                  </div>
+                )}
+                {(study.outcome) && (
+                  <div>
+                    <Text tag="p" variant="textXS" class="text-base-600 font-medium uppercase">Outcome:</Text>
+                    <Text tag="p" variant="textSM" class="text-accent-700 font-medium">{study.outcome}</Text>
+                  </div>
+                )}
+                {(study.timeline || study.investment) && (
+                  <div class="flex gap-4 text-xs text-base-600 pt-2">
+                    {study.timeline && <span>⏱️ {study.timeline}</span>}
+                    {study.investment && <span>💰 {study.investment}</span>}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Pricing Section -->
+  {((service.pricingTiers && service.pricingTiers.length > 0) || (service.pricing && Array.isArray(service.pricing) && service.pricing.length > 0)) && (
+    <section class="bg-base-50">
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          Investment & Timeline
+        </Text>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {(service.pricingTiers || service.pricing)?.map((tier: any) => (
+            <div class="bg-white p-8 flex flex-col">
+              <Text tag="h3" variant="displaySM" class="text-base-800 font-display">
+                {tier.name}
+              </Text>
+              {tier.priceRange && (
+                <>
+                  <Text
+                    tag="p"
+                    variant="displayLG"
+                    class="text-accent-800 font-display mt-4"
+                  >
+                    {tier.priceRange.currency || '$'}
+                    {tier.priceRange.min}k–{tier.priceRange.max}k
+                  </Text>
+                  {tier.timelineWeeks && (
+                    <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                      {tier.timelineWeeks.min}–{tier.timelineWeeks.max} weeks
+                    </Text>
+                  )}
+                </>
+              )}
+              {tier.description && (
+                <Text tag="p" variant="textBase" class="text-base-700 mt-6 mb-6">
+                  {tier.description}
+                </Text>
+              )}
+              {tier.highlights && (
+                <ul class="space-y-2 mt-auto">
+                  {tier.highlights.map((highlight: string) => (
+                    <li class="text-sm text-base-600">✓ {highlight}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- FAQ Section -->
+  {service.faqs && service.faqs.length > 0 && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="text-accent-800 font-display text-balance mb-12"
+        >
+          Common Questions
+        </Text>
+        <div class="space-y-4">
+          {service.faqs.map((faq, idx) => (
+            <details class="bg-base-50 p-6 cursor-pointer group">
+              <summary class="flex justify-between items-center font-medium text-base-800 hover:text-accent-800">
+                {faq.question}
+                <span class="group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div class="mt-4 text-base-600 text-sm leading-relaxed prose prose-sm">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Final CTA Section -->
+  {service.finalCTA && (
+    <section
+      class="relative py-24 bg-cover bg-center"
+      style={service.finalCTA.backgroundImage ? `background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(...)` : ''}
+    >
+      {!service.finalCTA.backgroundImage && (
+        <div class="absolute inset-0 bg-gradient-to-r from-accent-900 to-accent-800"></div>
+      )}
+      <Wrapper variant="standard" class="relative py-12">
+        <div class="text-center max-w-2xl mx-auto">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-white font-display text-balance mb-4"
+          >
+            {service.finalCTA.headline}
+          </Text>
+          {service.finalCTA.subheadline && (
+            <Text tag="p" variant="textLG" class="text-accent-100 mb-8">
+              {service.finalCTA.subheadline}
+            </Text>
+          )}
+          {(service.finalCTA.showBookingForm || service.finalCTA.bookingForm) && (
+            <a href="#booking-form" class="btn btn-primary">
+              Schedule Your Assessment
+            </a>
+          )}
+          {service.finalCTA.trustSignals && service.finalCTA.trustSignals.length > 0 && (
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+              {service.finalCTA.trustSignals.map((signal) => (
+                <div class="text-white text-sm">
+                  {signal.icon && <span class="mr-2">{signal.icon}</span>}
+                  {signal.text}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+
+  <!-- Booking Form Section -->
+  {service.bookingForm && (
+    <section id="booking-form" class="bg-base-50">
+      <Wrapper variant="standard" class="py-24">
+        <div class="max-w-2xl mx-auto">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-accent-800 font-display text-balance mb-4"
+          >
+            {service.bookingForm.formTitle || "Ready to Get Started?"}
+          </Text>
+          <Text tag="p" variant="textBase" class="text-base-600 mb-8">
+            {service.bookingForm.confirmationMessage || "Fill out the form below and we'll reach out to schedule your assessment."}
+          </Text>
+          {service.bookingForm.formAction && (
+            <form
+              action={service.bookingForm.formAction}
+              method="POST"
+              class="space-y-6"
+            >
+              {service.bookingForm.industryOptions && service.bookingForm.industryOptions.length > 0 && (
+                <div>
+                  <label class="block text-sm font-medium text-base-700 mb-2">
+                    Industry
+                  </label>
+                  <select
+                    name="industry"
+                    required
+                    class="w-full px-4 py-2 border border-base-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
+                  >
+                    <option value="">Select your industry</option>
+                    {service.bookingForm.industryOptions.map((option: any) => (
+                      <option value={typeof option === 'string' ? option : option.value}>
+                        {typeof option === 'string' ? option : option.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              <button
+                type="submit"
+                class="btn btn-primary w-full"
+              >
+                {service.bookingForm.submitButtonText || "Schedule Assessment"}
+              </button>
+            </form>
+          )}
+        </div>
+      </Wrapper>
+    </section>
+  )}
+</BaseLayout>

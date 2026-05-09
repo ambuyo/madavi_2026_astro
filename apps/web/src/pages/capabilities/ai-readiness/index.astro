@@ -1,0 +1,23 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Sections
+import ReadinessHero from "@/components/services/ai-readiness/ReadinessHero.astro";
+import ReadinessFailurePoints from "@/components/services/ai-readiness/ReadinessFailurePoints.astro";
+import ReadinessMeaning from "@/components/services/ai-readiness/ReadinessMeaning.astro";
+import ReadinessDimensions from "@/components/services/ai-readiness/ReadinessDimensions.astro";
+import ReadinessWhatYouGet from "@/components/services/ai-readiness/ReadinessWhatYouGet.astro";
+import ReadinessHighlights from "@/components/services/ai-readiness/ReadinessHighlights.astro";
+---
+
+<BaseLayout>
+  <ReadinessHero />
+  <ReadinessFailurePoints />
+  <ReadinessMeaning />
+  <ReadinessDimensions />
+  <ReadinessWhatYouGet />
+  <ReadinessHighlights type="practices" />
+  <ReadinessHighlights type="team" />
+  <ReadinessHighlights type="cases" />
+</BaseLayout>
+ 

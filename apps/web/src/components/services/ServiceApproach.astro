@@ -1,0 +1,182 @@
+---
+import { Image } from "astro:assets";
+import testimonial from "@/images/assets/testimonial.png";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const approachSteps = [
+  {
+    title: "Strategic Case Planning",
+    description:
+      "Align client objectives, develop innovative legal strategies, and craft a clear roadmap for success with our meticulous case planning process.",
+    bullets: [
+      "Align legal strategy with client goals",
+      "Foster innovation in case approach",
+      "Craft a detailed litigation or negotiation roadmap",
+    ],
+  },
+  {
+    title: "Consulting Excellence",
+    description:
+      "Address legal challenges with personalized solutions. Our consulting process delivers expertise, collaboration, and client-centric strategies for success.",
+    bullets: [
+      "Personalized solutions for legal challenges",
+      "Client-centric and collaborative approach",
+      "Expertise-driven legal consulting",
+    ],
+  },
+  {
+    title: "Advocacy & Representation",
+    description:
+      "Advocate for clients, build strong cases, and capitalize on opportunities with our dynamic representation process.",
+    bullets: [
+      "Vigorous advocacy in negotiations and court",
+      "Build strong, evidence-based cases",
+      "Capitalize on legal opportunities",
+    ],
+  },
+  {
+    title: "Precision Monitoring",
+    description:
+      "Utilize real-time case analytics, continuous improvement initiatives, and ensure operational excellence with our precision monitoring process.",
+    bullets: [
+      "Real-time analytics for case insights",
+      "Continuous improvement in legal processes",
+      "Ensure operational excellence for clients",
+    ],
+  },
+];
+---
+
+<section>
+  <Wrapper variant="paddingLess" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div>
+        <div class="relative w-full lg:sticky lg:top-16 lg:h-screen">
+          <Image
+            src={testimonial}
+            width={1440}
+            height={900}
+            alt="Our Approach"
+            class="object-cover object-center w-full h-full bg-base-50"
+            loading="eager"
+            decoding="async"
+          />
+          <div
+            class="lg:absolute lg:inset-0 size-full bg-accent-900 lg:bg-accent-900/90 flex flex-col items-start justify-start px-8 md:px-12 lg:px-24 z-10 py-24"
+          >
+            <div class="w-full">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-secondary-400 tracking-wide uppercase"
+              >
+                our way
+              </Text>
+              <Text
+                tag="h2"
+                variant="displayLG"
+                class="text-white font-display text-balance mt-12"
+              >
+                Our Approach
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-300 mt-2">
+                Every case is unique, and so is our approach. We combine deep
+                legal expertise with innovative strategies, cutting-edge
+                technology, and a relentless focus on results.
+              </Text>
+              <div
+                class="mt-12 grid grid-cols-1 overflow-hidden lg:grid-cols-2 bg-white/5 backdrop-blur-sm"
+              >
+                <Image
+                  src={testimonial}
+                  width={500}
+                  height={500}
+                  loading="eager"
+                  decoding="async"
+                  alt="Customer testimonial"
+                  class="object-cover h-60 w-full object-top"
+                />
+                <figure class="p-4 flex flex-col h-full justify-between">
+                  <blockquote>
+                    <Text tag="p" variant="textSM" class="text-base-300 italic">
+                      "Carrington guided us through a complex dispute with
+                      clarity and confidence. We always knew our options and
+                      felt genuinely supported."
+                    </Text>
+                  </blockquote>
+                  <figcaption class="mt-3 flex items-center gap-3">
+                    <Text
+                      tag="p"
+                      variant="textXS"
+                      class="text-secondary-300 font-medium"
+                    >
+                      Alex Rivera, COO,
+                      <br />
+                      Northshore Holdings
+                    </Text>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 lg:p-20 bg-base-50">
+        <dl class="flex flex-col gap-8">
+          {
+            approachSteps.map((step, idx) => (
+              <div class="bg-white p-8 flex flex-col items-start sticky top-8 lg:top-20">
+                <dt>
+                  <Text
+                    tag="p"
+                    variant="displayXL"
+                    class="text-accent-800 font-display italic font-medium"
+                  >
+                    {idx + 1}
+                  </Text>
+                  <Text
+                    tag="h3"
+                    variant="displaySM"
+                    class="text-base-800 font-display mt-12"
+                  >
+                    {step.title}
+                  </Text>
+                </dt>
+                <dd>
+                  <Text
+                    tag="p"
+                    variant="textSM"
+                    class="text-base-600 text-balance"
+                  >
+                    {step.description}
+                  </Text>
+                  <ul class="list-disc space-y-1 list-inside mt-4 pt-4 border-t border-base-100">
+                    {step.bullets.map((bullet) => (
+                      <li class="text-base-600 text-sm">{bullet}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="mt-4 pt-4 border-t border-base-200">
+          <Text tag="p" variant="textSM" class="text-base-700 lg:w-1/2">
+            Ready to experience legal representation that puts your interests
+            first?
+          </Text>
+          <div class="flex items-center gap-2 flex-col lg:flex-row mt-4">
+            <Button variant="default" size="xs" class="w-full lg:w-fit">
+              Schedule Consultation
+            </Button>
+            <Button variant="muted" size="xs" class="w-full lg:w-fit">
+              Learn more about us
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

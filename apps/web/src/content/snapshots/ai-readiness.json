@@ -1,0 +1,222 @@
+{
+  "id": "sanity-ai-readiness-doc",
+  "slug": "ai-readiness",
+  "title": "AI Readiness Assessment",
+  "shortDescription": "Assess organizational readiness and build a foundation for AI success",
+  "icon": "assessment",
+  "hero": {
+    "headline": "AI Readiness Assessment",
+    "subheadline": "Honest Assessment Before You Waste Money on AI Tools",
+    "videoUrl": "/services/bgvideo2.mp4",
+    "ctaText": "Book Free Audit",
+    "ctaLink": "booking-form"
+  },
+  "stats": [
+    {
+      "value": "20+",
+      "label": "Years Experience"
+    },
+    {
+      "value": "500+",
+      "label": "Organizations Assessed"
+    },
+    {
+      "value": "98%",
+      "label": "Success Rate"
+    },
+    {
+      "value": "50M+",
+      "label": "In Value Created"
+    },
+    {
+      "value": "4.9/5",
+      "label": "Avg. Rating"
+    },
+    {
+      "value": "100+",
+      "label": "5-Star Reviews"
+    }
+  ],
+  "problemSection": {
+    "headline": "Most Businesses Jump Straight to Tools",
+    "copy": "Without understanding your current state—people, processes, data, and culture—you'll implement AI solutions that look great in demos but deliver mediocre results.",
+    "painPoints": [
+      {
+        "icon": "tool",
+        "label": "Tool Selection"
+      },
+      {
+        "icon": "people",
+        "label": "Skills Gap"
+      },
+      {
+        "icon": "data",
+        "label": "Data Quality"
+      },
+      {
+        "icon": "change",
+        "label": "Change Management"
+      }
+    ],
+    "keyStatistic": {
+      "stat": "60% of AI tools sit unused",
+      "description": "Because organizations didn't assess readiness first"
+    }
+  },
+  "philosophy": {
+    "title": "Our Philosophy",
+    "description": "At Madavi Advisory, we believe that AI readiness starts with honest assessment. Organizations that invest in understanding their current state—people, processes, data, and culture—are the ones that succeed with AI implementation.",
+    "values": [
+      {
+        "title": "Integrity First",
+        "description": "We provide honest assessments without sugar-coating gaps. Real understanding leads to real solutions.",
+        "icon": "Integrity"
+      },
+      {
+        "title": "Excellence in Action",
+        "description": "Our readiness framework is based on years of experience helping organizations transform through AI adoption.",
+        "icon": "Action"
+      },
+      {
+        "title": "True Partnership",
+        "description": "We work with you to not just identify gaps, but build concrete plans to address them.",
+        "icon": "Partnership"
+      }
+    ]
+  },
+  "approach": {
+    "title": "Our Approach",
+    "description": "Our comprehensive AI Readiness Assessment evaluates your organization across four critical dimensions.",
+    "steps": [
+      {
+        "title": "People Readiness Assessment",
+        "description": "Evaluate leadership understanding, team skills, organizational alignment, and change readiness.",
+        "timeline": "Week 1",
+        "bullets": [
+          "Leadership AI literacy and commitment",
+          "Team skills and capability gaps",
+          "Organizational alignment and vision",
+          "Change management readiness"
+        ]
+      },
+      {
+        "title": "Process Analysis",
+        "description": "Examine current workflows, identify AI opportunities, and assess process maturity.",
+        "timeline": "Week 1-2",
+        "bullets": [
+          "Document existing processes",
+          "Identify AI improvement opportunities",
+          "Assess process maturity levels",
+          "Define ownership and accountability"
+        ]
+      },
+      {
+        "title": "Data Evaluation",
+        "description": "Assess data quality, governance, infrastructure, and readiness for AI workloads.",
+        "timeline": "Week 2",
+        "bullets": [
+          "Data quality and completeness assessment",
+          "Data governance and documentation review",
+          "Infrastructure capability evaluation",
+          "Bias and fairness analysis"
+        ]
+      },
+      {
+        "title": "Cultural Assessment",
+        "description": "Evaluate organizational culture, change appetite, collaboration, and growth mindset.",
+        "timeline": "Week 2-3",
+        "bullets": [
+          "Appetite for change and experimentation",
+          "Psychological safety and innovation culture",
+          "Cross-functional collaboration readiness",
+          "Learning and development commitment"
+        ]
+      }
+    ]
+  },
+  "pricing": [
+    {
+      "name": "Audit Only",
+      "priceRange": {
+        "min": 0,
+        "max": 0,
+        "currency": "Free"
+      },
+      "timelineWeeks": {
+        "min": 1,
+        "max": 2
+      },
+      "description": "60-minute assessment session and detailed report",
+      "highlights": [
+        "60-minute structured interview",
+        "Detailed readiness report",
+        "3 next-step scenarios",
+        "No credit card required"
+      ]
+    },
+    {
+      "name": "Audit + Strategy",
+      "priceRange": {
+        "min": 4,
+        "max": 15,
+        "currency": "$"
+      },
+      "timelineWeeks": {
+        "min": 4,
+        "max": 6
+      },
+      "description": "Full assessment plus 4-week strategic roadmap",
+      "highlights": [
+        "Everything in Audit",
+        "2-day on-site assessment",
+        "Phased implementation roadmap",
+        "ROI analysis and business case"
+      ]
+    },
+    {
+      "name": "Full Partnership",
+      "priceRange": {
+        "min": 15,
+        "max": 50,
+        "currency": "$"
+      },
+      "timelineWeeks": {
+        "min": 8,
+        "max": 16
+      },
+      "description": "Assessment, strategy, and 12-week implementation support",
+      "highlights": [
+        "Everything in Audit + Strategy",
+        "12 weeks of hands-on advisory",
+        "Weekly guidance and checkpoints",
+        "Change management support"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Is this really free?",
+      "answer": "Yes. Our 60-minute readiness audit costs nothing and requires no credit card. We charge only if you move forward with strategy or implementation services."
+    },
+    {
+      "question": "Why do you offer it for free?",
+      "answer": "We believe every organization should understand their AI readiness before spending money. A free audit filters for serious organizations and builds trust. If we're the right partner, you'll want to work with us."
+    },
+    {
+      "question": "How long does the full audit take?",
+      "answer": "The core interview is 60 minutes. We deliver a detailed report within 3 business days. If you want to move to strategy work, that typically takes 4-6 weeks."
+    },
+    {
+      "question": "What if we're not ready for AI?",
+      "answer": "That's valuable information. We'll show you exactly what needs to happen first—whether that's data work, process improvements, team hiring, or culture change. We'll even give you a phased plan with timeline and resource needs."
+    }
+  ],
+  "caseStudyIds": [
+    "case-study-id-1",
+    "case-study-id-2"
+  ],
+  "seo": {
+    "metaDescription": "Evaluate your organization's AI readiness with our comprehensive assessment framework. Understand people, processes, data, and culture before implementing AI.",
+    "focusKeyword": "AI readiness assessment"
+  }
+}

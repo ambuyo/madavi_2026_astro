@@ -1,0 +1,289 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import PressCard from "@/components/press/PressCard.astro";
+import LogoCloud from "@/components/testimonials/LogoCloud.astro";
+// Content
+import { getCollection } from "astro:content";
+const pressReleasesData = await getCollection("pressReleases");
+const pressReleases = pressReleasesData.map((release) => ({
+  id: release.id,
+  data: release.data,
+}));
+
+const mediaCoverage = [
+  {
+    title: "Madavi's HCAIF Framework Transforms AI Adoption Across Africa",
+    publication: "TechCrunch Africa",
+    date: "May 2026",
+    type: "Feature Article",
+    excerpt:
+      "An in-depth look at how Madavi's innovative Human-Centric AI Implementation Framework is setting new industry standards for responsible AI adoption.",
+  },
+  {
+    title: "Madavi Advisory Partners with Leading Organizations on AI Strategy",
+    publication: "AI Business Journal",
+    date: "April 2026",
+    type: "News Article",
+    excerpt:
+      "Coverage of Madavi's expanding client base and commitment to helping organizations navigate AI adoption with a people-first approach.",
+  },
+  {
+    title: "The Future of AI Leadership: Insights from Madavi Advisory",
+    publication: "Harvard Business Review",
+    date: "March 2026",
+    type: "Interview",
+    excerpt:
+      "CEO discusses emerging trends in AI strategy and how organizations can build cultures ready for responsible AI integration.",
+  },
+  {
+    title: "Madavi's Impact on AI Governance and Organizational Readiness",
+    publication: "MIT Sloan Management Review",
+    date: "February 2026",
+    type: "Analysis",
+    excerpt:
+      "Examination of Madavi's role in shaping best practices for AI governance and organizational transformation across sectors.",
+  },
+];
+
+const mediaStats = [
+  { number: "50+", label: "Media Mentions" },
+  { number: "20+", label: "Publications Featured" },
+  { number: "25+", label: "Press Releases" },
+  { number: "5+", label: "Years of Coverage" },
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="pb-12 pt-48">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-8 gap-x-12">
+        <div>
+          <div class="lg:sticky lg:top-48">
+            <Text
+              tag="h1"
+              variant="displayMD"
+              class="text-accent-800 font-display text-balance"
+            >
+              Press and Media
+            </Text>
+            <Text tag="p" variant="textSM" class="text-base-700 mt-2">
+              Madavi Advisory maintains strong relationships with media outlets
+              and industry publications. Our thought leadership and AI expertise
+              regularly appear in major publications, providing valuable insights
+              to businesses and leaders worldwide.
+            </Text>
+          </div>
+        </div>
+        <div class="lg:col-span-2 space-y-24">
+          <div>
+            <Text
+              tag="h3"
+              variant="displayXS"
+              class="text-accent-800 font-display"
+            >
+              Latest press releases
+            </Text>
+            <div class="space-y-8 mt-4">
+              {pressReleases.length > 0 ? (
+                pressReleases.map((release) => <PressCard post={release} />)
+              ) : (
+                <Text tag="p" variant="textBase" class="text-base-600">
+                  No press releases available yet.
+                </Text>
+              )}
+            </div>
+          </div>
+          <div>
+            <div>
+              <Text
+                tag="h3"
+                variant="displayXS"
+                class="text-accent-800 font-display"
+              >
+                Recent Media Coverage
+              </Text>
+              <div class="space-y-8 mt-4">
+                {
+                  mediaCoverage.map((coverage) => (
+                    <article class="bg-base-50 p-8 flex flex-col">
+                      <div class="flex items-center gap-2 text-xs text-base-600">
+                        <span>{coverage.publication}</span>
+                        <span aria-hidden="true">•</span>
+                        <span>{coverage.date}</span>
+                        <span aria-hidden="true">•</span>
+                        <span>{coverage.type}</span>
+                      </div>
+                      <Text
+                        tag="h3"
+                        variant="displaySM"
+                        class="text-accent-800 font-display mt-12"
+                      >
+                        {coverage.title}
+                      </Text>
+                      <Text
+                        tag="p"
+                        variant="textBase"
+                        class="text-base-600 leading-relaxed line-clamp-3"
+                      >
+                        {coverage.excerpt}
+                      </Text>
+                    </article>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+        <Text
+          tag="p"
+          variant="textXS"
+          class="text-secondary-500 font-semibold tracking-wide uppercase"
+        >
+          Media Impact
+        </Text>
+        <div class="lg:col-span-3">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-accent-800 font-display text-balance lg:col-span-2"
+          >
+            Reputation built on recognition
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-700 mt-2 lg:text-balance"
+          >
+            Madavi Advisory is regularly featured in leading publications and
+            cited for its expertise, thought leadership, and industry influence.
+            The numbers below reflect our ongoing presence in the media and our
+            reputation among peers and professionals.
+          </Text>
+        </div>
+      </div>
+      <ul
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-8 mt-12 lg:mt-24 lg:divide-x lg:divide-base-200 lg:border-x lg:border-base-200"
+      >
+        {
+          mediaStats.map((stat) => (
+            <li class=" flex flex-col  gap-1 lg:gap-48 lg:px-4 ">
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-base-700 font-medium uppercase"
+              >
+                {stat.label}
+              </Text>
+              <Text
+                tag="p"
+                variant="displayLG"
+                class="text-accent-800 font-display italic font-medium"
+              >
+                {stat.number}
+              </Text>
+            </li>
+          ))
+        }
+      </ul>
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+        <Text
+          tag="p"
+          variant="textXS"
+          class="text-secondary-500 font-semibold tracking-wide uppercase"
+        >
+          Trusted by Leading Publications
+        </Text>
+        <div class="lg:col-span-3">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-accent-800 font-display text-balance lg:col-span-2"
+          >
+            Featured in
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-700 mt-2 lg:text-balance"
+          >
+            Madavi Advisory is regularly featured in top-tier media and industry
+            outlets. Our expertise and thought leadership are recognized by
+            respected publications, reflecting our reputation for excellence and
+            influence in AI strategy and organizational transformation.
+          </Text>
+        </div>
+      </div>
+      <LogoCloud />
+      <div class="bg-base-50 p-8 lg:p-12 mt-12 lg:mt-24">
+        <div
+          class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:items-end"
+        >
+          <div>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-accent-800 font-display"
+            >
+              Media Inquiries
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-1 text-balance"
+            >
+              For press inquiries, interview requests, or media opportunities,
+              please contact our communications team. We respond to all media
+              inquiries within 24 hours.
+            </Text>
+            <div class="space-y-12 gap-4 mt-8">
+              <div>
+                <Text tag="p" variant="textSM" class="font-semibold">
+                  Press Contact
+                </Text>
+                <div class="space-y-1 text-sm text-base-700 mt-4">
+                  <Text tag="p" variant="textXS"> Sarah Mitchell </Text>
+                  <Text tag="p" variant="textXS">
+                    Director of Communications
+                  </Text>
+                  <a
+                    href="mailto:press@madavi.co"
+                    class="text-secondary-500 hover:text-accent-800 transition-colors text-xs block"
+                  >
+                    press@madavi.co
+                  </a>
+                  <a
+                    href="tel:+254718735565"
+                    class="text-secondary-500 hover:text-accent-800 transition-colors text-xs block"
+                  >
+                    +254 (718) 735-565
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Button
+            isLink={true}
+            href="/contact?subject=media"
+            variant="default"
+            size="sm"
+            class="w-full lg:w-fit shrink-0"
+          >
+            Contact Media Team
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

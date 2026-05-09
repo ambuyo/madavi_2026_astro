@@ -1,0 +1,55 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import EventsCard from "@/components/events/EventsCard.astro";
+// Sanity
+import { getEvents } from "@/lib/sanity/events";
+
+const sanityEvents = await getEvents();
+const sortedEvents = sanityEvents.sort(
+  (a, b) => new Date(a.startDate).valueOf() - new Date(b.startDate).valueOf()
+);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-32">
+      <div class="max-w-xl">
+        <Text
+          tag="span"
+          variant="textXS"
+          class="uppercase font-medium text-accent-700"
+        >
+          Community
+        </Text>
+
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="text-base-900 mt-12 tracking-tight font-display text-balance"
+        >
+          Upcoming Events
+        </Text>
+
+        <Text tag="p" variant="textLG" class="text-base-600 mt-4 text-balance">
+          Webinars, workshops, cohorts, and gatherings where you can learn, network, and grow.
+        </Text>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-12">
+        {
+          sortedEvents.length > 0 ? (
+            sortedEvents.map((post) => <EventsCard post={post} />)
+          ) : (
+            <Text tag="p" variant="textBase" class="text-base-600">
+              No events scheduled at the moment. Check back soon!
+            </Text>
+          )
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

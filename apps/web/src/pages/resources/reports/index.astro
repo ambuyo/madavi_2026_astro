@@ -1,0 +1,47 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import DocumentCard from "@/components/documents/DocumentCard.astro";
+// Content
+import { getCollection } from "astro:content";
+
+const documents = await getCollection("documents");
+const sortedDocuments = documents.sort(
+  (a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-32">
+      <div class="max-w-xl">
+        <Text
+          tag="span"
+          variant="textXS"
+          class="uppercase font-medium text-accent-700"
+        >
+          Resources
+        </Text>
+
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="text-base-900 mt-12 tracking-tight font-display text-balance"
+        >
+          Reports & Documents
+        </Text>
+
+        <Text tag="p" variant="textLG" class="text-base-600 mt-4 text-balance">
+          Access official reports, financial documents, meeting minutes, and strategic planning resources.
+        </Text>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-12">
+        {sortedDocuments.map((post) => <DocumentCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>
