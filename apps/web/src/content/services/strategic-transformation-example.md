@@ -6,7 +6,7 @@ summary: >
 category: Advisory
 featured: true
 image:
-  url: ./transformation-hero.png
+  url: https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop
   alt: Strategic transformation workshop
 pubDate: 2024-01-15
 updatedDate: 2025-04-29

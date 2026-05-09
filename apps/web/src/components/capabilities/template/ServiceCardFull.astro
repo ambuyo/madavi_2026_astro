@@ -3,13 +3,12 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 // Icons for services
-const service = Astro.props.service;
 const { title, summary, category, pricing, url } = {
-  url: service ? "/services/" + (service.slug || service.id) : "/services/",
-  title: service?.data?.title || "",
-  summary: service?.data?.summary || "",
-  category: service?.data?.category || "",
-  pricing: service?.data?.pricing || { pricingModel: "custom", startingPrice: "Contact us" },
+  url: "/capabilities/" + Astro.props.service.slug,
+  title: Astro.props.service.data.title,
+  summary: Astro.props.service.data.summary,
+  category: Astro.props.service.data.category,
+  pricing: Astro.props.service.data.pricing,
 };
 ---
 

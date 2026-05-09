@@ -1,0 +1,31 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Sections
+import ServiceHero from "@/components/capabilities/template/ServiceHero.astro";
+import ServiceStats from "@/components/capabilities/template/ServiceStats.astro";
+import ServicePhilosophy from "@/components/capabilities/template/ServicePhilosophy.astro";
+import ServiceApproach from "@/components/capabilities/template/ServiceApproach.astro";
+import ServiceHighlights from "@/components/capabilities/template/ServiceHighlights.astro";
+
+interface Props {
+  seo?: {
+    title?: string;
+    description?: string;
+    type?: string;
+  };
+}
+
+const { seo } = Astro.props;
+---
+
+<BaseLayout {seo}>
+  <ServiceHero />
+  <ServiceStats />
+  <ServicePhilosophy />
+  <ServiceApproach />
+  <ServiceHighlights type="practices" />
+  <ServiceHighlights type="team" />
+  <ServiceHighlights type="cases" />
+  <slot />
+</BaseLayout>

@@ -30,9 +30,10 @@ industries:
   - "Professional Services"
   - "Construction & Development"
 image:
-  url: "/src/images/services/services.png"
+  url: "https://images.unsplash.com/photo-1554224311-beee415c15e7?w=800&h=600&fit=crop"
   alt: "Professional accountant working on financial records"
 pubDate: 2025-11-10
+updatedDate: 2025-11-10
 ---
 
 ## Professional Bookkeeping & Accounting Services

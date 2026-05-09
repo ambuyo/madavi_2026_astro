@@ -2,7 +2,7 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-import ServiceCard from "@/components/services/ServiceCard.astro";
+import ServiceCard from "@/components/capabilities/template/ServiceCard.astro";
 import TeamCard from "@/components/team/TeamCard.astro";
 import CasesCard from "@/components/cases/CasesCard.astro";
 import { getCollection } from "astro:content";
@@ -101,7 +101,7 @@ const alternateBg = type === "cases" ? "bg-white" : "bg-base-50";
         <div class="grid grid-cols-1 lg:grid-cols-2 mt-12 lg:mt-24 gap-8">
           {highlightedItems.map((item) => {
             if (type === "practices") {
-              return <ServiceCard post={item} />;
+              return <ServiceCard service={item} />;
             } else if (type === "team") {
               return <TeamCard post={item} />;
             } else if (type === "cases") {

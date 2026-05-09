@@ -11,7 +11,7 @@ import MegaMenu from "@/components/global/MegaMenu.astro";
 
 // Navigation links
 const navLinks = [
-  { label: "Services", href: "/ai-services" },
+  { label: "Capabilities", href: "/capabilities" },
   { label: "Industries", href: "/industries" },
     { label: "Resources", href: "#" },
   { label: "Case Studies", href: "/case-studies" },
@@ -67,7 +67,7 @@ const navLinks = [
     const header = document.querySelector("header");
     if (!header) return;
 
-    const servicesLink = header.querySelector('a[href="/ai-services"]');
+    const servicesLink = header.querySelector('a[href="/capabilities"]');
     const industriesLink = header.querySelector('a[href="/industries"]');
     const resourcesLink = header.querySelector('a[href="#"]');
     const megamenu = header.querySelector("#megamenu");

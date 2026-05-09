@@ -78,10 +78,35 @@ const capabilitiesCollection = defineCollection({
   }),
 });
 
+const servicesCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    category: z.string(),
+    features: z.array(z.string()),
+    outcomes: z.array(z.string()),
+    industries: z.array(z.string()),
+    pricing: z.object({
+      startingPrice: z.string(),
+      monthlyPrice: z.string().optional(),
+      pricingModel: z.string(),
+      note: z.string(),
+    }),
+    image: z.object({
+      url: z.string(),
+      alt: z.string(),
+    }),
+    pubDate: z.coerce.date().optional(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   pressReleases: pressReleasesCollection,
   documents: documentsCollection,
   events: eventsCollection,
   posts: postsCollection,
   capabilities: capabilitiesCollection,
+  services: servicesCollection,
 };

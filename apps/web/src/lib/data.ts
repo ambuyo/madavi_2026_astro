@@ -38,7 +38,7 @@ import type {
  * Toggle between Content Collections and Sanity CMS
  * Set to true to use Sanity, false to use Content Collections
  */
-export const USE_SANITY = true;
+export const USE_SANITY = false;
 
 // =============================================================================
 // LAZY SANITY IMPORTS
