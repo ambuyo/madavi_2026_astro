@@ -4,9 +4,6 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  experimental: {
-    svgo: true,
-  },
   markdown: {
     drafts: true,
     shikiConfig: {
