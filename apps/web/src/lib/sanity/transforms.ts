@@ -228,6 +228,12 @@ export function transformCaseStudy(caseStudy: SanityCaseStudy): CaseStudy {
       client: caseStudy.client,
       industry: caseStudy.industry,
       services: caseStudy.services || [],
+      year: caseStudy.year,
+      tagline: caseStudy.tagline,
+      aboutClient: caseStudy.aboutClient,
+      scopeOfWork: caseStudy.scopeOfWork,
+      whatWeDid: caseStudy.whatWeDid,
+      projectUrl: caseStudy.projectUrl,
       challenge: caseStudy.challenge,
       solution: caseStudy.solution,
       results: caseStudy.results || [],
@@ -237,6 +243,12 @@ export function transformCaseStudy(caseStudy: SanityCaseStudy): CaseStudy {
             url: getImageUrl(caseStudy.image.asset),
             alt: caseStudy.image.alt || caseStudy.title || "",
           }
+        : undefined,
+      projectImages: caseStudy.projectImages
+        ? caseStudy.projectImages.map((img) => ({
+            url: getImageUrl(img.asset),
+            alt: img.alt || "",
+          }))
         : undefined,
       pubDate: new Date(caseStudy.pubDate),
     },

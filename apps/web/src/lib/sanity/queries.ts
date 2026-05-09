@@ -315,6 +315,12 @@ const caseStudyFields = groq`
   client,
   industry,
   services,
+  year,
+  tagline,
+  aboutClient,
+  scopeOfWork,
+  whatWeDid,
+  projectUrl,
   challenge,
   solution,
   results[] {
@@ -327,6 +333,10 @@ const caseStudyFields = groq`
     role
   },
   image {
+    asset->,
+    alt
+  },
+  projectImages[] {
     asset->,
     alt
   },

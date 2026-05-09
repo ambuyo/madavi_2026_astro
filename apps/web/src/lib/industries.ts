@@ -1,17 +1,17 @@
 export const industryMap: Record<string, string> = {
-  acceleratorsIncubators: "Accelerators/Incubators",
+  "accelerators-incubators": "Accelerators/Incubators",
   agriculture: "Agriculture",
   consortiums: "Consortiums",
   edtech: "Edtech",
   foundations: "Foundations",
   healthcare: "Healthcare",
-  legal: "Legal & Law Firms",
+  "legal-law-firms": "Legal & Law Firms",
   manufacturing: "Manufacturing",
-  nonProfits: "Non Profits",
-  realEstate: "Real Estate",
-  retailEcommerce: "Retail & Ecommerce",
+  "non-profits": "Non Profits",
+  "real-estate": "Real Estate",
+  "retail-ecommerce": "Retail & Ecommerce",
   technology: "Technology",
-  ventureCapital: "Venture Capital",
+  "venture-capital": "Venture Capital",
 };
 
 export function getIndustryDisplayName(value: string): string {

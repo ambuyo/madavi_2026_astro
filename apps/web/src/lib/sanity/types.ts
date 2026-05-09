@@ -419,11 +419,18 @@ export interface SanityCaseStudy {
   client: string;
   industry: string;
   services: string[];
+  year?: number;
+  tagline?: string;
+  aboutClient?: string;
+  scopeOfWork?: string;
+  whatWeDid?: string;
+  projectUrl?: string;
   challenge: string;
   solution: string;
   results: SanityResult[];
   testimonial?: SanityTestimonial;
   image?: SanityImage;
+  projectImages?: SanityImage[];
   pubDate: string;
   body?: PortableTextBlock[];
 }
@@ -438,6 +445,12 @@ export interface CaseStudy {
     client: string;
     industry: string;
     services: string[];
+    year?: number;
+    tagline?: string;
+    aboutClient?: string;
+    scopeOfWork?: string;
+    whatWeDid?: string;
+    projectUrl?: string;
     challenge: string;
     solution: string;
     results: Array<{
@@ -450,6 +463,7 @@ export interface CaseStudy {
       role?: string;
     };
     image?: UnifiedImage;
+    projectImages?: UnifiedImage[];
     pubDate: Date;
   };
   body?: PortableTextBlock[];
