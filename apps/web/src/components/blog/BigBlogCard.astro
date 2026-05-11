@@ -6,8 +6,8 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 
 // Content
-const { title, description, image, pubDate } = {
-  url: "/blog/posts/" + Astro.props.post.id,
+const { title, description, image, pubDate, url } = {
+  url: "/blog/posts/" + Astro.props.post.slug,
   title: Astro.props.post.data.title,
   description: Astro.props.post.data.description,
   image: Astro.props.post.data.image.url,
@@ -49,7 +49,7 @@ function formatDate(dateStr: string) {
       </Text>
     </div>
     <Button
-      href={`/blog/posts/${Astro.props.post.id}`}
+      href={url}
       title={`Read more: ${title}`}
       isLink={true}
       variant="muted"
