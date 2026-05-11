@@ -44,7 +44,7 @@ export const USE_SANITY = false;
  * Toggle WordPress fetch for blog posts
  * Set to false to disable WordPress API calls during development
  */
-export const USE_WORDPRESS = false;
+export const USE_WORDPRESS = true;
 
 // =============================================================================
 // LAZY SANITY IMPORTS

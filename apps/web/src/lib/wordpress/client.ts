@@ -4,8 +4,10 @@ export const wpApiUrl = `${wpBaseUrl}/wp-json/wp/v2`;
 
 // Helper to create Basic Auth header
 function createAuthHeader(): string {
-  const username = import.meta.env.WP_USERNAME || "Amukune";
-  const appPassword = import.meta.env.WP_APP_PASSWORD || "KDZR p3CM RIbh xyjr UHSI mA2d";
+  // Support both Astro/Vite context (import.meta.env) and Node.js context (process.env)
+  const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : process.env;
+  const username = env.WP_USERNAME || "Amukune";
+  const appPassword = env.WP_APP_PASSWORD || "KDZR p3CM RIbh xyjr UHSI mA2d";
 
   // Create basic auth string
   const authString = `${username}:${appPassword}`;
@@ -25,7 +27,6 @@ export async function wpFetch<T>(
       ...options,
       headers: {
         "Content-Type": "application/json",
-        Authorization: createAuthHeader(),
         ...options.headers,
       },
     });
