@@ -8,7 +8,14 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Sections
 import BlogCard from "@/components/blog/BlogCard.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
+
+interface Props {
+  frontmatter: any;
+  seo?: any;
+}
+
 const { frontmatter, seo } = Astro.props;
+
 // Data
 import { getTeamMemberBySlug, getPosts } from "@/lib/data";
 const team = frontmatter.team
@@ -18,9 +25,24 @@ const allPosts = await getPosts();
 const relatedPosts = allPosts.filter((post) =>
   post.data.tags.some((tag) => frontmatter.tags.includes(tag))
 );
+
+// Prepare SEO data for BaseLayout (Article type)
+const seoData = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  seoType: "article" as const,
+  publishDate: new Date(frontmatter.pubDate),
+  author: team?.data.name || frontmatter.team || "Madavi Inc.",
+  image: frontmatter.image?.url,
+  keywords: frontmatter.tags || [],
+  canonical: Astro.url.pathname,
+};
 ---
 
-<BaseLayout seo={seo}>
+<BaseLayout
+  {...seoData}
+  seo={seo}
+>
   <section>
     <Wrapper variant="standard" class="py-12 relative">
       <div class="max-w-3xl">

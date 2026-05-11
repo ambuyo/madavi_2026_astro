@@ -1,15 +1,20 @@
 ---
-// Fundations
+// Styles
 import "@/styles/global.css";
+
+// SEO & Head Components
 import BaseHead from "@/components/fundations/head/BaseHead.astro";
-// Components
+import SEOHead from "@/components/SEOHead.astro";
+import StructuredData from "@/components/StructuredData.astro";
+
+// Layout Components
 import MainCta from "@/components/ctas/MainCta.astro";
 import Footer from "@/components/global/Footer.astro";
 import Navigation from "@/components/global/Navigation.astro";
-// Components
 import Search from "@/components/global/Search.astro";
 
 interface Props {
+  // Legacy SEO prop (for backward compatibility)
   seo?: {
     title?: string;
     description?: string;
@@ -18,24 +23,95 @@ interface Props {
     publishedTime?: string;
     noindex?: boolean;
   };
+
+  // New comprehensive SEO props
+  title?: string;
+  description?: string;
+  canonical?: string;
+  seoType?: "article" | "website" | "organization";
+  publishDate?: Date;
+  modifiedDate?: Date;
+  author?: string;
+  image?: string;
+  keywords?: string[];
+
+  // Layout control
   hideNavigation?: boolean;
   hideFooter?: boolean;
+  hideMainCta?: boolean;
 }
 
-// Hides the navigation, or footer on selected screens by passing props:
-// <BaseLayout hideNavigation={true} hideFooter={true}>
+// Extract SEO data with fallbacks
 const {
+  // Legacy
   seo,
+
+  // New SEO
+  title,
+  description,
+  canonical,
+  seoType = "website",
+  publishDate,
+  modifiedDate,
+  author,
+  image,
+  keywords = [],
+
+  // Layout
   hideMainCta = false,
   hideNavigation = false,
   hideFooter = false,
 } = Astro.props;
+
+// Merge legacy and new SEO data (new takes precedence)
+const seoTitle = title || seo?.title;
+const seoDescription = description || seo?.description;
+const seoImage = image || seo?.image?.url;
+const seoPublishedTime = publishDate || (seo?.publishedTime ? new Date(seo.publishedTime) : undefined);
 ---
 
 <html lang="en" class="scroll-smooth">
   <head>
+    <!-- Legacy head components (kept for backward compatibility) -->
     <BaseHead seo={seo} />
+
+    <!-- Enhanced SEO head with meta tags (LLM-optimized) -->
+    {seoTitle && (
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription || ""}
+        canonical={canonical}
+        type={seoType}
+        publishDate={seoPublishedTime}
+        modifiedDate={modifiedDate}
+        author={author}
+        image={seoImage}
+        keywords={keywords}
+      />
+    )}
+
+    <!-- JSON-LD Structured Data for search engines -->
+    {seoTitle && (
+      <StructuredData
+        type={seoType === "article" ? "Article" : "WebPage"}
+        data={{
+          headline: seoTitle,
+          description: seoDescription,
+          url: Astro.url.href,
+          image: seoImage,
+          datePublished: seoPublishedTime?.toISOString?.(),
+          dateModified: modifiedDate?.toISOString?.(),
+          author: author
+            ? {
+                "@type": "Person",
+                name: author,
+              }
+            : undefined,
+        }}
+      />
+    )}
   </head>
+
   <body class="flex flex-col bg-white min-h-svh pt-24">
     {!hideNavigation && <Navigation />}
     <main class="grow"><slot /></main>
