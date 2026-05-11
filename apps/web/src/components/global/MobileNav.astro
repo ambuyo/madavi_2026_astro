@@ -6,14 +6,19 @@ import Button from "@/components/fundations/elements/Button.astro";
 
 interface Props {
   links: Array<{ label: string; href: string }>;
+  variant?: "default" | "transparent";
 }
 
-const { links } = Astro.props;
+const { links, variant = "default" } = Astro.props;
+
+const buttonClass = variant === "transparent"
+  ? "p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+  : "p-2 text-base-900 hover:bg-base-100 rounded-lg transition-colors";
 ---
 
 <div class="relative lg:hidden select-none" data-mobile-nav-root>
   <button
-    class="p-2 text-base-900 hover:bg-base-100 rounded-lg transition-colors"
+    class={buttonClass}
     aria-haspopup="true"
     aria-expanded="false"
     aria-controls="mobile-nav-panel"

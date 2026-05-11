@@ -43,12 +43,20 @@ export default defineConfig({
     })
   ],
   image: {
-    // Authorize WordPress domain for remote image optimization
+    // Authorize WordPress and R2 domains for remote image optimization
     remotePatterns: [
       {
         protocol: "https",
         hostname: "cms.madavi.co",
         pathname: "/wp-content/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.madavi.co",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.madavi.co",
       },
     ],
     // Optimize image formats and caching
@@ -58,5 +66,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        "@": "/src",
+      },
+    },
   },
 });

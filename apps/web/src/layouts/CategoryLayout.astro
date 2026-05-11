@@ -1,0 +1,126 @@
+---
+// Assets
+import categoryHeaderBg from "@/images/blog/categories/category-header.jpg";
+// Foundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Sections
+import BlogCard from "@/components/blog/BlogCard.astro";
+
+interface Props {
+  category: {
+    name: string;
+    slug: string;
+  };
+  categoryDescription?: string | null;
+  posts: any[];
+}
+
+const { category, categoryDescription, posts } = Astro.props;
+
+// Prepare SEO data for BaseLayout
+const seoData = {
+  title: `${category.name} Articles`,
+  description: `Browse all articles in the ${category.name} category`,
+  seoType: "website" as const,
+  canonical: Astro.url.pathname,
+};
+---
+
+<BaseLayout navVariant="transparent" {...seoData}>
+  <section class="relative overflow-hidden -mt-24 pt-24" data-parallax-container>
+    {/* Background image with parallax */}
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style={{backgroundImage: `url(${categoryHeaderBg.src})`}}
+      data-parallax
+    />
+
+    {/* Dark overlay */}
+    <div class="absolute inset-0 bg-black/40" />
+
+    <Wrapper variant="standard" class="relative py-20 lg:py-32">
+      <div class="max-w-3xl mx-auto text-center">
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="font-medium tracking-tight text-white leading-tight"
+        >
+          {category.name}
+        </Text>
+
+        {categoryDescription && (
+          <div
+            class="text-white/90 mt-6 lg:mt-8 max-w-2xl mx-auto text-lg"
+            set:html={categoryDescription}
+          />
+        )}
+
+        <div class={`flex items-center justify-center gap-2 ${categoryDescription ? "mt-8" : "mt-12"}`}>
+          <span class="text-white font-bold text-lg">{posts.length}</span>
+          <span class="text-white/60">•</span>
+          <span class="text-white/80">{posts.length === 1 ? "Article" : "Articles"}</span>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <Wrapper variant="standard" class="py-16 lg:py-24">
+    {
+      posts.length > 0 ? (
+        <div>
+          <div class="flex justify-end mb-12">
+            <Button isLink size="sm" variant="secondary" href="/blog" class="w-fit">
+              ← Back to all posts
+            </Button>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-24">
+            {posts.map((post) => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <Text
+            tag="p"
+            variant="textLG"
+            class="text-base-600 mb-8"
+          >
+            No posts found in this category yet.
+          </Text>
+          <Button isLink size="md" variant="primary" href="/blog">
+            Browse all posts
+          </Button>
+        </div>
+      )
+    }
+  </Wrapper>
+</BaseLayout>
+
+<script is:inline>
+  function initParallax() {
+    const container = document.querySelector("[data-parallax-container]");
+    const parallaxElement = document.querySelector("[data-parallax]");
+
+    if (!container || !parallaxElement) return;
+
+    function updateParallax() {
+      const rect = container.getBoundingClientRect();
+      const scrolled = window.scrollY;
+      const offset = Math.min(scrolled * 0.5, rect.height * 0.3);
+      parallaxElement.style.transform = `translateY(${offset}px)`;
+    }
+
+    window.addEventListener("scroll", updateParallax, { passive: true });
+    updateParallax();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initParallax);
+  } else {
+    initParallax();
+  }
+</script>

@@ -1,0 +1,51 @@
+---
+import { getOptimizedImageUrl, generateSrcSet, isR2Image } from "@/lib/wordpress/fetch";
+
+interface Props {
+  src: string;
+  alt: string;
+  title?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: "lazy" | "eager";
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  title,
+  width,
+  height,
+  class: className,
+  loading = "lazy",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1536px",
+} = Astro.props;
+
+// Check if image is on R2 and generate optimized URLs
+const isR2 = isR2Image(src);
+const srcSet = isR2 ? generateSrcSet(src) : src;
+const webpSrcSet = isR2 ? generateSrcSet(src) : src;
+---
+
+<picture>
+  {isR2 && (
+    <source
+      srcset={webpSrcSet}
+      sizes={sizes}
+      type="image/webp"
+    />
+  )}
+  <img
+    src={src}
+    srcset={srcSet}
+    sizes={sizes}
+    alt={alt}
+    title={title}
+    width={width}
+    height={height}
+    loading={loading}
+    class={className}
+  />
+</picture>

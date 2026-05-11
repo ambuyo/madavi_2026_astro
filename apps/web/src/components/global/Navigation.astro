@@ -7,34 +7,48 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import Search from "@/components/global/Search.astro";
 import MobileNav from "@/components/global/MobileNav.astro";
-import MegaMenu from "@/components/global/MegaMenu.astro";
+import Megamenu from "@/components/global/Megamenu.astro";
+
+interface Props {
+  variant?: "default" | "transparent";
+}
+
+const { variant = "default" } = Astro.props;
 
 // Navigation links
 const navLinks = [
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Industries", href: "/industries" },
-    { label: "Resources", href: "#" },
+  { label: "Capabilities", href: "/capabilities", hasMegamenu: true },
+  { label: "Resources", href: "/resources", hasMegamenu: true },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Team", href: "/team" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ];
+
+const headerBaseClass = "fixed inset-x-0 top-0 z-50 transition-all duration-300";
+const headerClass = variant === "transparent"
+  ? "bg-transparent [&.scrolled]:bg-white [&.scrolled]:border-b [&.scrolled]:border-base-200 [&.scrolled]:shadow-sm"
+  : "bg-white";
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 bg-white">
+<header class={`${headerBaseClass} ${headerClass}`} data-navbar-variant={variant}>
   <Wrapper variant="standard" class="py-6">
     <div class="flex items-center justify-between gap-4">
-      <a href="/" class="flex items-center gap-3 text-base-900 max-w-xs">
-        <Logo class="h-16 w-auto" />
+      <a href="/" class={`flex items-center gap-3 max-w-xs transition-colors ${variant === "transparent" ? "text-white [.scrolled_&]:text-base-900" : "text-base-900"}`}>
+        <Logo variant={variant === "transparent" ? "light" : "dark"} class="h-16 w-auto" />
       </a>
       <nav class="hidden items-center gap-8 lg:flex group" aria-label="Primary">
         {
           navLinks.map((link) => {
-            const hasMegamenu = link.label === "Services" || link.label === "Industries" || link.label === "Resources";
+            const hasMegamenu = link.hasMegamenu;
+            const linkClass = variant === "transparent"
+              ? "text-white/80 hover:text-white [.scrolled_&]:text-base-700 [.scrolled_&]:hover:text-base-950"
+              : "text-base-700 hover:text-base-950";
             return (
               <a
                 href={link.href}
-                class={`text-sm font-medium text-base-700 transition-colors hover:text-base-950 ${hasMegamenu ? "has-megamenu" : ""}`}
+                data-megamenu={link.label.toLowerCase()}
+                class={`text-sm font-medium transition-colors ${linkClass} ${hasMegamenu ? "has-megamenu" : ""}`}
               >
                 {link.label}
               </a>
@@ -43,71 +57,102 @@ const navLinks = [
         }
       </nav>
       <div class="flex items-center gap-2">
-        <Search />
+        <Search variant={variant} />
         <Button
           isLink
           size="xs"
-          variant="default"
+          variant={variant === "transparent" ? "light" : "default"}
           href="/contact"
-          class="hidden lg:flex"
+          class={`hidden lg:flex ${variant === "transparent" ? "[.scrolled_&]:variant-default" : ""}`}
         >
           Get My AI Audit
         </Button>
-        <MobileNav links={navLinks} />
+        <MobileNav links={navLinks} variant={variant} />
       </div>
     </div>
   </Wrapper>
   <div class="group/megamenu">
-    <MegaMenu />
+    <Megamenu />
   </div>
 </header>
 
 <script is:inline>
+  // Handle navbar scroll detection
+  function handleNavbarScroll() {
+    const header = document.querySelector("header[data-navbar-variant]");
+    if (!header) return;
+
+    const variant = header.getAttribute("data-navbar-variant");
+    if (variant !== "transparent") return;
+
+    const logo = header.querySelector("a img");
+    const lightLogoUrl = logo?.src;
+    const darkLogoUrl = lightLogoUrl?.replace("white.png", "Full.png");
+
+    function updateNavbarStyle() {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled) {
+        header.classList.add("scrolled");
+        if (logo && darkLogoUrl) {
+          logo.src = darkLogoUrl;
+        }
+      } else {
+        header.classList.remove("scrolled");
+        if (logo && lightLogoUrl) {
+          logo.src = lightLogoUrl;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", updateNavbarStyle, { passive: true });
+    updateNavbarStyle();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", handleNavbarScroll);
+  } else {
+    handleNavbarScroll();
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     const header = document.querySelector("header");
     if (!header) return;
 
-    const servicesLink = header.querySelector('a[href="/capabilities"]');
-    const industriesLink = header.querySelector('a[href="/industries"]');
-    const resourcesLink = header.querySelector('a[href="#"]');
+    const capabilitiesLink = header.querySelector('[data-megamenu="capabilities"]');
+    const resourcesLink = header.querySelector('[data-megamenu="resources"]');
     const megamenu = header.querySelector("#megamenu");
     const resourcesMegamenu = header.querySelector("#resources-megamenu");
 
-    console.log("Navigation script loaded");
-    console.log("Header:", header);
-    console.log("Resources Link:", resourcesLink);
-    console.log("Resources Megamenu:", resourcesMegamenu);
-
     const hideAllMenus = () => {
       megamenu?.classList.add("hidden");
-      megamenu?.classList.remove("block");
       resourcesMegamenu?.classList.add("hidden");
-      resourcesMegamenu?.classList.remove("block");
     };
 
-    const showMenu = (menu) => {
+    const showCapabilitiesMenu = () => {
       hideAllMenus();
-      menu?.classList.remove("hidden");
-      menu?.classList.add("block");
+      megamenu?.classList.remove("hidden");
     };
 
-    // Services and Industries links
-    [servicesLink, industriesLink].forEach((link) => {
-      if (!link) return;
-      link.addEventListener("mouseenter", () => showMenu(megamenu));
-      link.addEventListener("mouseleave", () => hideAllMenus());
-    });
+    const showResourcesMenu = () => {
+      hideAllMenus();
+      resourcesMegamenu?.classList.remove("hidden");
+    };
 
-    // Resources link
+    // Capabilities link - shows megamenu
+    if (capabilitiesLink) {
+      capabilitiesLink.addEventListener("mouseenter", showCapabilitiesMenu);
+      capabilitiesLink.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+          if (!megamenu?.matches(":hover")) {
+            hideAllMenus();
+          }
+        }, 100);
+      });
+    }
+
+    // Resources link - shows resources megamenu
     if (resourcesLink) {
-      console.log("Setting up resources link events");
-      resourcesLink.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
-      resourcesLink.addEventListener("mouseenter", () => {
-        console.log("Resources link hovered");
-        showMenu(resourcesMegamenu);
-      });
+      resourcesLink.addEventListener("mouseenter", showResourcesMenu);
       resourcesLink.addEventListener("mouseleave", () => {
         setTimeout(() => {
           if (!resourcesMegamenu?.matches(":hover")) {
@@ -117,20 +162,16 @@ const navLinks = [
       });
     }
 
-    // Megamenu hover states
-    megamenu?.addEventListener("mouseenter", () => {
-      megamenu?.classList.remove("hidden");
-    });
-    megamenu?.addEventListener("mouseleave", () => hideAllMenus());
+    // Megamenu (Capabilities) hover states
+    if (megamenu) {
+      megamenu.addEventListener("mouseenter", showCapabilitiesMenu);
+      megamenu.addEventListener("mouseleave", hideAllMenus);
+    }
 
     // Resources megamenu hover states
-    resourcesMegamenu?.addEventListener("mouseenter", () => {
-      console.log("Resources megamenu hovered");
-      resourcesMegamenu?.classList.remove("hidden");
-    });
-    resourcesMegamenu?.addEventListener("mouseleave", () => {
-      console.log("Resources megamenu left");
-      hideAllMenus();
-    });
+    if (resourcesMegamenu) {
+      resourcesMegamenu.addEventListener("mouseenter", showResourcesMenu);
+      resourcesMegamenu.addEventListener("mouseleave", hideAllMenus);
+    }
   });
 </script>

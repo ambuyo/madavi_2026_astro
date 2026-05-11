@@ -1,5 +1,33 @@
-import { WordPressPost, getFeaturedImage, stripHtml } from "./fetch";
+import {
+  WordPressPost,
+  WordPressCategory,
+  getFeaturedImage,
+  stripHtml,
+} from "./fetch";
+import { htmlToMarkdown, extractPlainText } from "./markdown";
 import type { Post } from "../sanity/types";
+
+// Helper to extract categories from embedded data
+function extractCategories(wpPost: WordPressPost): WordPressCategory[] {
+  if (!wpPost._embedded?.["wp:term"]) {
+    return [];
+  }
+
+  const categories: WordPressCategory[] = [];
+  for (const termArray of wpPost._embedded["wp:term"]) {
+    for (const term of termArray) {
+      if (term.taxonomy === "category") {
+        categories.push({
+          id: term.id,
+          name: term.name,
+          slug: term.slug,
+        });
+      }
+    }
+  }
+
+  return categories;
+}
 
 // Helper to decode HTML entities in content
 function decodeHtmlEntities(text: string): string {
@@ -41,6 +69,10 @@ function decodeHtmlEntities(text: string): string {
 // Transform WordPress post to our Post type
 export function transformWordPressPost(wpPost: WordPressPost): Post {
   const featuredImage = getFeaturedImage(wpPost);
+  const htmlContent = decodeHtmlEntities(wpPost.content.rendered);
+  const markdown = htmlToMarkdown(htmlContent);
+  const plainText = extractPlainText(htmlContent);
+  const categories = extractCategories(wpPost);
 
   return {
     slug: wpPost.slug,
@@ -49,12 +81,15 @@ export function transformWordPressPost(wpPost: WordPressPost): Post {
       description: stripHtml(wpPost.excerpt.rendered),
       pubDate: new Date(wpPost.date),
       tags: [], // WordPress tags would need separate API call if needed
+      categories: categories,
       team: undefined,
       image: {
         url: featuredImage.url,
         alt: featuredImage.alt,
       },
     },
-    body: decodeHtmlEntities(wpPost.content.rendered),
+    body: htmlContent,
+    markdown: markdown,
+    plainText: plainText,
   };
 }

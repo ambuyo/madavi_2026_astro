@@ -5,16 +5,25 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import OptimizedImage from "@/components/OptimizedImage.astro";
 // Sections
 import BlogCard from "@/components/blog/BlogCard.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
+// Utils
+import { calculateReadingTime } from "@/lib/reading-time";
 
 interface Props {
   frontmatter: any;
   seo?: any;
+  plainText?: string;
+  wordCount?: number;
 }
 
-const { frontmatter, seo } = Astro.props;
+const { frontmatter, seo, plainText = "", wordCount = 0 } = Astro.props;
+
+// Calculate reading time from plain text
+const readingTime = plainText ? calculateReadingTime(plainText) : null;
 
 // Data
 import { getTeamMemberBySlug, getPosts } from "@/lib/data";
@@ -63,15 +72,26 @@ const seoData = {
       </div>
     </Wrapper>
     <Wrapper variant="paddingLess">
-      <Image
-        alt={frontmatter.image.alt}
-        src={frontmatter.image.url}
-        width={800}
-        height={600}
-        loading="lazy"
-        decoding="async"
-        class="w-full max-h-150 object-cover object-top"
-      />
+      {frontmatter.image.url.includes("images.madavi.co") || frontmatter.image.url.includes("cdn.madavi.co") ? (
+        <OptimizedImage
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt}
+          width={1200}
+          height={630}
+          loading="lazy"
+          class="w-full max-h-150 object-cover object-top"
+        />
+      ) : (
+        <Image
+          alt={frontmatter.image.alt}
+          src={frontmatter.image.url}
+          width={800}
+          height={600}
+          loading="lazy"
+          decoding="async"
+          class="w-full max-h-150 object-cover object-top"
+        />
+      )}
     </Wrapper>
     <Wrapper variant="standard" class="py-12 lg:py-24">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -109,6 +129,22 @@ const seoData = {
                 </Text>
               </div>
               {
+                readingTime && (
+                  <div>
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-500 uppercase tracking-wide"
+                    >
+                      Reading Time
+                    </Text>
+                    <Text tag="p" variant="textBase" class="text-base-900">
+                      {readingTime.displayText} ({readingTime.words.toLocaleString()} words)
+                    </Text>
+                  </div>
+                )
+              }
+              {
                 team && (
                   <div>
                     <Text
@@ -133,27 +169,50 @@ const seoData = {
                   </div>
                 )
               }
-              <div>
-                <Text
-                  tag="p"
-                  variant="textSM"
-                  class="text-base-500 uppercase tracking-wide"
-                >
-                  Tags
-                </Text>
-                <div class="flex flex-col gap-1 mt-2">
-                  {
-                    frontmatter.tags.map((tag) => (
+              {frontmatter.tags && frontmatter.tags.length > 0 && (
+                <div>
+                  <Text
+                    tag="p"
+                    variant="textSM"
+                    class="text-base-500 uppercase tracking-wide"
+                  >
+                    Tags
+                  </Text>
+                  <div class="flex flex-col gap-1 mt-2">
+                    {frontmatter.tags.map((tag: string) => (
                       <a
                         href={`/blog/tags/${tag}`}
                         class="inline-block text-base-700 text-sm capitalize"
                       >
                         {tag.replace(/-/g, " ")}
                       </a>
-                    ))
-                  }
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
+              {frontmatter.categories && frontmatter.categories.length > 0 && (
+                <div>
+                  <Text
+                    tag="p"
+                    variant="textSM"
+                    class="text-base-500 uppercase tracking-wide"
+                  >
+                    Category
+                  </Text>
+                  <div class="flex flex-col gap-1 mt-2">
+                    {frontmatter.categories.map(
+                      (category: { name: string; slug: string }) => (
+                        <a
+                          href={`/blog/cat/${category.slug}`}
+                          class="inline-block text-base-700 text-sm capitalize"
+                        >
+                          {category.name}
+                        </a>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

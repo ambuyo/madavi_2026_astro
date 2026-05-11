@@ -1,0 +1,48 @@
+---
+import CategoryLayout from "@/layouts/CategoryLayout.astro";
+import { getPosts, getPostsByCategory, getCategoryDescription } from "@/lib/data";
+
+interface Props {
+  category: string;
+}
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+
+  // Extract unique categories from all posts
+  const categorySet = new Set<string>();
+  posts.forEach((post) => {
+    post.data.categories?.forEach((cat) => {
+      categorySet.add(cat.slug);
+    });
+  });
+
+  return Array.from(categorySet).map((categorySlug) => ({
+    params: { category: categorySlug },
+  }));
+}
+
+const { category } = Astro.params;
+
+// Get all posts and find category info
+const allPosts = await getPosts();
+const categoryInfo = allPosts
+  .flatMap((post) => post.data.categories || [])
+  .find((cat) => cat.slug === category);
+
+if (!categoryInfo) {
+  return Astro.redirect("/blog");
+}
+
+// Fetch category description
+const categoryDescription = await getCategoryDescription(category);
+
+// Get posts for this category
+const categoryPosts = await getPostsByCategory(category);
+---
+
+<CategoryLayout
+  category={categoryInfo}
+  categoryDescription={categoryDescription}
+  posts={categoryPosts}
+/>

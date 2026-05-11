@@ -220,6 +220,52 @@ export async function getPostsByTag(tag: string): Promise<Post[]> {
 }
 
 /**
+ * Get posts by category (WordPress)
+ */
+export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
+  if (!USE_WORDPRESS) {
+    return [];
+  }
+
+  try {
+    const { fetchWordPressPostsByCategory } = await import(
+      "./wordpress/fetch"
+    );
+    const { transformWordPressPost } = await import(
+      "./wordpress/transforms"
+    );
+
+    const posts = await fetchWordPressPostsByCategory(categorySlug);
+    return posts.map(transformWordPressPost);
+  } catch (error) {
+    console.warn(
+      `Failed to fetch posts from category "${categorySlug}", falling back to cached posts.`,
+      error
+    );
+
+    const { readCachedPosts } = await import("./wordpress/cache");
+    const { transformWordPressPost } = await import(
+      "./wordpress/transforms"
+    );
+
+    const cachedPosts = await readCachedPosts();
+    if (cachedPosts && cachedPosts.length > 0) {
+      const filteredPosts = cachedPosts.filter((post) => {
+        return post._embedded?.["wp:term"]?.some?.((termArray: any[]) =>
+          termArray.some(
+            (term: any) =>
+              term.taxonomy === "category" && term.slug === categorySlug
+          )
+        );
+      });
+      return filteredPosts.map(transformWordPressPost);
+    }
+
+    return [];
+  }
+}
+
+/**
  * Get all unique tags
  */
 export async function getAllTags(): Promise<string[]> {
@@ -232,6 +278,69 @@ export async function getAllTags(): Promise<string[]> {
   const tags = new Set<string>();
   posts.forEach((p) => p.data.tags.forEach((tag) => tags.add(tag)));
   return Array.from(tags);
+}
+
+/**
+ * Get all unique categories (WordPress)
+ */
+export async function getAllCategories(): Promise<
+  Array<{ id: number; name: string; slug: string }>
+> {
+  if (!USE_WORDPRESS) {
+    return [];
+  }
+
+  const posts = await getPosts();
+  const categoryMap = new Map<string, { id: number; name: string; slug: string }>();
+
+  posts.forEach((post) => {
+    post.data.categories?.forEach((cat) => {
+      if (!categoryMap.has(cat.slug)) {
+        categoryMap.set(cat.slug, cat);
+      }
+    });
+  });
+
+  return Array.from(categoryMap.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+}
+
+// Helper to clean WordPress editor attributes from HTML
+function cleanWordPressHtml(html: string): string {
+  return html
+    .replace(/\s+data-path-to-node="[^"]*"/g, "")
+    .replace(/\s+data-index-in-node="[^"]*"/g, "")
+    .trim();
+}
+
+/**
+ * Get category description by slug (WordPress)
+ */
+export async function getCategoryDescription(
+  categorySlug: string
+): Promise<string | null> {
+  if (!USE_WORDPRESS) {
+    return null;
+  }
+
+  try {
+    const { wpFetch } = await import("./wordpress/client");
+    const categories = await wpFetch<
+      Array<{ id: number; name: string; slug: string; description: string }>
+    >(`/categories?slug=${encodeURIComponent(categorySlug)}`);
+
+    if (categories.length > 0 && categories[0].description) {
+      return cleanWordPressHtml(categories[0].description);
+    }
+  } catch (error) {
+    console.warn(
+      `Failed to fetch category description for "${categorySlug}":`,
+      error
+    );
+  }
+
+  return null;
 }
 
 // =============================================================================

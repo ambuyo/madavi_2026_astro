@@ -50,10 +50,13 @@ export interface Post {
     description: string;
     pubDate: Date;
     tags: string[];
+    categories?: Array<{ id: number; name: string; slug: string }>;
     team?: string;
     image: UnifiedImage;
   };
   body?: string;
+  markdown?: string;
+  plainText?: string;
   render?: () => Promise<{ Content: unknown }>;
 }
 

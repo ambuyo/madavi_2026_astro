@@ -7,6 +7,10 @@ import BaseHead from "@/components/fundations/head/BaseHead.astro";
 import SEOHead from "@/components/SEOHead.astro";
 import StructuredData from "@/components/StructuredData.astro";
 
+// Analytics Components
+import GoogleAnalytics from "@/components/fundations/scripts/GoogleAnalytics.astro";
+import LLMAnalytics from "@/components/fundations/scripts/LLMAnalytics.astro";
+
 // Layout Components
 import MainCta from "@/components/ctas/MainCta.astro";
 import Footer from "@/components/global/Footer.astro";
@@ -39,6 +43,7 @@ interface Props {
   hideNavigation?: boolean;
   hideFooter?: boolean;
   hideMainCta?: boolean;
+  navVariant?: "default" | "transparent";
 }
 
 // Extract SEO data with fallbacks
@@ -61,6 +66,7 @@ const {
   hideMainCta = false,
   hideNavigation = false,
   hideFooter = false,
+  navVariant = "default",
 } = Astro.props;
 
 // Merge legacy and new SEO data (new takes precedence)
@@ -110,10 +116,14 @@ const seoPublishedTime = publishDate || (seo?.publishedTime ? new Date(seo.publi
         }}
       />
     )}
+
+    <!-- Analytics -->
+    <GoogleAnalytics />
+    <LLMAnalytics />
   </head>
 
   <body class="flex flex-col bg-white min-h-svh pt-24">
-    {!hideNavigation && <Navigation />}
+    {!hideNavigation && <Navigation variant={navVariant} />}
     <main class="grow"><slot /></main>
     {!hideFooter && <MainCta />}
     {!hideFooter && <Footer />}

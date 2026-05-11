@@ -39,6 +39,11 @@ const seo = {
 };
 ---
 
-<BlogLayout frontmatter={post.data} seo={seo}>
+<BlogLayout
+  frontmatter={post.data}
+  seo={seo}
+  plainText={post.plainText || ""}
+  wordCount={post.plainText?.trim().split(/\s+/).length || 0}
+>
   {Content ? <Content /> : <div set:html={post.body} />}
 </BlogLayout>

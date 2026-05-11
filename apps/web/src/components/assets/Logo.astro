@@ -1,8 +1,16 @@
 ---
 import { Image } from "astro:assets";
-import logoImage from "@/images/brand/logos/Madavi Logo - Full.png";
+import logoDark from "@/images/brand/logos/Madavi Logo - Full.png";
+import logoLight from "@/images/brand/logos/Madavi Logo - Full- white.png";
 
-const { class: className = "", ...rest } = Astro.props;
+interface Props {
+  variant?: "dark" | "light";
+  class?: string;
+  [key: string]: any;
+}
+
+const { variant = "dark", class: className = "", ...rest } = Astro.props;
+const logoImage = variant === "light" ? logoLight : logoDark;
 ---
 
 <Image

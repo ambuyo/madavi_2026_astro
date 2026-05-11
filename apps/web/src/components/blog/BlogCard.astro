@@ -2,10 +2,11 @@
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 // Content
-const { title, url, image } = {
+const { title, url, image, category } = {
   url: "/" + Astro.props.post.slug,
   title: Astro.props.post.data.title,
   image: Astro.props.post.data.image.url,
+  category: Astro.props.post.data.categories?.[0],
 };
 
 // Convert title to proper sentence case
@@ -34,6 +35,21 @@ const sentenceCaseTitle = title
     class="absolute inset-0 z-10"></a>
 
   <div class="flex-1">
+    {category && (
+      <a
+        href={`/blog/cat/${category.slug}`}
+        class="inline-block relative z-20 mb-2"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Text
+          tag="p"
+          variant="textSM"
+          class="text-base-600 hover:text-accent-600 transition-colors capitalize"
+        >
+          {category.name}
+        </Text>
+      </a>
+    )}
     <Text tag="h3" variant="textLG" class="text-base-900 font-semibold text-left"
       >{sentenceCaseTitle}</Text
     >

@@ -1,22 +1,10 @@
 import type { APIRoute } from "astro";
 import { getPostBySlug } from "@/lib/data";
+import { htmlToMarkdown, extractPlainText } from "@/lib/wordpress/markdown";
 
-// Strip HTML tags and clean text
-function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-// Extract plain text from HTML (for LLM APIs)
-function extractPlainText(html: string): string {
-  return stripHtml(html)
-    .replace(/&nbsp;/g, " ")
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+// Return empty array for static generation - this is a dynamic API endpoint
+export function getStaticPaths() {
+  return [];
 }
 
 export const GET: APIRoute = async ({ params }) => {
@@ -53,7 +41,9 @@ export const GET: APIRoute = async ({ params }) => {
     }
 
     const siteUrl = "https://madavi.co";
-    const plainText = extractPlainText(post.body || "");
+    const htmlContent = post.body || "";
+    const markdown = htmlToMarkdown(htmlContent);
+    const plainText = extractPlainText(htmlContent);
 
     // Return clean, structured data optimized for LLM consumption
     const llmFriendlyData = {
@@ -67,11 +57,15 @@ export const GET: APIRoute = async ({ params }) => {
       published: post.data.pubDate?.toISOString?.(),
       author: post.data.team || "Madavi Inc.",
 
-      // Content
+      // Content (multiple formats for LLM consumption)
       content: {
-        // Plain text (easiest for LLMs to parse)
+        // Markdown format (structured, readable)
+        markdown: markdown,
+        // Plain text (simplest for LLMs to parse)
         plainText: plainText,
-        length: plainText.split(/\s+/).length,
+        // Word count for both formats
+        wordCount: plainText.split(/\s+/).length,
+        markdownWordCount: markdown.split(/\s+/).length,
       },
 
       // Media
@@ -110,6 +104,7 @@ export const GET: APIRoute = async ({ params }) => {
       performance: {
         readTime: Math.ceil(plainText.split(/\s+/).length / 200),
         estimatedReadMinutes: `${Math.ceil(plainText.split(/\s+/).length / 200)}-${Math.ceil(plainText.split(/\s+/).length / 150)} minutes`,
+        contentFormats: ["markdown", "plainText", "html"],
       },
 
       // Additional metadata for context

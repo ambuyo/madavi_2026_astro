@@ -1,0 +1,87 @@
+---
+// Google Analytics 4 integration
+// Set your GA4 ID via GA4_ID environment variable
+const GA4_ID = import.meta.env.GA4_ID || import.meta.env.PUBLIC_GA4_ID;
+
+if (!GA4_ID) {
+  console.warn("Google Analytics not configured. Set GA4_ID or PUBLIC_GA4_ID environment variable.");
+}
+---
+
+{GA4_ID && (
+  <>
+    <!-- Google Analytics -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+    <script define:vars={{ GA4_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', GA4_ID, {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+
+      // Track page views
+      document.addEventListener('astro:page-load', () => {
+        gtag('event', 'page_view', {
+          'page_path': window.location.pathname,
+          'page_title': document.title,
+        });
+      });
+
+      // Track scroll depth
+      let maxScroll = 0;
+      window.addEventListener('scroll', () => {
+        const scrollDepth = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+        if (scrollDepth > maxScroll) {
+          maxScroll = scrollDepth;
+          if (scrollDepth % 25 === 0) {
+            gtag('event', 'scroll_depth', {
+              'depth': scrollDepth,
+            });
+          }
+        }
+      }, { passive: true });
+
+      // Track time on page
+      let timeOnPage = 0;
+      setInterval(() => {
+        timeOnPage += 1;
+        if (timeOnPage % 30 === 0) {
+          gtag('event', 'time_on_page', {
+            'seconds': timeOnPage,
+            'page': window.location.pathname,
+          });
+        }
+      }, 1000);
+
+      // Track link clicks
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href) {
+          const href = link.href;
+          const isExternal = !href.includes(window.location.hostname);
+          gtag('event', 'link_click', {
+            'link_url': href,
+            'link_text': link.textContent?.trim(),
+            'link_type': isExternal ? 'external' : 'internal',
+          });
+        }
+      });
+
+      // Track button clicks
+      document.addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (button) {
+          gtag('event', 'button_click', {
+            'button_text': button.textContent?.trim(),
+            'button_class': button.className,
+          });
+        }
+      });
+
+      // Export gtag globally for custom events
+      window.gtag = gtag;
+    </script>
+  </>
+)}
