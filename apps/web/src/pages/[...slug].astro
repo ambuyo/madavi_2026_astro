@@ -1,12 +1,26 @@
 ---
 import BlogLayout from "@/layouts/BlogLayout.astro";
-import { getPosts, getPostBySlug } from "@/lib/data";
+import { getPostBySlug } from "@/lib/data";
+import { readCachedPosts } from "@/lib/wordpress/cache";
+import { transformWordPressPost } from "@/lib/wordpress/transforms";
 
 export async function getStaticPaths() {
-  const posts = await getPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+  try {
+    // Use cached posts for static generation to avoid API calls during build
+    const cachedPosts = await readCachedPosts();
+
+    if (!cachedPosts || cachedPosts.length === 0) {
+      console.warn("No cached posts found. Skipping static path generation.");
+      return [];
+    }
+
+    return cachedPosts.map((post) => ({
+      params: { slug: post.slug },
+    }));
+  } catch (error) {
+    console.error("Error generating static paths:", error);
+    return [];
+  }
 }
 
 const { slug } = Astro.params;

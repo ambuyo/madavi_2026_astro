@@ -122,17 +122,36 @@ async function getSanityModules() {
 
 /**
  * Get all posts - fetches from WordPress if USE_WORDPRESS is true
+ * Falls back to cached posts if API is unavailable
  */
 export async function getPosts() {
   if (!USE_WORDPRESS) {
     return [];
   }
 
-  const { fetchWordPressPosts } = await import("./wordpress/fetch");
-  const { transformWordPressPost } = await import("./wordpress/transforms");
+  try {
+    const { fetchWordPressPosts } = await import("./wordpress/fetch");
+    const { transformWordPressPost } = await import("./wordpress/transforms");
 
-  const posts = await fetchWordPressPosts();
-  return posts.map(transformWordPressPost);
+    const posts = await fetchWordPressPosts();
+    return posts.map(transformWordPressPost);
+  } catch (error) {
+    console.warn(
+      "Failed to fetch posts from WordPress API, falling back to cached posts.",
+      error
+    );
+
+    // Fallback to cached posts if API fails
+    const { readCachedPosts } = await import("./wordpress/cache");
+    const { transformWordPressPost } = await import("./wordpress/transforms");
+
+    const cachedPosts = await readCachedPosts();
+    if (cachedPosts && cachedPosts.length > 0) {
+      return cachedPosts.map(transformWordPressPost);
+    }
+
+    return [];
+  }
 }
 
 /**
@@ -143,11 +162,34 @@ export async function getPostBySlug(slug: string) {
     return null;
   }
 
-  const { fetchWordPressPostBySlug } = await import("./wordpress/fetch");
-  const { transformWordPressPost } = await import("./wordpress/transforms");
+  try {
+    const { fetchWordPressPostBySlug } = await import("./wordpress/fetch");
+    const { transformWordPressPost } = await import("./wordpress/transforms");
 
-  const post = await fetchWordPressPostBySlug(slug);
-  return post ? transformWordPressPost(post) : null;
+    const post = await fetchWordPressPostBySlug(slug);
+    if (post) {
+      return transformWordPressPost(post);
+    }
+  } catch (error) {
+    console.warn(
+      `Failed to fetch post "${slug}" from WordPress API, falling back to cached posts.`,
+      error
+    );
+
+    // Fallback to cached posts if API fails
+    const { readCachedPosts } = await import("./wordpress/cache");
+    const { transformWordPressPost } = await import("./wordpress/transforms");
+
+    const cachedPosts = await readCachedPosts();
+    if (cachedPosts) {
+      const post = cachedPosts.find((p) => p.slug === slug);
+      if (post) {
+        return transformWordPressPost(post);
+      }
+    }
+  }
+
+  return null;
 }
 
 /**

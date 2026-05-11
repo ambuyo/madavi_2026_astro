@@ -17,6 +17,20 @@ export default defineConfig({
   },
   site: "https://madavi.ai",
   integrations: [react(), sitemap()],
+  image: {
+    // Authorize WordPress domain for remote image optimization
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cms.madavi.co",
+        pathname: "/wp-content/**",
+      },
+    ],
+    // Optimize image formats and caching
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
