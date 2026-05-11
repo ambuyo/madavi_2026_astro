@@ -10,6 +10,16 @@ import ShieldCheck from "@/components/fundations/icons/ShieldCheck.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Button from "@/components/fundations/elements/Button.astro";
+// Data
+import { getInfoPages } from "@/lib/data";
+
+// Fetch info pages from Sanity
+const infoPages = await getInfoPages();
+const legalLinks = infoPages.map((page) => ({
+  href: `/legal/${page.slug}`,
+  label: page.data.page,
+}));
+
 // Footer link configurations
 const footerSections = [
   {
@@ -57,22 +67,9 @@ const footerSections = [
     ],
   },
   {
-    title: "Quick Links",
-    links: [
-      { href: "#", label: "Tax Forms & Documents" },
-      { href: "#", label: "Client Portal Login" },
-      { href: "#", label: "Payment Portal" },
-      { href: "#", label: "File Upload Center" },
-      { href: "#", label: "Tax Calendar" },
-      { href: "#", label: "Business Resources" },
-    ],
+    title: "Legal & Compliance",
+    links: legalLinks,
   },
-];
-const legalLinks = [
-  { href: "/legal/privacy", label: "Privacy Policy" },
-  { href: "/legal/terms", label: "Terms of Service" },
-  { href: "#", label: "Security" },
-  { href: "#", label: "Accessibility" },
 ];
 
 const certifications = [

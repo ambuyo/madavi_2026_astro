@@ -75,6 +75,8 @@ const navLinks = [
 
     console.log("Navigation script loaded");
     console.log("Header:", header);
+    console.log("Resources Link:", resourcesLink);
+    console.log("Resources Megamenu:", resourcesMegamenu);
 
     const hideAllMenus = () => {
       megamenu?.classList.add("hidden");
@@ -98,18 +100,37 @@ const navLinks = [
 
     // Resources link
     if (resourcesLink) {
+      console.log("Setting up resources link events");
       resourcesLink.addEventListener("click", (e) => {
         e.preventDefault();
       });
-      resourcesLink.addEventListener("mouseenter", () => showMenu(resourcesMegamenu));
-      resourcesLink.addEventListener("mouseleave", () => hideAllMenus());
+      resourcesLink.addEventListener("mouseenter", () => {
+        console.log("Resources link hovered");
+        showMenu(resourcesMegamenu);
+      });
+      resourcesLink.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+          if (!resourcesMegamenu?.matches(":hover")) {
+            hideAllMenus();
+          }
+        }, 100);
+      });
     }
 
     // Megamenu hover states
-    megamenu?.addEventListener("mouseenter", () => megamenu?.classList.remove("hidden"));
+    megamenu?.addEventListener("mouseenter", () => {
+      megamenu?.classList.remove("hidden");
+    });
     megamenu?.addEventListener("mouseleave", () => hideAllMenus());
 
-    resourcesMegamenu?.addEventListener("mouseenter", () => resourcesMegamenu?.classList.remove("hidden"));
-    resourcesMegamenu?.addEventListener("mouseleave", () => hideAllMenus());
+    // Resources megamenu hover states
+    resourcesMegamenu?.addEventListener("mouseenter", () => {
+      console.log("Resources megamenu hovered");
+      resourcesMegamenu?.classList.remove("hidden");
+    });
+    resourcesMegamenu?.addEventListener("mouseleave", () => {
+      console.log("Resources megamenu left");
+      hideAllMenus();
+    });
   });
 </script>

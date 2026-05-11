@@ -111,6 +111,51 @@ const resourcesMegamenuSections = [
   },
 ];
 
+// Resources data
+const resources = [
+  {
+    title: "Events & Summits",
+    description: "Our upcoming events and recordings",
+    href: "/resources/events",
+    icon: "🎤",
+  },
+  {
+    title: "Customer Stories",
+    description: "Behind the successful partnerships",
+    href: "/resources/customer-stories",
+    icon: "📋",
+  },
+  {
+    title: "Guides",
+    description: "Insights from marketing leaders",
+    href: "/resources/guides",
+    icon: "📖",
+  },
+  {
+    title: "Reports",
+    description: "Data for smarter decisions",
+    href: "/resources/reports",
+    icon: "📊",
+  },
+  {
+    title: "Blog",
+    description: "Long-form you can learn from",
+    href: "/blog",
+    icon: "📝",
+  },
+];
+
+const latestMedia = [
+  {
+    title: "The AI Reset: A Playbook for Bringing AI to Your Creative Team",
+    href: "/resources/the-ai-reset",
+  },
+  {
+    title: "From AI uncertainty to creative superpower: 6 lessons from Superside's Shift summit",
+    href: "/resources/superside-shift-summit",
+  },
+];
+
 ---
 
 <div
@@ -222,124 +267,90 @@ const resourcesMegamenuSections = [
 <!-- Resources Megamenu -->
 <div
   id="resources-megamenu"
-  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto bg-black"
+  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto bg-white"
 >
   <div class="flex justify-center">
-    <div class="w-full max-w-7xl px-12 py-12">
-      <div
-        class="grid grid-cols-2 gap-y-8 lg:grid-cols-5 lg:divide-x divide-base-900 p-0"
-      >
-        {
-          resourcesMegamenuSections.map((section) => (
-            <div class="px-6">
-              <a
-                href={section.href}
-                class="group flex items-center justify-between text-white uppercase hover:text-accent-400 transition-colors"
-              >
-                <Text tag="h3" variant="textSM">
-                  {section.title}
-                </Text>
-                <ArrowRight class="size-4 " />
-              </a>
-              <ul class="space-y-2 mt-4 lg:mt-12">
-                {section.links.map((link) => (
-                  <li>
-                    <a
-                      href={link.href}
-                      class="group text-xs flex items-center text-base-300 hover:text-accent-500 transition-colors duration-300 justify-between"
+    <div class="w-full max-w-7xl px-8 lg:px-12 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Left Column: Resources -->
+        <div>
+          <Text
+            tag="h3"
+            variant="textLG"
+            class="text-base-900 font-semibold mb-8"
+          >
+            Our resources
+          </Text>
+          <div class="space-y-6">
+            {
+              resources.map((resource) => (
+                <a
+                  href={resource.href}
+                  class="group flex items-start gap-4 pb-6 border-b border-base-200 hover:border-accent-400 transition-colors"
+                >
+                  <div class="flex-shrink-0 text-2xl">
+                    {resource.icon}
+                  </div>
+                  <div class="flex-grow">
+                    <Text
+                      tag="h4"
+                      variant="textBase"
+                      class="text-base-900 font-semibold group-hover:text-accent-600 transition-colors"
                     >
-                      {link.label}
-                      <ArrowRight class="size-4 hidden group-hover:flex duration-300" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-        <div
-          class="p-8 bg-accent-400 flex flex-col h-full justify-between gap-12 lg:gap-18 col-span-full lg:col-span-1"
-        >
-          <div>
-            <Shield class="h-6 text-white" />
-            <Text
-              tag="h3"
-              variant="displaySM"
-              class="text-base text-white mt-8 font-display font-medium"
-            >
-              Get in touch
-            </Text>
-            <Text tag="p" variant="textSM" class="text-white font-medium mt-2">
-              Ready to accelerate your AI adoption? Let's talk.
-            </Text>
+                      {resource.title}
+                    </Text>
+                    <Text
+                      tag="p"
+                      variant="textSM"
+                      class="text-base-600 mt-1"
+                    >
+                      {resource.description}
+                    </Text>
+                  </div>
+                </a>
+              ))
+            }
           </div>
-          <Button
-            variant="muted"
-            size="xs"
-            isLink={true}
-            href="/contact"
-            class="w-fit"
-          >
-            Contact Us
-          </Button>
         </div>
-      </div>
-      <div
-        class="border-t pt-4 border-base-900 col-span-full flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between"
-      >
-        <div class="flex flex-wrap gap-4 items-center">
-          <a
-            href="tel:+1-555-123-4567"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
+
+        <!-- Right Column: Latest Media -->
+        <div>
+          <Text
+            tag="h3"
+            variant="textLG"
+            class="text-base-900 font-semibold mb-8"
           >
-            +1 (555) 123-4567
-          </a>
-          <span class="hidden md:flex text-base-900">|</span>
-          <address class="text-base-400 not-italic text-xs">
-            123 Business Street, Suite 100, New York, NY 10001
-          </address>
-        </div>
-        <div
-          class="flex flex-wrap gap-4 items-center order-first lg:order-none"
-        >
-          <a
-            href="https://x.com/madavihq"
-             target="_blank"
-             rel="noopener noreferrer"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
-          >
-            X
-          </a>
-                    <a
-            href="https://x.com/madavihq"
-             target="_blank"
-             rel="noopener noreferrer"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
-          >
-            X
-          </a>
-          <a
-            href="https://www.linkedin.com/company/madavihq/"
-             target="_blank"
-             rel="noopener noreferrer"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
-          >
-            LinkedIn
-          </a>
-                    <a
-            href="https://www.facebook.com/madavihq"
-             target="_blank"
-             rel="noopener noreferrer"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
-          >
-            FB
-          </a>
-          <a
-            href="mailto:hi@madavi.co"
-            class="text-base-400 text-xs hover:text-white-400 transition-colors"
-          >
-            Email
-          </a>
+            Latest media
+          </Text>
+          <div class="space-y-6">
+            {
+              latestMedia.map((media) => (
+                <a
+                  href={media.href}
+                  class="group block overflow-hidden rounded-lg"
+                >
+                  <div class="relative bg-base-200 aspect-video overflow-hidden rounded-lg mb-4">
+                    <div class="w-full h-full bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center text-white">
+                      <Text
+                        tag="p"
+                        variant="textSM"
+                        class="text-center px-4"
+                      >
+                        {media.title}
+                      </Text>
+                    </div>
+                  </div>
+                  <Text
+                    tag="h4"
+                    variant="textBase"
+                    class="text-base-900 font-semibold group-hover:text-accent-600 transition-colors line-clamp-2"
+                  >
+                    {media.title}
+                  </Text>
+                </a>
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>

@@ -178,7 +178,7 @@ const readinessDimensions = [
             decoding="async"
           />
           <div
-            class="lg:absolute lg:inset-0 size-full bg-accent-900 lg:bg-accent-900/90 flex flex-col items-start justify-start px-8 md:px-12 lg:px-24 z-10 py-24"
+            class="lg:absolute lg:inset-0 size-full bg-accent-900 lg:bg-accent-900/90 flex flex-col items-start justify-start px-8 md:px-12 lg:px-24 z-10 py-24 text-white"
           >
             <div class="w-full">
               <Text
@@ -281,15 +281,15 @@ What We Assess: 7 Readiness Dimensions
                     </ul>
                   </div>
 
-                  <div class="mt-6 p-4 bg-base-50 rounded-lg">
+                  <div class="mt-6 p-4 rounded-lg" style="background-color: #00424E;">
                     <Text
                       tag="h4"
                       variant="textSM"
-                      class="text-base-800 font-bold"
+                      class="text-white font-bold"
                     >
                       Why it matters:
                     </Text>
-                    <Text tag="p" variant="textSM" class="text-base-700 mt-2">
+                    <Text tag="p" variant="textSM" class="text-white mt-2">
                       {dimension.whyMatters}
                     </Text>
                   </div>
@@ -327,18 +327,6 @@ What We Assess: 7 Readiness Dimensions
           }
         </dl>
         <div class="mt-4 pt-4 border-t border-base-200">
-          <Text tag="p" variant="textSM" class="text-base-700 lg:w-1/2">
-            Ready to experience legal representation that puts your interests
-            first?
-          </Text>
-          <div class="flex items-center gap-2 flex-col lg:flex-row mt-4">
-            <Button variant="default" size="xs" class="w-full lg:w-fit">
-              Schedule Consultation
-            </Button>
-            <Button variant="muted" size="xs" class="w-full lg:w-fit">
-              Learn more about us
-            </Button>
-          </div>
         </div>
       </div>
     </div>

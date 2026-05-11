@@ -1,6 +1,45 @@
 ---
+import { Image } from "astro:assets";
+import talk from "@/images/assets/talk.png";
 import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { WavePath } from "@/components/ui/wave-path";
+
+const features = [
+  {
+    title: "Cultural Barriers",
+    bullets: [
+      "Team doesn't trust it",
+      "Leadership doesn't champion it",
+      "Skepticism from previous tech failures ",
+    ],
+  },
+  {
+    title: "Process Chaos",
+    bullets: [
+      "Workflows too messy to automate",
+      "Every person does things differently",
+      "No standardization or documentation",
+    ],
+  },
+  {
+    title: "Technical Gaps",
+    bullets: [
+      "Systems don't integrate",
+      "Poor Data Quality ",
+      "Infrastructure can't handle it",
+    ],
+  },
+  {
+    title: "Capacity Issues",
+    bullets: [
+      "Team already at 120% capacity",
+      "No bandwidth for learning",
+      "No time for implementation",
+    ],
+  },
+];
 
 const columns = [
   {
@@ -42,65 +81,70 @@ const columns = [
 ];
 ---
 
-<section class="bg-base-50">
-  <Wrapper variant="standard" class="py-24">
-    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8 mb-12">
-      <Text
-        tag="p"
-        variant="textXS"
-        class="text-accent-700 font-semibold tracking-wide uppercase"
-      >
-        Common Barriers
-      </Text>
-      <div class="lg:col-span-3">
-        <Text
-          tag="h2"
-          variant="displayLG"
-          class="text-accent-800 font-display text-balance"
-        >
-          Most Businesses Jump Straight to Tools
-        </Text>
-        <Text
-          tag="p"
-          variant="textBase"
-          class="text-base-700 mt-2"
-        >
-          Understanding these barriers is the first step to building a successful AI readiness program.
-        </Text>
-      </div>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {
-        columns.map((column) => (
-          <div class="flex flex-col h-full p-6 border border-base-200 rounded-lg">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-accent-100 mb-4">
-              <span class="text-xl text-accent-700">→</span>
-            </div>
-            <Text
-              tag="h3"
-              variant="textBase"
-              class="text-accent-900 font-bold mb-4"
-            >
-              {column.title}
-            </Text>
-            <ul class="space-y-3 flex-grow">
-              {column.bullets.map((bullet) => (
-                <li class="flex gap-3">
-                  <span class="flex-shrink-0 text-accent-600 font-bold">•</span>
-                  <Text
-                    tag="span"
-                    variant="textSM"
-                    class="text-base-700"
-                  >
-                    {bullet}
-                  </Text>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div
+      class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 p-8 lg:p-12 bg-base-50"
+    >
+      <Image
+        src={talk}
+        alt="Image"
+        width={800}
+        height={1440}
+        loading="eager"
+        decoding="async"
+        class="size-full object-cover object-center aspect-square"
+      />
+      <div class="flex flex-col">
+        <div>
+          <Kicker>        Common Barriers
+</Kicker>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-base-950 text-balance font-medium tracking-tight font-display mt-8 border-t border-base-200 pt-8"
+          >
+            Most businesses prioritize <span class="text-accent-600">tools</span>
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-700 mt-2 text-pretty"
+          >
+          A successful AI readiness program doesn't start with technology—it starts with awareness. By first understanding the specific barriers to adoption, we design a roadmap that proactively addresses cultural resistance and data silos. 
+          </Text>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-8 mt-12">
+          {
+            features.map((feature) => (
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="text-base-900 font-display"
+                >
+                  {feature.title}
+                </Text>
+                <ul class="space-y-2 mt-4">
+                  {feature.bullets.map((bullet) => (
+                    <li class="flex gap-2">
+                      <span class="flex-shrink-0 text-accent-600 font-bold">•</span>
+                      <Text
+                        tag="span"
+                        variant="textSM"
+                        class="text-base-600"
+                      >
+                        {bullet}
+                      </Text>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </Wrapper>
 </section>

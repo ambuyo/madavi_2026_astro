@@ -40,6 +40,12 @@ import type {
  */
 export const USE_SANITY = false;
 
+/**
+ * Toggle WordPress fetch for blog posts
+ * Set to false to disable WordPress API calls during development
+ */
+export const USE_WORDPRESS = false;
+
 // =============================================================================
 // LAZY SANITY IMPORTS
 // =============================================================================
@@ -115,9 +121,13 @@ async function getSanityModules() {
 // =============================================================================
 
 /**
- * Get all posts - fetches from WordPress instead of Sanity
+ * Get all posts - fetches from WordPress if USE_WORDPRESS is true
  */
 export async function getPosts() {
+  if (!USE_WORDPRESS) {
+    return [];
+  }
+
   const { fetchWordPressPosts } = await import("./wordpress/fetch");
   const { transformWordPressPost } = await import("./wordpress/transforms");
 
@@ -129,6 +139,10 @@ export async function getPosts() {
  * Get a single post by slug from WordPress
  */
 export async function getPostBySlug(slug: string) {
+  if (!USE_WORDPRESS) {
+    return null;
+  }
+
   const { fetchWordPressPostBySlug } = await import("./wordpress/fetch");
   const { transformWordPressPost } = await import("./wordpress/transforms");
 

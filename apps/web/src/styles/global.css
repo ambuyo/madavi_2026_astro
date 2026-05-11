@@ -4,7 +4,7 @@
 @plugin "tailwind-scrollbar-hide";
 @theme {
   /* Typography */
-  --font-display: "Lora", serif;
+  --font-display: "Josefin Sans", sans-serif;
   --font-sans: "Inter", sans-serif;
 
   /* Colors */
@@ -18,16 +18,16 @@
   --color-accent-400: oklch(0.672 0.221 37.86);
   --color-accent-500: oklch(0.582 0.192 37.74);
   --color-accent-600: oklch(0.491 0.162 37.77);
-  --color-accent-700: oklch(0.411 0.136 37.63);
-  --color-accent-800: oklch(0.322 0.105 37.99);
-  --color-accent-900: oklch(0.231 0.076 37.81);
+  --color-accent-700: #00424E;
+  --color-accent-800: #1EB49C;
+  --color-accent-900: #1EB49C;
   --color-accent-950: oklch(0.184 0.059 38.68);
 
   /* Base */
-  --color-base-50: oklch(0.988 0.003 105.99);
+  --color-base-50: #F8F9F2;
   --color-base-100: oklch(0.939 0.005 106.28);
   --color-base-200: oklch(0.853 0.005 106.32);
-  --color-base-300: oklch(0.766 0.004 106.27);
+  --color-base-300: #FFFFFF;
   --color-base-400: oklch(0.672 0.004 106.33);
   --color-base-500: oklch(0.586 0.003 106.25);
   --color-base-600: oklch(0.499 0.003 106.32);
