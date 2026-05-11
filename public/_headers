@@ -1,0 +1,27 @@
+# CORS for LLM-friendly API endpoints
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS, HEAD
+  Access-Control-Allow-Headers: Content-Type, Accept
+  Cache-Control: public, max-age=3600
+
+/llm-index.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS, HEAD
+  Cache-Control: public, max-age=3600
+
+# Content API endpoints
+/api/content/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS, HEAD
+  Cache-Control: public, max-age=86400
+
+# Sitemaps - cacheable
+/sitemap*.xml
+  Cache-Control: public, max-age=86400
+
+# Security headers for main site
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

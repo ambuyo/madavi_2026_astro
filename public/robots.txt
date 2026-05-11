@@ -1,0 +1,48 @@
+# Standard search engines
+User-agent: *
+Allow: /
+
+# Explicitly allow LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: YouSearch
+Allow: /
+
+# Disallow API internals from traditional search (optional)
+# They don't crawl /api anyway, but be explicit
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /private/
+
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl-delay for respectful scraping
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://madavi.co/sitemap-index.xml
+Sitemap: https://madavi.co/llm-index.json

@@ -1,0 +1,74 @@
+---
+export interface Props {
+  type: "Article" | "WebPage" | "Organization" | "Person" | "NewsArticle";
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+const baseSchema = {
+  "@context": "https://schema.org",
+  "@type": type,
+  ...data,
+};
+
+// Add organization context for articles and news
+if ((type === "Article" || type === "NewsArticle") && !data.publisher) {
+  baseSchema.publisher = {
+    "@type": "Organization",
+    name: "Madavi Inc.",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://madavi.co/logo.png",
+      width: 250,
+      height: 250,
+    },
+    sameAs: [
+      "https://twitter.com/madavi_inc",
+      "https://linkedin.com/company/madavi-inc",
+    ],
+  };
+}
+
+// Add main entity of page for better SEO
+if (type === "Article" || type === "NewsArticle") {
+  if (!baseSchema.mainEntityOfPage) {
+    baseSchema.mainEntityOfPage = {
+      "@type": "WebPage",
+      "@id": data.url || Astro.url.href,
+    };
+  }
+
+  // Ensure author is properly formatted
+  if (data.author && typeof data.author === "string") {
+    baseSchema.author = {
+      "@type": "Person",
+      name: data.author,
+    };
+  }
+}
+
+// Add organization schema to homepage
+if (type === "Organization") {
+  baseSchema.address = {
+    "@type": "PostalAddress",
+    addressCountry: "US",
+  };
+  baseSchema.contactPoint = {
+    "@type": "ContactPoint",
+    telephone: "+1-XXXXXXX",
+    contactType: "Customer Service",
+  };
+}
+
+// Validate and clean schema
+const schemaString = JSON.stringify(baseSchema, (key, value) => {
+  // Remove undefined values and empty arrays
+  if (value === undefined || (Array.isArray(value) && value.length === 0)) {
+    return undefined;
+  }
+  return value;
+}, 2);
+---
+
+<script type="application/ld+json" set:html={schemaString} />
