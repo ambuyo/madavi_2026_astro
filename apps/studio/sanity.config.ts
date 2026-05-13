@@ -5,10 +5,10 @@ import { schemaTypes } from "./schemas";
 import { structure } from "./structure";
 
 export default defineConfig({
-  name: "lexington-starter",
-  title: "Lexington Starter",
+  name: "madavi-6u680gce",
+  title: "Madavi Studio",
 
-  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID || "",
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID || "6u680gce",
   dataset: import.meta.env.SANITY_STUDIO_DATASET || "production",
 
   plugins: [structureTool({ structure }), visionTool()],
