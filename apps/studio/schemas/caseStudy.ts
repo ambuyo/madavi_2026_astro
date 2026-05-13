@@ -6,9 +6,10 @@ export const caseStudy = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
+      name: "client",
+      title: "Client",
       type: "string",
+      description: "Name of the client",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -16,16 +17,9 @@ export const caseStudy = defineType({
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "client",
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "client",
-      title: "Client",
-      type: "string",
-      description: "Name of the client",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -80,11 +74,11 @@ export const caseStudy = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "challenge",
-      title: "Challenge",
+      name: "aboutClient",
+      title: "About Client",
       type: "text",
       rows: 4,
-      description: "The challenge the client faced",
+      description: "The client and the challenge they faced",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -162,22 +156,8 @@ export const caseStudy = defineType({
       description: "Brief tagline for the project",
     }),
     defineField({
-      name: "aboutClient",
-      title: "About Client",
-      type: "text",
-      rows: 3,
-      description: "Background information about the client",
-    }),
-    defineField({
-      name: "scopeOfWork",
-      title: "Scope of Work",
-      type: "text",
-      rows: 4,
-      description: "The scope of work defined for this project",
-    }),
-    defineField({
-      name: "whatWeDid",
-      title: "What We Did",
+      name: "ourProcess",
+      title: "Our Process",
       type: "text",
       rows: 4,
       description: "Description of what was done in the project",
@@ -229,79 +209,15 @@ export const caseStudy = defineType({
       type: "datetime",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "body",
-      title: "Body",
-      type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-            { title: "H3", value: "h3" },
-            { title: "H4", value: "h4" },
-            { title: "Quote", value: "blockquote" },
-          ],
-          marks: {
-            decorators: [
-              { title: "Bold", value: "strong" },
-              { title: "Italic", value: "em" },
-              { title: "Code", value: "code" },
-            ],
-            annotations: [
-              {
-                name: "link",
-                type: "object",
-                title: "Link",
-                fields: [
-                  {
-                    name: "href",
-                    type: "url",
-                    title: "URL",
-                    validation: (Rule) =>
-                      Rule.uri({
-                        scheme: ["http", "https", "mailto", "tel"],
-                      }),
-                  },
-                ],
-              },
-            ],
-          },
-          lists: [
-            { title: "Bullet", value: "bullet" },
-            { title: "Numbered", value: "number" },
-          ],
-        },
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [
-            {
-              name: "alt",
-              type: "string",
-              title: "Alt Text",
-            },
-            {
-              name: "caption",
-              type: "string",
-              title: "Caption",
-            },
-          ],
-        },
-      ],
-    }),
   ],
   preview: {
     select: {
-      title: "title",
-      client: "client",
+      title: "client",
       media: "image",
     },
-    prepare({ title, client, media }) {
+    prepare({ title, media }) {
       return {
         title,
-        subtitle: client,
         media,
       };
     },
