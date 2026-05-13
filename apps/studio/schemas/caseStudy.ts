@@ -120,6 +120,13 @@ export const caseStudy = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "businessImpact",
+      title: "Business Impact",
+      type: "text",
+      rows: 4,
+      description: "The business impact and outcomes achieved for the client",
+    }),
+    defineField({
       name: "testimonial",
       title: "Testimonial",
       type: "object",

@@ -38,13 +38,13 @@ import type {
  * Toggle between Content Collections and Sanity CMS
  * Set to true to use Sanity, false to use Content Collections
  */
-export const USE_SANITY = false;
+export const USE_SANITY = true;
 
 /**
  * Toggle WordPress fetch for blog posts
  * Set to false to disable WordPress API calls during development
  */
-export const USE_WORDPRESS = true;
+export const USE_WORDPRESS = false;
 
 // =============================================================================
 // LAZY SANITY IMPORTS
@@ -411,26 +411,28 @@ export async function getServices(): Promise<Service[]> {
   if (USE_SANITY) {
     const { sanityFetch, queries, transforms } = await getSanityModules();
     const services = await sanityFetch<any[]>(queries.allServicesQuery);
-    return services.map(transforms.transformService);
+    return services.filter(Boolean).map(transforms.transformService).filter((s: any) => s?.slug);
   }
 
   const services = await getCollection("services");
-  return services.map((service) => ({
-    slug: service.id,
-    data: {
-      title: service.data.title,
-      summary: service.data.summary,
-      category: service.data.category,
-      features: service.data.features,
-      outcomes: service.data.outcomes,
-      industries: service.data.industries,
-      pricing: service.data.pricing,
-      image: service.data.image,
-      pubDate: service.data.pubDate,
-      updatedDate: service.data.updatedDate,
-    },
-    render: () => render(service),
-  }));
+  return services
+    .filter((service: any) => service?.data?.title)
+    .map((service) => ({
+      slug: service.id,
+      data: {
+        title: service.data.title,
+        summary: service.data.summary,
+        category: service.data.category,
+        features: service.data.features,
+        outcomes: service.data.outcomes,
+        industries: service.data.industries,
+        pricing: service.data.pricing,
+        image: service.data.image,
+        pubDate: service.data.pubDate,
+        updatedDate: service.data.updatedDate,
+      },
+      render: () => render(service),
+    }));
 }
 
 /**
@@ -533,26 +535,38 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
   if (USE_SANITY) {
     const { sanityFetch, queries, transforms } = await getSanityModules();
     const caseStudies = await sanityFetch<any[]>(queries.allCaseStudiesQuery);
-    return caseStudies.map(transforms.transformCaseStudy);
+    return caseStudies
+      .filter(Boolean)
+      .map(transforms.transformCaseStudy)
+      .filter((cs: any) => cs?.slug && cs?.data?.title);
   }
 
   const caseStudies = await getCollection("caseStudies");
-  return caseStudies.map((caseStudy) => ({
-    slug: caseStudy.id,
-    data: {
-      title: caseStudy.data.title,
-      client: caseStudy.data.client,
-      industry: caseStudy.data.industry,
-      services: caseStudy.data.services,
-      challenge: caseStudy.data.challenge,
-      solution: caseStudy.data.solution,
-      results: caseStudy.data.results,
-      testimonial: caseStudy.data.testimonial,
-      image: caseStudy.data.image,
-      pubDate: caseStudy.data.pubDate,
-    },
-    render: () => render(caseStudy),
-  }));
+  return caseStudies
+    .filter((caseStudy: any) => caseStudy?.data?.image && caseStudy?.data?.industry)
+    .map((caseStudy: any) => ({
+      slug: caseStudy.id,
+      data: {
+        title: caseStudy.data.title,
+        client: caseStudy.data.client,
+        industry: caseStudy.data.industry,
+        services: caseStudy.data.services,
+        aboutClient: caseStudy.data.aboutClient,
+        ourProcess: caseStudy.data.ourProcess,
+        challenge: caseStudy.data.challenge,
+        solution: caseStudy.data.solution,
+        results: caseStudy.data.results,
+        businessImpact: caseStudy.data.businessImpact,
+        testimonial: caseStudy.data.testimonial,
+        year: caseStudy.data.year,
+        tagline: caseStudy.data.tagline,
+        projectUrl: caseStudy.data.projectUrl,
+        image: caseStudy.data.image,
+        projectImages: caseStudy.data.projectImages,
+        pubDate: caseStudy.data.pubDate,
+      },
+      render: () => render(caseStudy),
+    }));
 }
 
 /**
@@ -578,11 +592,18 @@ export async function getCaseStudyBySlug(
       client: entry.data.client,
       industry: entry.data.industry,
       services: entry.data.services,
+      aboutClient: entry.data.aboutClient,
+      ourProcess: entry.data.ourProcess,
       challenge: entry.data.challenge,
       solution: entry.data.solution,
       results: entry.data.results,
+      businessImpact: entry.data.businessImpact,
       testimonial: entry.data.testimonial,
+      year: entry.data.year,
+      tagline: entry.data.tagline,
+      projectUrl: entry.data.projectUrl,
       image: entry.data.image,
+      projectImages: entry.data.projectImages,
       pubDate: entry.data.pubDate,
     },
     render: () => render(entry),

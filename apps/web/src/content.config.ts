@@ -275,6 +275,10 @@ const caseStudies = defineCollection({
       client: z.string(),
       industry: z.string(),
       services: z.array(z.string()),
+      year: z.number().optional(),
+      tagline: z.string().optional(),
+      aboutClient: z.string().optional(),
+      ourProcess: z.string().optional(),
       challenge: z.string(),
       solution: z.string(),
       results: z.array(
@@ -283,6 +287,7 @@ const caseStudies = defineCollection({
           value: z.string(),
         })
       ),
+      businessImpact: z.string().optional(),
       testimonial: z
         .object({
           quote: z.string(),
@@ -290,14 +295,143 @@ const caseStudies = defineCollection({
           role: z.string().optional(),
         })
         .optional(),
+      projectUrl: z.string().optional(),
       image: z
         .object({
           url: image(),
           alt: z.string(),
         })
         .optional(),
+      projectImages: z
+        .array(
+          z.object({
+            url: image(),
+            alt: z.string(),
+          })
+        )
+        .optional(),
       pubDate: z.date(),
     }),
+});
+
+const faqs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/faqs" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    slug: z.string(),
+    seo: z.object({
+      keywords: z.array(z.string()),
+    }).optional(),
+    faqs: z.array(
+      z.object({
+        id: z.string(),
+        question: z.string(),
+        shortTitle: z.string(),
+        shortAnswer: z.string(),
+        fullAnswer: z.string(),
+      })
+    ),
+  }),
+});
+
+const capabilities = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/capabilities" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    slug: z.string(),
+    pageTitle: z.string().optional(),
+    seoMetaDescription: z.string().optional(),
+    schema: z.object({
+      type: z.string().optional(),
+      name: z.string().optional(),
+      description: z.string().optional(),
+      url: z.string().optional(),
+      keywords: z.array(z.string()).optional(),
+    }).optional(),
+
+    // Hero section
+    hero: z.object({
+      subtitle: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+
+    // Barriers/Failure Points
+    barriers: z.array(
+      z.object({
+        title: z.string(),
+        bullets: z.array(z.string()),
+      })
+    ).default([]),
+
+    // Barrier section customization
+    barrierSection: z.object({
+      title: z.string().optional(),
+      heading: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+
+    // Programs/Barrier Combat
+    programs: z.array(
+      z.object({
+        title: z.string(),
+        subtitle: z.string(),
+        combats: z.string(),
+        for: z.string(),
+      })
+    ).default([]),
+
+    // Highlights/Quick wins
+    highlights: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      })
+    ).default([]),
+
+    // Value Steps/What You Get
+    valueSteps: z.array(
+      z.object({
+        phase: z.string(),
+        title: z.string(),
+        description: z.string(),
+        bullets: z.array(z.string()),
+      })
+    ).default([]),
+
+    // Vertical Carousels/Detailed Sections
+    carouselSections: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        items: z.array(
+          z.object({
+            title: z.string(),
+            description: z.string(),
+            image: z.string().optional(),
+          })
+        ),
+      })
+    ).default([]),
+
+    // FAQs
+    faqs: z.array(
+      z.object({
+        category: z.string(),
+        questions: z.array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          })
+        ),
+      })
+    ).default([]),
+
+    seo: z.object({
+      keywords: z.array(z.string()),
+    }).optional(),
+  }),
 });
 
 export const collections = {
@@ -307,4 +441,6 @@ export const collections = {
   services,
   industries,
   caseStudies,
+  faqs,
+  capabilities,
 };

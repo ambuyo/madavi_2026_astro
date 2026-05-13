@@ -129,7 +129,7 @@ const { frontmatter } = Astro.props;
             <Wrapper variant="prose" class="-mt-8 lg:col-span-3">
               <Text
                 tag="p"
-                variant="displayMD"
+                variant="displaySM"
                 class="dark:text-white tracking-tight font-medium text-black"
               >
                 {caseStudy.data.aboutClient}
@@ -200,7 +200,7 @@ const { frontmatter } = Astro.props;
           </Text>
         </div>
 
-        {/* 6. Our Process */}
+        {/* 6. Our Process - Display after Services */}
         {caseStudy.data.ourProcess && (
           <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
             <Text
@@ -285,7 +285,30 @@ const { frontmatter } = Astro.props;
           </div>
         )
       }
-      {/* 9. Testimonials (hide if blank) */}
+      {/* 9. Business Outcome - Display after Project Images */}
+      {caseStudy.data.businessImpact && (
+        <div class="border-b border-base-200 dark:border-base-800 py-4 grid grid-cols-1 lg:grid-cols-4 gap-2">
+          <Text
+            tag="h4"
+            variant="displayXL"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            class="dark:text-white text-base-700 font-medium tracking-tighter"
+          >
+            Business Outcome
+          </Text>
+          <div class="lg:col-span-3">
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-500 dark:text-base-400"
+            >
+              {caseStudy.data.businessImpact}
+            </Text>
+          </div>
+        </div>
+      )}
+      {/* 10. Testimonials (hide if blank) */}
       {caseStudy.data.testimonial && (
         <div class="py-4 border-t border-base-200 dark:border-base-800">
           <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">

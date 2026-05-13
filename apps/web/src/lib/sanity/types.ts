@@ -425,12 +425,14 @@ export interface SanityCaseStudy {
   year?: number;
   tagline?: string;
   aboutClient?: string;
+  ourProcess?: string;
   scopeOfWork?: string;
   whatWeDid?: string;
   projectUrl?: string;
   challenge: string;
   solution: string;
   results: SanityResult[];
+  businessImpact?: string;
   testimonial?: SanityTestimonial;
   image?: SanityImage;
   projectImages?: SanityImage[];
@@ -451,6 +453,7 @@ export interface CaseStudy {
     year?: number;
     tagline?: string;
     aboutClient?: string;
+    ourProcess?: string;
     scopeOfWork?: string;
     whatWeDid?: string;
     projectUrl?: string;
@@ -460,6 +463,7 @@ export interface CaseStudy {
       label: string;
       value: string;
     }>;
+    businessImpact?: string;
     testimonial?: {
       quote: string;
       author: string;

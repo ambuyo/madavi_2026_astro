@@ -231,12 +231,14 @@ export function transformCaseStudy(caseStudy: SanityCaseStudy): CaseStudy {
       year: caseStudy.year,
       tagline: caseStudy.tagline,
       aboutClient: caseStudy.aboutClient,
+      ourProcess: caseStudy.ourProcess,
       scopeOfWork: caseStudy.scopeOfWork,
       whatWeDid: caseStudy.whatWeDid,
       projectUrl: caseStudy.projectUrl,
       challenge: caseStudy.challenge,
       solution: caseStudy.solution,
       results: caseStudy.results || [],
+      businessImpact: caseStudy.businessImpact,
       testimonial: caseStudy.testimonial,
       image: caseStudy.image
         ? {
