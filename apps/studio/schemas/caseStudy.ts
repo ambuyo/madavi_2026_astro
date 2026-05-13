@@ -82,6 +82,13 @@ export const caseStudy = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "ourProcess",
+      title: "Our Process",
+      type: "text",
+      rows: 4,
+      description: "Description of what was done in the project",
+    }),
+    defineField({
       name: "solution",
       title: "Solution",
       type: "text",
@@ -154,13 +161,6 @@ export const caseStudy = defineType({
       title: "Project Tagline",
       type: "string",
       description: "Brief tagline for the project",
-    }),
-    defineField({
-      name: "ourProcess",
-      title: "Our Process",
-      type: "text",
-      rows: 4,
-      description: "Description of what was done in the project",
     }),
     defineField({
       name: "projectUrl",
