@@ -116,7 +116,7 @@ const { frontmatter } = Astro.props;
 
         {/* 2. About Client */}
         {caseStudy.data.aboutClient && (
-          <div class="grid grid-cols-1 lg:grid-cols-4 items-baseline gap-2 py-4">
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-2 py-4">
             <Text
               tag="h4"
               variant="displayXL"
@@ -126,15 +126,15 @@ const { frontmatter } = Astro.props;
             >
               About Client
             </Text>
-            <div class="lg:col-span-3">
+            <Wrapper variant="prose" class="-mt-8 lg:col-span-3">
               <Text
                 tag="p"
-                variant="textBase"
-                class="text-base-500 dark:text-base-400"
+                variant="displayMD"
+                class="dark:text-white tracking-tight font-medium text-black"
               >
                 {caseStudy.data.aboutClient}
               </Text>
-            </div>
+            </Wrapper>
           </div>
         )}
 
