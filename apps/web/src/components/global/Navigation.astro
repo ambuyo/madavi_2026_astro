@@ -8,6 +8,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Search from "@/components/global/Search.astro";
 import MobileNav from "@/components/global/MobileNav.astro";
 import Megamenu from "@/components/global/Megamenu.astro";
+import ResourcesMegamenu from "@/components/global/ResourcesMegamenu.astro";
 
 interface Props {
   variant?: "default" | "transparent";
@@ -19,7 +20,7 @@ const { variant = "default" } = Astro.props;
 const navLinks = [
   { label: "Capabilities", href: "/capabilities", hasMegamenu: true },
   { label: "Resources", href: "/resources", hasMegamenu: true },
-  { label: "Case Studies", href: "/case-studies" },
+  { label: "Case Studies", href: "/our-work" },
   { label: "Team", href: "/team" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#contact" },
@@ -74,6 +75,7 @@ const headerClass = variant === "transparent"
   <div class="group/megamenu">
     <Megamenu />
   </div>
+  <ResourcesMegamenu />
 </header>
 
 <script is:inline>

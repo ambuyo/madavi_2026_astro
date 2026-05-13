@@ -1,146 +1,164 @@
 ---
-// Assets
-import Shield from "@/components/assets/Shield.astro";
-import { Image } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 // Icons
 import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 
-const resources = [
+// Resources sections
+const resourcesSections = [
   {
-    title: "Events & Summits",
-    description: "Our upcoming events and recordings",
-    href: "/resources/events",
-    icon: "🎤",
+    title: "Our resources",
+    href: "/resources",
+    links: [
+      { href: "/resources/events", label: "Events & Summits", description: "Our upcoming events and recordings", icon: "🎤" },
+      { href: "/resources/customer-stories", label: "Customer Stories", description: "Behind the successful partnerships", icon: "👥" },
+      { href: "/resources/guides", label: "Guides", description: "Insights from marketing leaders", icon: "📖" },
+      { href: "/resources/reports", label: "Reports", description: "Data for smarter decisions", icon: "📊" },
+      { href: "/blog", label: "Blog", description: "Long-form you can learn from", icon: "💬" },
+    ],
   },
   {
-    title: "Customer Stories",
-    description: "Behind the successful partnerships",
-    href: "/resources/customer-stories",
-    icon: "📋",
+    title: "Learning",
+    href: "/resources/learning",
+    links: [
+      { href: "/resources/guides", label: "Guides", description: "", icon: "" },
+      { href: "/resources/reports", label: "Reports", description: "", icon: "" },
+      { href: "/resources/customer-stories", label: "Customer Stories", description: "", icon: "" },
+    ],
   },
   {
-    title: "Guides",
-    description: "Insights from marketing leaders",
-    href: "/resources/guides",
-    icon: "📖",
-  },
-  {
-    title: "Reports",
-    description: "Data for smarter decisions",
-    href: "/resources/reports",
-    icon: "📊",
-  },
-  {
-    title: "Blog",
-    description: "Long-form you can learn from",
+    title: "Content",
     href: "/blog",
-    icon: "📝",
-  },
-];
-
-const latestMedia = [
-  {
-    title: "The AI Reset: A Playbook for Bringing AI to Your Creative Team",
-    href: "/resources/the-ai-reset",
-    image: "https://via.placeholder.com/400x300?text=AI+Reset",
-  },
-  {
-    title: "From AI uncertainty to creative superpower: 6 lessons from Superside's Shift summit",
-    href: "/resources/superside-shift-summit",
-    image: "https://via.placeholder.com/400x300?text=Superside+Shift",
+    links: [
+      { href: "/blog", label: "Blog", description: "", icon: "" },
+      { href: "/resources/podcast", label: "Podcast", description: "", icon: "" },
+      { href: "/resources/videos", label: "Videos", description: "", icon: "" },
+    ],
   },
 ];
 ---
 
 <div
   id="resources-megamenu"
-  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto bg-white"
+  class="hidden fixed left-0 right-0 top-[73px] z-40 md:max-h-none max-h-[calc(100vh-73px)] overflow-y-auto"
+  style="background-color: #FAF9F6;"
 >
   <div class="flex justify-center">
-    <div class="w-full max-w-7xl px-8 lg:px-12 py-12">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Left Column: Resources -->
-        <div>
-          <Text
-            tag="h3"
-            variant="textLG"
-            class="text-base-900 font-semibold mb-8"
-          >
-            Our resources
-          </Text>
-          <div class="space-y-6">
-            {
-              resources.map((resource) => (
-                <a
-                  href={resource.href}
-                  class="group flex items-start gap-4 pb-6 border-b border-base-200 hover:border-accent-400 transition-colors"
+    <div class="w-full max-w-7xl px-12 py-12">
+      <div
+        class="grid grid-cols-2 gap-y-8 lg:grid-cols-3 lg:divide-x p-0"
+        style="border-color: #E8E6E1;"
+      >
+      {
+        resourcesSections.map((section, index) => (
+          <div class="px-6">
+            {index === 0 ? (
+              <>
+                <Text
+                  tag="h3"
+                  variant="textSM"
+                  class="uppercase mb-8 lg:mb-12"
+                  style="color: #36454F;"
                 >
-                  <div class="flex-shrink-0 text-2xl">
-                    {resource.icon}
-                  </div>
-                  <div class="flex-grow">
-                    <Text
-                      tag="h4"
-                      variant="textBase"
-                      class="text-base-900 font-semibold group-hover:text-accent-600 transition-colors"
-                    >
-                      {resource.title}
-                    </Text>
-                    <Text
-                      tag="p"
-                      variant="textSM"
-                      class="text-base-600 mt-1"
-                    >
-                      {resource.description}
-                    </Text>
-                  </div>
-                </a>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Right Column: Latest Media -->
-        <div>
-          <Text
-            tag="h3"
-            variant="textLG"
-            class="text-base-900 font-semibold mb-8"
-          >
-            Latest media
-          </Text>
-          <div class="space-y-6">
-            {
-              latestMedia.map((media) => (
-                <a
-                  href={media.href}
-                  class="group block overflow-hidden rounded-lg"
-                >
-                  <div class="relative bg-base-200 aspect-video overflow-hidden rounded-lg mb-4">
-                    <div class="w-full h-full bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center text-white">
-                      <Text
-                        tag="p"
-                        variant="textSM"
-                        class="text-center px-4"
+                  {section.title}
+                </Text>
+                <ul class="space-y-0">
+                  {section.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="group flex items-start justify-between gap-4 py-2"
                       >
-                        {media.title}
-                      </Text>
-                    </div>
-                  </div>
-                  <Text
-                    tag="h4"
-                    variant="textBase"
-                    class="text-base-900 font-semibold group-hover:text-accent-600 transition-colors line-clamp-2"
-                  >
-                    {media.title}
+                        <div>
+                          <div
+                            class="group-hover:text-accent-400 transition-colors"
+                            style="color: #36454F; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; line-height: 1.2;"
+                          >
+                            {link.label}
+                          </div>
+                          <div
+                            style="color: #7A8189; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.4;"
+                          >
+                            {link.description}
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <>
+                <a
+                  href={section.href}
+                  class="group flex items-center justify-between uppercase hover:text-accent-400 transition-colors"
+                  style="color: #36454F;"
+                >
+                  <Text tag="h3" variant="textSM">
+                    {section.title}
                   </Text>
+                  <ArrowRight class="size-4 " />
                 </a>
-              ))
-            }
+                <ul class="space-y-2 mt-4 lg:mt-12">
+                  {section.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="group text-xs flex items-center hover:text-accent-500 transition-colors duration-300 justify-between"
+                        style="color: #7A8189;"
+                      >
+                        {link.label}
+                        <ArrowRight class="size-4 hidden group-hover:flex duration-300" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
+        ))
+      }
+      <div
+        class="border-t pt-4 col-span-full flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between"
+        style="border-color: #E8E6E1;"
+      >
+        <div class="flex flex-wrap gap-4 items-center">
+          <a
+            href="tel:+1-555-123-4567"
+            class="text-xs hover:text-accent-400 transition-colors"
+            style="color: #7A8189;"
+          >
+            +254 (718) 735-565
+          </a>
+          <span class="hidden md:flex" style="color: #D6D3CC;">|</span>
+          <address class="not-italic text-xs" style="color: #7A8189;">
+            2595, 1007 N Orange St. 4th Floor, DE, Wilmington, USA
+          </address>
+        </div>
+        <div
+          class="flex flex-wrap gap-4 items-center order-first lg:order-none"
+        >
+          <a
+            href="#_"
+            class="text-xs hover:text-accent-400 transition-colors"
+            style="color: #7A8189;"
+          >
+            X
+          </a>
+          <a
+            href="#_"
+            class="text-xs hover:text-accent-400 transition-colors"
+            style="color: #7A8189;"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="#_"
+            class="text-xs hover:text-accent-400 transition-colors"
+            style="color: #7A8189;"
+          >
+            Email
+          </a>
         </div>
       </div>
     </div>
