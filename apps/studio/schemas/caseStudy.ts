@@ -89,14 +89,6 @@ export const caseStudy = defineType({
       description: "Description of what was done in the project",
     }),
     defineField({
-      name: "solution",
-      title: "Solution",
-      type: "text",
-      rows: 4,
-      description: "The solution provided",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "results",
       title: "Results",
       type: "array",
