@@ -4,14 +4,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
-import DocumentCard from "@/components/documents/DocumentCard.astro";
-// Content
-import { getCollection } from "astro:content";
+import ReportCard from "@/components/documents/ReportCard.astro";
+// Sanity
+import { getReports } from "@/lib/sanity/reports";
 
-const documents = await getCollection("documents");
-const sortedDocuments = documents.sort(
-  (a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title)
-);
+const reports = await getReports();
 ---
 
 <BaseLayout>
@@ -40,7 +37,15 @@ const sortedDocuments = documents.sort(
       </div>
 
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-12">
-        {sortedDocuments.map((post) => <DocumentCard post={post} />)}
+        {
+          reports.length > 0 ? (
+            reports.map((report) => <ReportCard post={report} />)
+          ) : (
+            <Text tag="p" variant="textBase" class="text-base-600">
+              No reports available at the moment. Check back soon!
+            </Text>
+          )
+        }
       </div>
     </Wrapper>
   </section>
