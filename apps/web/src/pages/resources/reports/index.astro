@@ -10,7 +10,7 @@ import ReportCard from "@/components/documents/ReportCard.astro";
 import { getReports } from "@/lib/sanity/reports";
 
 const allReports = await getReports();
-const reportsPerPage = 4;
+const reportsPerPage = 8; // 2 rows of 4 columns
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const totalPages = Math.ceil(allReports.length / reportsPerPage);
 const startIndex = (currentPage - 1) * reportsPerPage;
