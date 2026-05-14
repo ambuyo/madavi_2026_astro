@@ -79,7 +79,9 @@ const certifications = [
 ];
 ---
 
-<footer class="border-t border-base-900" style="background-color: #00424e;">
+<footer class="border-t border-base-900 relative overflow-hidden" style="background-color: #00424e; background-image: url('/footer-bg.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="absolute inset-0 bg-gradient-to-b from-[#00424e]/95 via-[#00424e]/97 to-[#00424e]"></div>
+  <div class="relative z-10">
   <Wrapper variant="standard" class="py-16">
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-8">
       <div class="col-span-full lg:col-span-1">
@@ -187,10 +189,11 @@ const certifications = [
     </div>
     <BigLogo class="text-white mt-24" />
   </Wrapper>
+  </div>
 </footer>
 <script>
-  // Auto-update copyright year
-  document.getElementById("current-year").textContent = new Date()
-    .getFullYear()
-    .toString();
+  const yearElement = document.getElementById("current-year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear().toString();
+  }
 </script>
