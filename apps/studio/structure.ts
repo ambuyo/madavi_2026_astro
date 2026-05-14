@@ -8,6 +8,7 @@ import {
   TagIcon,
   EarthGlobeIcon,
   ImageIcon,
+  CalendarIcon,
 } from "@sanity/icons";
 
 // Singleton document IDs
@@ -45,12 +46,19 @@ export const structure = (S: StructureBuilder) =>
         .schemaType("industry")
         .child(S.documentTypeList("industry").title("Industries")),
 
-      // Case Studies
+      // Our Work
       S.listItem()
-        .title("Case Studies")
+        .title("Our Work")
         .icon(CaseIcon)
-        .schemaType("caseStudy")
-        .child(S.documentTypeList("caseStudy").title("Case Studies")),
+        .schemaType("singleWork")
+        .child(S.documentTypeList("singleWork").title("Our Work")),
+
+      // Events
+      S.listItem()
+        .title("Events")
+        .icon(CalendarIcon)
+        .schemaType("event")
+        .child(S.documentTypeList("event").title("Events")),
 
       // Client Logos
       S.listItem()
