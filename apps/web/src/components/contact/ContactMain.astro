@@ -3,14 +3,14 @@
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Contact Components
 import ContactInfo from "@/components/contact/ContactInfo.astro";
-import ContactForm from "@/components/contact/ContactForm.astro";
+import { ContactFormReact } from "@/components/contact/ContactFormReact";
 ---
 
 <section >
   <Wrapper variant="standard" class="py-12 lg:py-24">
     <div class="grid lg:grid-cols-2 gap-8">
       <ContactInfo />
-      <ContactForm />
+      <ContactFormReact client:load />
     </div>
   </Wrapper>
 </section>
