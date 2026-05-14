@@ -4,6 +4,11 @@ import Text from "@/components/fundations/elements/Text.astro";
 
 const { post } = Astro.props;
 const { name, slug, industry, summary, publicationDate, featuredImage } = post;
+
+if (!slug || !slug.current) {
+  throw new Error(`Report "${name}" is missing a slug. Please add a slug in Sanity Studio.`);
+}
+
 const url = `/resources/reports/${slug.current}`;
 const year = new Date(publicationDate).getFullYear();
 ---
