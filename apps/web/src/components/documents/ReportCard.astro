@@ -11,47 +11,59 @@ if (!slug || !slug.current) {
 
 const url = `/resources/reports/${slug.current}`;
 const year = new Date(publicationDate).getFullYear();
+const date = new Date(publicationDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
-<article class="flex flex-col group h-full rounded-2xl bg-base-50 overflow-hidden hover:shadow-md transition-shadow duration-200">
+<a href={url} class="flex flex-col group h-full bg-white border border-base-200 hover:shadow-lg transition-shadow duration-300">
+  {/* Featured Image */}
   {featuredImage && featuredImage.asset && (
-    <a href={url} class="relative block overflow-hidden h-40 bg-base-100">
+    <div class="relative overflow-hidden bg-base-100 flex-shrink-0" style="aspect-ratio: 4/3;">
       <img
         src={featuredImage.asset.url}
         alt={featuredImage.alt || name}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
-    </a>
+    </div>
   )}
 
+  {/* Content */}
   <div class="flex flex-col flex-grow p-6">
+    {/* Title */}
     <Text
-      tag="p"
-      variant="textXS"
-      class="text-secondary-500 uppercase font-medium"
+      tag="h3"
+      variant="textBase"
+      class="text-base-900 font-semibold group-hover:text-accent-600 transition-colors line-clamp-3"
     >
-      {industry} • {year}
+      {name}
     </Text>
 
-    <a href={url} class="group/link mt-3">
-      <Text
-        tag="h3"
-        variant="displaySM"
-        class="text-accent-800 font-display group-hover/link:text-accent-900 transition-colors"
-      >
-        {name}
-      </Text>
-    </a>
-
-    <Text tag="p" variant="textSM" class="text-base-600 mt-2 line-clamp-2 flex-grow">
+    {/* Description */}
+    <Text tag="p" variant="textSM" class="text-base-600 mt-3 line-clamp-3 flex-grow">
       {summary}
     </Text>
 
-    <a
-      href={url}
-      class="text-accent-600 hover:text-accent-700 font-medium text-xs mt-4 inline-block"
-    >
-      Read Report →
-    </a>
+    {/* Metadata - Author */}
+    <div class="mt-6 pt-6 border-t border-base-100">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-base-700 font-medium"
+      >
+        {industry}
+      </Text>
+
+      {/* Date */}
+      <Text
+        tag="p"
+        variant="textXS"
+        class="text-base-600 mt-1"
+      >
+        {date}
+      </Text>
+    </div>
   </div>
-</article>
+</a>
