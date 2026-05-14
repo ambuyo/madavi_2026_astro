@@ -25,9 +25,16 @@ const event = Astro.props.event || (slug ? await getEventBySlug(slug) : null);
 if (!event) {
   return Astro.redirect("/resources/events");
 }
+
+// Convert date strings to Date objects for EventsLayout
+const frontmatter = {
+  ...event,
+  startDate: new Date(event.startDate),
+  endDate: new Date(event.endDate),
+};
 ---
 
-<EventsLayout frontmatter={event}>
+<EventsLayout frontmatter={frontmatter}>
   <Text tag="h2" variant="displayMD" class="text-accent-800 font-display mt-8">
     Event Details
   </Text>
