@@ -1,7 +1,6 @@
 ---
 // Foundations
 import Text from "@/components/fundations/elements/Text.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 
 const post = Astro.props.post;
 const isSanityEvent = post.slug && typeof post.slug === "object" && post.slug.current;
@@ -63,26 +62,13 @@ const dayLabel = startDate.getDate();
       </div>
     )}
 
-    <div class="p-4 lg:p-8 pt-4 lg:pt-6">
-      <Text tag="h3" variant="textBase" class="font-medium text-base-900">
+    <a href={url} class="p-4 lg:p-8 pt-4 lg:pt-6 group/link block">
+      <Text tag="h3" variant="textBase" class="font-medium text-base-900 group-hover/link:text-accent-600 transition-colors">
         {title}
       </Text>
       <Text tag="p" variant="textSM" class="text-base-600 mt-2">
         {description}
       </Text>
-    </div>
-  </div>
-  <div class="p-4 lg:p-8 pt-0">
-    <Button
-      isLink
-      size="xs"
-      variant="muted"
-      href={url}
-      title={`View event: ${title}`}
-      aria-label={`View event: ${title}`}
-      class="w-fit"
-    >
-      View event
-    </Button>
+    </a>
   </div>
 </article>
