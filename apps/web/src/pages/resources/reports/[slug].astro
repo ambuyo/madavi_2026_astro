@@ -1,13 +1,19 @@
 ---
-import { getCollection, render } from "astro:content";
-import DocumentsLayout from "@/layouts/DocumentsLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+import { getReports, getReportBySlug } from "@/lib/sanity/reports";
+
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const documents = await getCollection("documents");
-  const paths = documents.map((page) => {
+  const reports = await getReports();
+  const paths = reports.map((report) => {
     return {
-      params: { slug: page.id },
-      props: { page },
+      params: { slug: report.slug.current },
+      props: { report },
       trailingSlash: false,
     };
   });
@@ -15,13 +21,184 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  page: any;
+  report: any;
 }
 
-const { page } = Astro.props;
-const { Content } = await render(page);
+const { slug } = Astro.params;
+const report = Astro.props.report || (slug ? await getReportBySlug(slug) : null);
+
+if (!report) {
+  return Astro.redirect("/resources/reports");
+}
+
+const publicationDate = new Date(report.publicationDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
-<DocumentsLayout frontmatter={page.data}>
-  <Content />
-</DocumentsLayout>
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="grid lg:grid-cols-3 gap-12">
+        {/* Left Column */}
+        <div>
+          <div class="lg:sticky lg:top-48">
+            {/* Report Cover Image */}
+            {report.reportCoverImage && report.reportCoverImage.asset && (
+              <div class="relative overflow-hidden bg-base-100 mb-6 rounded-lg" style="aspect-ratio: 3/4; width: 50%;">
+                <img
+                  src={report.reportCoverImage.asset.url}
+                  alt={report.reportCoverImage.alt || report.name}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            )}
+
+            {/* Report Name */}
+            <Text
+              tag="h1"
+              variant="displaySM"
+              class="text-accent-800 font-display text-balance"
+            >
+              {report.name}
+            </Text>
+
+            {/* Industry & Publication Date */}
+            <div class="mt-4 space-y-2">
+              <Text tag="p" variant="textXS" class="text-base-600 uppercase font-medium">
+                {report.industry}
+              </Text>
+              <Text tag="p" variant="textXS" class="text-base-600">
+                Published on: {publicationDate}
+              </Text>
+            </div>
+
+            {/* Report Compiled by */}
+            <div class="mt-8 pt-8 border-t border-base-200">
+              <Text tag="p" variant="textXS" class="text-base-600 uppercase font-medium mb-2">
+                Report Compiled by
+              </Text>
+              <Text tag="p" variant="textBase" class="text-base-900 font-semibold">
+                {report.compiledBy}
+              </Text>
+            </div>
+
+            {/* Download Button */}
+            <div class="mt-12 space-y-3">
+              <Button
+                isLink={true}
+                href={report.fullReport?.asset?.url || "#"}
+                variant="default"
+                size="sm"
+                class="w-full flex items-center justify-center gap-2"
+                download
+              >
+                Download
+                <ArrowRight class="size-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column - Full Summary */}
+        <div class="lg:col-span-2">
+          {/* Featured Image */}
+          {report.featuredImage && report.featuredImage.asset && (
+            <div class="relative overflow-hidden bg-base-100 mb-8 rounded-lg" style="aspect-ratio: 16/9;">
+              <img
+                src={report.featuredImage.asset.url}
+                alt={report.featuredImage.alt || report.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
+          <div class="prose prose-lg max-w-none">
+            {report.fullSummary && (
+              <div class="text-base-900 leading-relaxed">
+                {report.fullSummary.map((block: any, idx: number) => {
+                  if (block._type === "block") {
+                    const style = block.style || "normal";
+                    const text = block.children
+                      ?.map((child: any) => {
+                        let content = child.text || "";
+                        if (child.marks?.includes("strong"))
+                          content = `<strong>${content}</strong>`;
+                        if (child.marks?.includes("em"))
+                          content = `<em>${content}</em>`;
+                        if (child.marks?.includes("code"))
+                          content = `<code>${content}</code>`;
+                        if (child.marks?.includes("underline"))
+                          content = `<u>${content}</u>`;
+                        return content;
+                      })
+                      .join("");
+
+                    if (style === "h1")
+                      return (
+                        <h1 key={idx} class="text-3xl font-bold mt-6 mb-4">
+                          <Fragment set:html={text} />
+                        </h1>
+                      );
+                    if (style === "h2")
+                      return (
+                        <h2 key={idx} class="text-2xl font-bold mt-5 mb-3">
+                          <Fragment set:html={text} />
+                        </h2>
+                      );
+                    if (style === "h3")
+                      return (
+                        <h3 key={idx} class="text-xl font-bold mt-4 mb-2">
+                          <Fragment set:html={text} />
+                        </h3>
+                      );
+                    if (style === "blockquote")
+                      return (
+                        <blockquote
+                          key={idx}
+                          class="border-l-4 border-accent-400 pl-4 py-2 my-4 italic text-base-700"
+                        >
+                          <Fragment set:html={text} />
+                        </blockquote>
+                      );
+                    return (
+                      <p key={idx} class="mb-4">
+                        <Fragment set:html={text} />
+                      </p>
+                    );
+                  }
+
+                  if (block._type === "block" && block.listItem) {
+                    const isOrdered = block.listItem === "number";
+                    const text = block.children
+                      ?.map((child: any) => {
+                        let content = child.text || "";
+                        if (child.marks?.includes("strong"))
+                          content = `<strong>${content}</strong>`;
+                        if (child.marks?.includes("em"))
+                          content = `<em>${content}</em>`;
+                        return content;
+                      })
+                      .join("");
+                    return (
+                      <li
+                        key={idx}
+                        class={`mb-2 ${isOrdered ? "list-decimal" : "list-disc"} list-inside`}
+                      >
+                        <Fragment set:html={text} />
+                      </li>
+                    );
+                  }
+
+                  return null;
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,9 @@
+---
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="prose prose-sm max-w-none text-base-700" set:html={content} />

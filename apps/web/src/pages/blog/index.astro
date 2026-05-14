@@ -7,6 +7,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import BlogCard from "@/components/blog/BlogCard.astro";
 import BigBlogCard from "@/components/blog/BigBlogCard.astro";
+import PostsCategoryCard from "@/components/blog/PostsCategoryCard.astro";
 // Data
 import { getPosts } from "@/lib/data";
 const allPosts = await getPosts();
@@ -17,12 +18,35 @@ allPosts.sort((a, b) => {
 });
 
 const featuredPost = allPosts[0];
-const remainingPosts = allPosts.slice(1);
+const remainingPosts = allPosts.slice(1, 3);
 
 const seo = {
   title: "Blog",
   description: "Read insights and articles about AI consulting, digital transformation, and business strategy from Madavi.",
   type: "website" as const,
+};
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Madavi Blog",
+  "headline": "Honest AI Advice for Business Leaders",
+  "description": "Real AI implementation insights for business leaders. No hype, no vendor pitches—just honest advice from deploying AI in law firms, hospitals, and African enterprises.",
+  "url": "https://madavi.co/blog/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Madavi Inc.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madavi.co/images/madavi-logo.png"
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Amukune"
+  },
+  "inLanguage": "en-US",
+  "keywords": "AI adoption, AI implementation, business AI, AI for law firms, AI for healthcare, AI for nonprofits, AI for retail, AI for African enterprises"
 };
 ---
 
@@ -30,21 +54,21 @@ const seo = {
   <section>
     <Wrapper variant="standard" class="py-12">
       <div class="max-w-2xl">
-        <Kicker variant="default">Journal</Kicker>
+        <Kicker variant="default">Our Insights</Kicker>
         <Text
           tag="h1"
           variant="displayLG"
           class="text-base-900 text-balance font-medium tracking-tight mt-8 font-display"
         >
-          Accounting Insights & Business Wisdom
+          Honest AI Advice for Business Leaders 
         </Text>
         <Text
           tag="p"
           variant="textBase"
           class="text-base-600 lg:text-balance mt-4"
         >
-          Stay ahead of the curve with expert analysis, practical tips, and the
-          latest trends in accounting, finance, and business management.
+Real AI implementation insights for business leaders. No hype, no vendor pitches—just honest advice from deploying AI in law firms, hospitals, and African enterprises.
+
         </Text>
       </div>
 
@@ -60,5 +84,23 @@ const seo = {
         </div>
       )}
     </Wrapper>
+
+    <PostsCategoryCard
+      category="content-marketing"
+      categoryTitle="Content Marketing"
+    />
+
+        <PostsCategoryCard
+      category="growth-marketing"
+      categoryTitle="Growth Marketing"
+    />
+
+            <PostsCategoryCard
+      category="seo-marketing"
+      categoryTitle="SEO Marketing"
+    />
+
   </section>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
 </BaseLayout>

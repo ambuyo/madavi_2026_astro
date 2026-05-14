@@ -267,8 +267,8 @@ const industries = defineCollection({
     }),
 });
 
-const caseStudies = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/caseStudies" }),
+const ourWork = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/ourWork" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -440,7 +440,7 @@ export const collections = {
   posts: postsCollection,
   services,
   industries,
-  caseStudies,
+  ourWork,
   faqs,
   capabilities,
 };

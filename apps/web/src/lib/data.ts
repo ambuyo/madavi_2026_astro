@@ -26,7 +26,7 @@ import type {
   TeamMember,
   Service,
   Industry,
-  CaseStudy,
+  SingleWork,
   InfoPage,
 } from "./sanity/types";
 
@@ -78,7 +78,7 @@ async function getSanityModules() {
       transformTeamMember,
       transformService,
       transformIndustry,
-      transformCaseStudy,
+      transformSingleWork,
       transformInfoPage,
     },
   ] = await Promise.all([
@@ -110,7 +110,7 @@ async function getSanityModules() {
       transformTeamMember,
       transformService,
       transformIndustry,
-      transformCaseStudy,
+      transformSingleWork,
       transformInfoPage,
     },
   };
@@ -529,16 +529,16 @@ export async function getIndustryBySlug(
 // =============================================================================
 
 /**
- * Get all case studies
+ * Get all single works
  */
-export async function getCaseStudies(): Promise<CaseStudy[]> {
+export async function getOurWork(): Promise<SingleWork[]> {
   if (USE_SANITY) {
     const { sanityFetch, queries, transforms } = await getSanityModules();
     const caseStudies = await sanityFetch<any[]>(queries.allCaseStudiesQuery);
     return caseStudies
       .filter(Boolean)
-      .map(transforms.transformCaseStudy)
-      .filter((cs: any) => cs?.slug && cs?.data?.title);
+      .map(transforms.transformSingleWork)
+      .filter((cs: any) => cs?.slug && cs?.data?.client);
   }
 
   const caseStudies = await getCollection("caseStudies");
@@ -547,14 +547,11 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
     .map((caseStudy: any) => ({
       slug: caseStudy.id,
       data: {
-        title: caseStudy.data.title,
         client: caseStudy.data.client,
         industry: caseStudy.data.industry,
         services: caseStudy.data.services,
         aboutClient: caseStudy.data.aboutClient,
         ourProcess: caseStudy.data.ourProcess,
-        challenge: caseStudy.data.challenge,
-        solution: caseStudy.data.solution,
         results: caseStudy.data.results,
         businessImpact: caseStudy.data.businessImpact,
         testimonial: caseStudy.data.testimonial,
@@ -570,17 +567,17 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
 }
 
 /**
- * Get a single case study by slug
+ * Get a single work by slug
  */
-export async function getCaseStudyBySlug(
+export async function getSingleWorkBySlug(
   slug: string
-): Promise<CaseStudy | null> {
+): Promise<SingleWork | null> {
   if (USE_SANITY) {
     const { sanityFetch, queries, transforms } = await getSanityModules();
     const caseStudy = await sanityFetch<any>(queries.caseStudyBySlugQuery, {
       slug,
     });
-    return caseStudy ? transforms.transformCaseStudy(caseStudy) : null;
+    return caseStudy ? transforms.transformSingleWork(caseStudy) : null;
   }
 
   const entry = await getEntry("caseStudies", slug);
@@ -588,14 +585,11 @@ export async function getCaseStudyBySlug(
   return {
     slug: entry.id,
     data: {
-      title: entry.data.title,
       client: entry.data.client,
       industry: entry.data.industry,
       services: entry.data.services,
       aboutClient: entry.data.aboutClient,
       ourProcess: entry.data.ourProcess,
-      challenge: entry.data.challenge,
-      solution: entry.data.solution,
       results: entry.data.results,
       businessImpact: entry.data.businessImpact,
       testimonial: entry.data.testimonial,
@@ -668,6 +662,6 @@ export type {
   TeamMember,
   Service,
   Industry,
-  CaseStudy,
+  SingleWork,
   InfoPage,
 } from "./sanity/types";

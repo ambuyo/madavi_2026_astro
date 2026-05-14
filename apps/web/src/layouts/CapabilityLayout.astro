@@ -1,0 +1,35 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ReadinessHero from "@/components/capabilities/ai-readiness/ReadinessHero.astro";
+import ReadinessFailurePoints from "@/components/capabilities/ai-readiness/ReadinessFailurePoints.astro";
+import ReadinessBarriersCombat from "@/components/capabilities/ai-readiness/ReadinessBarriersCombat.astro";
+import ReadinessVerticalCarousels from "@/components/capabilities/ai-readiness/ReadinessVerticalCarousels.astro";
+import ServicesFAQ from "@/components/capabilities/ai-readiness/ServicesFAQ.astro";
+import ReadinessValueSteps from "@/components/capabilities/ai-readiness/ReadinessValueSteps.astro";
+
+interface Props {
+  capability: {
+    title: string;
+    description: string;
+    slug: string;
+    hero?: any;
+    barriers: any[];
+    programs: any[];
+    highlights: any[];
+    valueSteps: any[];
+    carouselSections: any[];
+    faqs: any[];
+  };
+}
+
+const { capability } = Astro.props;
+---
+
+<BaseLayout>
+  <ReadinessHero />
+  <ReadinessFailurePoints failures={capability.barriers} />
+  <ReadinessBarriersCombat programs={capability.programs} />
+  <ReadinessVerticalCarousels sections={capability.carouselSections} />
+  <ReadinessValueSteps steps={capability.valueSteps} />
+  <ServicesFAQ faqData={capability.faqs} />
+</BaseLayout>

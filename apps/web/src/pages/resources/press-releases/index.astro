@@ -7,13 +7,10 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import PressCard from "@/components/press/PressCard.astro";
 import LogoCloud from "@/components/testimonials/LogoCloud.astro";
-// Content
-import { getCollection } from "astro:content";
-const pressReleasesData = await getCollection("pressReleases");
-const pressReleases = pressReleasesData.map((release) => ({
-  id: release.id,
-  data: release.data,
-}));
+// Data
+import { getPostsByCategory } from "@/lib/data";
+
+const pressReleases = await getPostsByCategory("company-updates");
 
 const mediaCoverage = [
   {
@@ -225,65 +222,6 @@ const mediaStats = [
         </div>
       </div>
       <LogoCloud />
-      <div class="bg-base-50 p-8 lg:p-12 mt-12 lg:mt-24">
-        <div
-          class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:items-end"
-        >
-          <div>
-            <Text
-              tag="h3"
-              variant="displaySM"
-              class="text-accent-800 font-display"
-            >
-              Media Inquiries
-            </Text>
-            <Text
-              tag="p"
-              variant="textSM"
-              class="text-base-600 mt-1 text-balance"
-            >
-              For press inquiries, interview requests, or media opportunities,
-              please contact our communications team. We respond to all media
-              inquiries within 24 hours.
-            </Text>
-            <div class="space-y-12 gap-4 mt-8">
-              <div>
-                <Text tag="p" variant="textSM" class="font-semibold">
-                  Press Contact
-                </Text>
-                <div class="space-y-1 text-sm text-base-700 mt-4">
-                  <Text tag="p" variant="textXS"> Sarah Mitchell </Text>
-                  <Text tag="p" variant="textXS">
-                    Director of Communications
-                  </Text>
-                  <a
-                    href="mailto:press@madavi.co"
-                    class="text-secondary-500 hover:text-accent-800 transition-colors text-xs block"
-                  >
-                    press@madavi.co
-                  </a>
-                  <a
-                    href="tel:+254718735565"
-                    class="text-secondary-500 hover:text-accent-800 transition-colors text-xs block"
-                  >
-                    +254 (718) 735-565
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <Button
-            isLink={true}
-            href="/contact?subject=media"
-            variant="default"
-            size="sm"
-            class="w-full lg:w-fit shrink-0"
-          >
-            Contact Media Team
-          </Button>
-        </div>
-      </div>
     </Wrapper>
   </section>
 </BaseLayout>

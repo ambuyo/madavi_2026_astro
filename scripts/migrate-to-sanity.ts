@@ -86,7 +86,7 @@ const SANITY_TYPES = [
   "teamMember",
   "service",
   "industry",
-  "caseStudy",
+  "singleWork",
   "infoPage",
 ] as const;
 
@@ -704,7 +704,7 @@ async function migrateCaseStudies() {
     const portableTextBody = markdownToPortableText(body);
 
     const doc = {
-      _type: "caseStudy",
+      _type: "singleWork",
       _id: `casestudy-${slug}`,
       title: frontmatter.title,
       slug: { _type: "slug", current: slug },

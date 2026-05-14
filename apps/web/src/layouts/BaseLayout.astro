@@ -125,7 +125,7 @@ const seoPublishedTime = publishDate || (seo?.publishedTime ? new Date(seo.publi
   <body class="flex flex-col bg-white min-h-svh pt-24">
     {!hideNavigation && <Navigation variant={navVariant} />}
     <main class="grow"><slot /></main>
-    {!hideFooter && <MainCta />}
+    {!hideMainCta && <MainCta />}
     {!hideFooter && <Footer />}
     <Search />
   </body>

@@ -11,7 +11,7 @@ import {
   getPosts,
   getServices,
   getIndustries,
-  getCaseStudies,
+  getOurWork,
   getTeamMembers,
   getInfoPages,
 } from "@/lib/data";
@@ -45,14 +45,14 @@ const industries = industriesData.map((industry) => ({
   category: "Industry",
 }));
 
-const caseStudiesData = await getCaseStudies();
-const caseStudies = caseStudiesData.map((caseStudy) => ({
-  title: caseStudy.data.title,
-  description: `${caseStudy.data.client} - ${caseStudy.data.challenge}`,
-  date: caseStudy.data.pubDate,
-  slug: caseStudy.slug,
-  type: "caseStudy",
-  category: caseStudy.data.industry,
+const ourWorkData = await getOurWork();
+const ourWork = ourWorkData.map((singleWork) => ({
+  title: singleWork.data.client,
+  description: singleWork.data.aboutClient || singleWork.data.tagline || `Our work with ${singleWork.data.client}`,
+  date: singleWork.data.pubDate,
+  slug: singleWork.slug,
+  type: "ourWork",
+  category: singleWork.data.industry,
 }));
 
 const teamData = await getTeamMembers();
@@ -79,7 +79,7 @@ const allContent = [
   ...posts,
   ...services,
   ...industries,
-  ...caseStudies,
+  ...ourWork,
   ...team,
   ...infopages,
 ];
@@ -154,8 +154,8 @@ const allContent = [
           return `/capabilities/${item.slug}`;
         case "industry":
           return `/industries/${item.slug}`;
-        case "caseStudy":
-          return `/case-studies/${item.slug}`;
+        case "ourWork":
+          return `/our-work/${item.slug}`;
         case "team":
           return `/team/${item.slug}`;
         case "infopage":

@@ -1,0 +1,219 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import FAQAnswer from "@/components/resources/FAQAnswer.astro";
+
+export async function getStaticPaths() {
+  const faqEntries = await getCollection("faqs");
+  return faqEntries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+const { title, description, faqs, schema, seo } = entry.data;
+
+const seoMeta = {
+  title: title,
+  description: description,
+  keywords: seo?.keywords?.join(", "),
+  type: "website" as const,
+};
+---
+
+<BaseLayout seo={seoMeta}>
+  <section>
+    <Wrapper variant="standard" class="py-16">
+      {/* Page Title */}
+      <div class="mb-16">
+        <Text tag="h1" variant="displayLG" class="text-accent-800 font-display mb-6 text-left">
+          {title}
+        </Text>
+        <Text tag="p" variant="textLG" class="text-base-700 max-w-3xl text-left">
+          {description}
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      {/* Main Content Grid */}
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* Left Sidebar - FAQ Navigation */}
+        <div class="lg:col-span-1">
+          <div class="space-y-0 sticky top-20">
+            {
+              faqs.map((faq: any) => (
+                <a
+                  href={`#${faq.id}`}
+                  class="block py-3 px-0 text-left hover:text-accent-700 transition-colors border-b border-base-200 last:border-b-0 group"
+                >
+                  <Text
+                    tag="p"
+                    variant="textSM"
+                    class="text-base-700 group-hover:text-accent-700 font-medium"
+                  >
+                    <span class="group-hover:block hidden mr-2">→</span>
+                    <span class="group-hover:hidden block">{faq.shortTitle}</span>
+                  </Text>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        {/* Right Content - Individual FAQ Cards */}
+        <div class="lg:col-span-2 space-y-6">
+          {
+            faqs.map((faq: any) => (
+              <div id={faq.id} class="scroll-mt-24 bg-base-50 p-8 lg:p-12 rounded-lg">
+                <article>
+                  <Text
+                    tag="h3"
+                    variant="textXL"
+                    class="text-base-900 font-semibold mb-6"
+                  >
+                    {faq.question}
+                  </Text>
+                  <FAQAnswer content={faq.fullAnswer} />
+                </article>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Wrapper>
+
+    {/* Stats Section */}
+    <Wrapper variant="standard" class="py-12 lg:py-24 bg-base-50 -mx-[calc(50vw-50%)]">
+      <div class="max-w-7xl mx-auto px-6">
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="text-accent-800 font-display text-center mb-12"
+        >
+          Trusted by Leading Organizations
+        </Text>
+        <ul class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          <li class="text-center">
+            <Text
+              tag="p"
+              variant="displayMD"
+              class="text-accent-800 font-display"
+            >
+              100+
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-2 font-medium"
+            >
+              Organizations Assessed
+            </Text>
+          </li>
+          <li class="text-center">
+            <Text
+              tag="p"
+              variant="displayMD"
+              class="text-accent-800 font-display"
+            >
+              95%
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-2 font-medium"
+            >
+              Client Satisfaction
+            </Text>
+          </li>
+          <li class="text-center">
+            <Text
+              tag="p"
+              variant="displayMD"
+              class="text-accent-800 font-display"
+            >
+              3+
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-2 font-medium"
+            >
+              Industries Served
+            </Text>
+          </li>
+          <li class="text-center">
+            <Text
+              tag="p"
+              variant="displayMD"
+              class="text-accent-800 font-display"
+            >
+              8 weeks
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 mt-2 font-medium"
+            >
+              Avg Timeline
+            </Text>
+          </li>
+        </ul>
+      </div>
+    </Wrapper>
+
+    {/* Booking CTA */}
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="max-w-2xl mx-auto text-center">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="text-accent-800 font-display mb-4"
+        >
+          Ready to Assess Your AI Readiness?
+        </Text>
+        <Text tag="p" variant="textBase" class="text-base-700 mb-8">
+          Book your free 60-minute AI readiness audit. Get honest assessment,
+          detailed report, and clear next steps.
+        </Text>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button
+            isLink={true}
+            href="/contact?subject=ai-readiness"
+            variant="default"
+            size="md"
+          >
+            Schedule Assessment
+          </Button>
+          <a
+            href="mailto:hello@madavi.co"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-base-300 text-base-900 font-medium hover:bg-base-50 transition-colors"
+          >
+            hello@madavi.co
+          </a>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  {/* JSON-LD Schema */}
+  {
+    schema && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+      />
+    )
+  }
+</BaseLayout>

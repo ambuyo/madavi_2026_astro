@@ -1,0 +1,411 @@
+---
+export interface TimelineEntry {
+  title: string;
+  content: string;
+}
+
+interface Props {
+  data: TimelineEntry[];
+  heading?: string;
+  subheading?: string;
+}
+
+const { data, heading = "Our Journey", subheading = "From digital marketing agency to AI-driven transformation partner. Follow our evolution and growth story." } = Astro.props;
+---
+
+<style>
+  .timeline-container {
+    position: relative;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: calc(1.25rem);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(229, 231, 235) 10%,
+      rgb(229, 231, 235) 90%,
+      transparent 100%
+    );
+  }
+
+  .dark .timeline-line {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(55, 65, 81) 10%,
+      rgb(55, 65, 81) 90%,
+      transparent 100%
+    );
+  }
+
+  .timeline-progress {
+    position: absolute;
+    left: calc(1.25rem);
+    top: 0;
+    width: 2px;
+    background: linear-gradient(
+      to top,
+      rgb(168, 85, 247),
+      rgb(59, 130, 246),
+      transparent
+    );
+    will-change: height;
+  }
+
+  .timeline-item {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-item {
+      padding-top: 10rem;
+      gap: 2.5rem;
+    }
+  }
+
+  .timeline-marker {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 10rem;
+    align-self: flex-start;
+    max-width: 20rem;
+    width: 100%;
+    z-index: 40;
+  }
+
+  @media (max-width: 767px) {
+    .timeline-marker {
+      position: static;
+      max-width: 100%;
+    }
+  }
+
+  .timeline-dot {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 9999px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0.75rem;
+  }
+
+  .dark .timeline-dot {
+    background-color: black;
+  }
+
+  .timeline-dot-inner {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 9999px;
+    background-color: rgb(229, 231, 235);
+    border: 1px solid rgb(209, 213, 219);
+  }
+
+  .dark .timeline-dot-inner {
+    background-color: rgb(31, 41, 55);
+    border-color: rgb(55, 65, 81);
+  }
+
+  .timeline-title {
+    display: none;
+    text-align: left;
+    padding-left: 5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(107, 114, 128);
+  }
+
+  .dark .timeline-title {
+    color: rgb(107, 114, 128);
+  }
+
+  @media (min-width: 768px) {
+    .timeline-title {
+      display: block;
+    }
+  }
+
+  .timeline-content {
+    position: relative;
+    padding-left: 5rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-content {
+      padding-left: 1rem;
+    }
+  }
+
+  .timeline-content-title {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-weight: 700;
+    color: rgb(107, 114, 128);
+  }
+
+  .dark .timeline-content-title {
+    color: rgb(107, 114, 128);
+  }
+
+  @media (min-width: 768px) {
+    .timeline-content-title {
+      display: none;
+    }
+  }
+
+  .timeline-content-text {
+    color: rgb(55, 65, 81);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-content-text {
+      font-size: 1rem;
+    }
+  }
+
+  .dark .timeline-content-text {
+    color: rgb(209, 213, 219);
+  }
+
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-grid {
+      gap: 1rem;
+    }
+  }
+
+  .timeline-grid-item {
+    border-radius: 0.5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 24px rgba(34, 42, 53, 0.06),
+      0 1px 1px rgba(0, 0, 0, 0.05),
+      0 0 0 1px rgba(34, 42, 53, 0.04),
+      0 0 4px rgba(34, 42, 53, 0.08),
+      0 16px 68px rgba(47, 48, 55, 0.05),
+      0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-grid-item {
+      height: 11rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .timeline-grid-item {
+      height: 15rem;
+    }
+  }
+
+  .timeline-grid-item span {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-grid-item span {
+      font-size: 1rem;
+    }
+  }
+
+  .grid-blue {
+    background: linear-gradient(135deg, rgb(96, 165, 250) 0%, rgb(37, 99, 235) 100%);
+  }
+
+  .grid-purple {
+    background: linear-gradient(135deg, rgb(168, 85, 247) 0%, rgb(126, 34, 206) 100%);
+  }
+
+  .grid-pink {
+    background: linear-gradient(135deg, rgb(244, 114, 182) 0%, rgb(236, 72, 153) 100%);
+  }
+
+  .grid-green {
+    background: linear-gradient(135deg, rgb(74, 222, 128) 0%, rgb(34, 197, 94) 100%);
+  }
+
+  .grid-cyan {
+    background: linear-gradient(135deg, rgb(34, 211, 238) 0%, rgb(6, 182, 212) 100%);
+  }
+
+  .grid-indigo {
+    background: linear-gradient(135deg, rgb(129, 140, 248) 0%, rgb(67, 56, 202) 100%);
+  }
+
+  .grid-violet {
+    background: linear-gradient(135deg, rgb(167, 139, 250) 0%, rgb(109, 40, 217) 100%);
+  }
+
+  .grid-teal {
+    background: linear-gradient(135deg, rgb(45, 212, 191) 0%, rgb(20, 184, 166) 100%);
+  }
+
+  .grid-red {
+    background: linear-gradient(135deg, rgb(248, 113, 113) 0%, rgb(239, 68, 68) 100%);
+  }
+
+  .grid-orange {
+    background: linear-gradient(135deg, rgb(251, 146, 60) 0%, rgb(249, 115, 22) 100%);
+  }
+
+  .grid-yellow {
+    background: linear-gradient(135deg, rgb(250, 204, 21) 0%, rgb(234, 179, 8) 100%);
+  }
+
+  .grid-lime {
+    background: linear-gradient(135deg, rgb(132, 204, 22) 0%, rgb(101, 163, 13) 100%);
+  }
+
+  .grid-fuchsia {
+    background: linear-gradient(135deg, rgb(232, 121, 249) 0%, rgb(219, 39, 119) 100%);
+  }
+
+  .grid-rose {
+    background: linear-gradient(135deg, rgb(251, 113, 133) 0%, rgb(244, 63, 94) 100%);
+  }
+
+  .grid-sky {
+    background: linear-gradient(135deg, rgb(56, 189, 248) 0%, rgb(14, 165, 233) 100%);
+  }
+
+  .grid-emerald {
+    background: linear-gradient(135deg, rgb(52, 211, 153) 0%, rgb(16, 185, 129) 100%);
+  }
+
+  .timeline-checklist {
+    margin-bottom: 2rem;
+  }
+
+  .timeline-checklist-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: rgb(55, 65, 81);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-checklist-item {
+      font-size: 1rem;
+    }
+  }
+
+  .dark .timeline-checklist-item {
+    color: rgb(209, 213, 219);
+  }
+
+  .timeline-end-dot {
+    position: absolute;
+    left: calc(1.25rem - 0.375rem);
+    bottom: -1.5rem;
+  }
+
+  .timeline-end-dot-inner {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: rgb(59, 130, 246);
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<div class="w-full bg-white dark:bg-neutral-950 font-sans md:px-10">
+  <div class="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
+    <h2 class="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
+      {heading}
+    </h2>
+    <p class="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm">
+      {subheading}
+    </p>
+  </div>
+
+  <div class="timeline-container relative max-w-7xl mx-auto pb-20">
+    <div class="timeline-line"></div>
+    <div class="timeline-progress" id="timeline-progress"></div>
+
+    {
+      data.map((item, index) => (
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="timeline-dot">
+              <div class="timeline-dot-inner"></div>
+            </div>
+            <h3 class="timeline-title">{item.title}</h3>
+          </div>
+
+          <div class="timeline-content">
+            <h3 class="timeline-content-title">{item.title}</h3>
+            <div
+              class="timeline-content-text"
+              set:html={item.content}
+            />
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="timeline-end-dot">
+      <div class="timeline-end-dot-inner"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Update progress bar on scroll
+  function updateTimelineProgress() {
+    const progressBar = document.getElementById("timeline-progress");
+    if (!progressBar) return;
+
+    const container = progressBar.closest(".timeline-container");
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const containerHeight = container.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    // Calculate scroll progress
+    let scrollProgress = 0;
+    if (rect.top < windowHeight && rect.bottom > 0) {
+      scrollProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight + containerHeight)));
+    }
+
+    // Update height
+    progressBar.style.height = scrollProgress * containerHeight + "px";
+  }
+
+  // Update on scroll
+  window.addEventListener("scroll", updateTimelineProgress, { passive: true });
+  window.addEventListener("resize", updateTimelineProgress, { passive: true });
+
+  // Initial call
+  updateTimelineProgress();
+</script>

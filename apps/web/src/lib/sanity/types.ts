@@ -415,9 +415,8 @@ export interface SanityTestimonial {
   role?: string;
 }
 
-export interface SanityCaseStudy {
+export interface SanitySingleWork {
   _id: string;
-  title: string;
   slug: string;
   client: string;
   industry: string;
@@ -426,11 +425,7 @@ export interface SanityCaseStudy {
   tagline?: string;
   aboutClient?: string;
   ourProcess?: string;
-  scopeOfWork?: string;
-  whatWeDid?: string;
   projectUrl?: string;
-  challenge: string;
-  solution: string;
   results: SanityResult[];
   businessImpact?: string;
   testimonial?: SanityTestimonial;
@@ -441,12 +436,11 @@ export interface SanityCaseStudy {
 }
 
 /**
- * Case study shape expected by UI components
+ * Single work/case study shape expected by UI components
  */
-export interface CaseStudy {
+export interface SingleWork {
   slug: string;
   data: {
-    title: string;
     client: string;
     industry: string;
     services: string[];
@@ -454,11 +448,7 @@ export interface CaseStudy {
     tagline?: string;
     aboutClient?: string;
     ourProcess?: string;
-    scopeOfWork?: string;
-    whatWeDid?: string;
     projectUrl?: string;
-    challenge: string;
-    solution: string;
     results: Array<{
       label: string;
       value: string;

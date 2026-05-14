@@ -6,21 +6,21 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Data
-import { getCaseStudies, getCaseStudyBySlug } from "@/lib/data";
+import { getOurWork, getSingleWorkBySlug } from "@/lib/data";
 // Utils
 import { getIndustryDisplayName } from "@/lib/industries";
 // Head
 import Seo from "@/components/fundations/head/Seo.astro";
 
 export async function getStaticPaths() {
-  const caseStudies = await getCaseStudies();
+  const caseStudies = await getOurWork();
   return caseStudies.map((caseStudy) => ({
     params: { slug: caseStudy.slug },
   }));
 }
 
 const { slug } = Astro.params;
-const caseStudy = await getCaseStudyBySlug(slug!);
+const caseStudy = await getSingleWorkBySlug(slug!);
 if (!caseStudy) {
   return Astro.redirect("/404");
 }

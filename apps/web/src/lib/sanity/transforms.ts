@@ -5,13 +5,13 @@ import type {
   SanityTeamMember,
   SanityService,
   SanityIndustry,
-  SanityCaseStudy,
+  SanitySingleWork,
   SanityInfoPage,
   Post,
   TeamMember,
   Service,
   Industry,
-  CaseStudy,
+  SingleWork,
   InfoPage,
 } from "./types";
 
@@ -218,43 +218,38 @@ export function transformIndustry(industry: SanityIndustry): Industry {
 }
 
 /**
- * Transform Sanity case study to UI-friendly shape
+ * Transform Sanity single work to UI-friendly shape
  */
-export function transformCaseStudy(caseStudy: SanityCaseStudy): CaseStudy {
+export function transformSingleWork(singleWork: SanitySingleWork): SingleWork {
   return {
-    slug: caseStudy.slug,
+    slug: singleWork.slug,
     data: {
-      title: caseStudy.title,
-      client: caseStudy.client,
-      industry: caseStudy.industry,
-      services: caseStudy.services || [],
-      year: caseStudy.year,
-      tagline: caseStudy.tagline,
-      aboutClient: caseStudy.aboutClient,
-      ourProcess: caseStudy.ourProcess,
-      scopeOfWork: caseStudy.scopeOfWork,
-      whatWeDid: caseStudy.whatWeDid,
-      projectUrl: caseStudy.projectUrl,
-      challenge: caseStudy.challenge,
-      solution: caseStudy.solution,
-      results: caseStudy.results || [],
-      businessImpact: caseStudy.businessImpact,
-      testimonial: caseStudy.testimonial,
-      image: caseStudy.image
+      client: singleWork.client,
+      industry: singleWork.industry,
+      services: singleWork.services || [],
+      year: singleWork.year,
+      tagline: singleWork.tagline,
+      aboutClient: singleWork.aboutClient,
+      ourProcess: singleWork.ourProcess,
+      projectUrl: singleWork.projectUrl,
+      results: singleWork.results || [],
+      businessImpact: singleWork.businessImpact,
+      testimonial: singleWork.testimonial,
+      image: singleWork.image
         ? {
-            url: getImageUrl(caseStudy.image.asset),
-            alt: caseStudy.image.alt || caseStudy.title || "",
+            url: getImageUrl(singleWork.image.asset),
+            alt: singleWork.image.alt || singleWork.client || "",
           }
         : undefined,
-      projectImages: caseStudy.projectImages
-        ? caseStudy.projectImages.map((img) => ({
+      projectImages: singleWork.projectImages
+        ? singleWork.projectImages.map((img) => ({
             url: getImageUrl(img.asset),
             alt: img.alt || "",
           }))
         : undefined,
-      pubDate: new Date(caseStudy.pubDate),
+      pubDate: new Date(singleWork.pubDate),
     },
-    body: Array.isArray(caseStudy.body) ? portableTextToHtml(caseStudy.body) : caseStudy.body || "",
+    body: Array.isArray(singleWork.body) ? portableTextToHtml(singleWork.body) : singleWork.body || "",
   };
 }
 

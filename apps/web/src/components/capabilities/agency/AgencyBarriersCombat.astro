@@ -1,0 +1,74 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+interface Props {
+  programs?: Array<{
+    title: string;
+    subtitle: string;
+    combats: string;
+    for: string;
+  }>;
+}
+
+const { programs = [] } = Astro.props;
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 lg:mt-24 gap-8">
+      {
+        programs.map((program) => (
+          <div class="bg-base-50 p-8 flex flex-col">
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-accent-800 font-display"
+            >
+              {program.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="text-base-600 font-medium mt-4"
+            >
+              {program.subtitle}
+            </Text>
+            <div class="mt-6 border-t border-base-200 pt-4">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-500 font-semibold uppercase tracking-wide"
+              >
+                Combats
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 mt-2"
+              >
+                {program.combats}
+              </Text>
+            </div>
+            <div class="mt-4">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-500 font-semibold uppercase tracking-wide"
+              >
+                For
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 mt-2"
+              >
+                {program.for}
+              </Text>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

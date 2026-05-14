@@ -1,0 +1,69 @@
+---
+// Assets
+import Shield from "@/components/assets/Shield.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import TeamCard from "@/components/team/TeamCard.astro";
+// Content
+import { getTeamMembers } from "@/lib/data";
+
+const teamMembers = await getTeamMembers();
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div class="max-w-xl">
+      <Kicker variant="default">Team</Kicker>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="text-base-900 text-balance font-display lg:mt-8"
+      >
+        Meet Our Team
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-700 lg:text-pretty lg:col-span-2 mt-4"
+      >
+        Our experienced professionals bring decades of combined expertise to
+        deliver exceptional accounting services.
+      </Text>
+    </div>
+
+    <div
+      class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-2 p-8 lg:p-12 bg-base-50"
+    >
+      {teamMembers.slice(0, 2).map((member) => <TeamCard post={member} />)}
+      <div class="bg-accent-400 p-8 flex flex-col h-full justify-between gap-8">
+        <div>
+          <Shield class="h-8 text-white" />
+          <Text
+            tag="h3"
+            variant="displaySM"
+            class="text-base text-white font-display font-medium mt-24"
+          >
+            Ready to work with our team?
+          </Text>
+          <Text tag="p" variant="textBase" class="text-white font-medium mt-2">
+            Connect with our experienced professionals to discuss your
+            accounting needs and how we can help.
+          </Text>
+        </div>
+        <Button
+          size="xs"
+          variant="muted"
+          isLink={true}
+          href="/team"
+          class="w-fit"
+        >
+          Meet the Full Team
+        </Button>
+      </div>
+    </div>
+  </Wrapper>
+</section>

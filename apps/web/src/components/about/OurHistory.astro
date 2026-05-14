@@ -1,0 +1,205 @@
+---
+import Timeline from "@/components/ui/timeline.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const timelineData = [
+  {
+    title: "2018",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Founded Madavi Agency with a simple vision: help businesses stand out and win in the digital space. Started as a digital marketing powerhouse focused on delivering measurable results.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Brand Building</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Digital Growth</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Marketing</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Results Driven</span>
+        </div>
+      </div>
+    `,
+  },
+  {
+    title: "2019-2020",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Rapid expansion across continents. Established offices in key markets and scaled to serve 60+ businesses, delivering over $20M in combined revenue growth for our partners.
+      </p>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Built a team of talented professionals across three continents. Strengthened our position as a trusted digital transformation partner for growing businesses.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Global Reach</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">60+ Clients</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Team Growth</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">$20M Growth</span>
+        </div>
+      </div>
+    `,
+  },
+  {
+    title: "2021",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
+        A critical turning point in our journey. While working with clients, we recognized a major pain point:
+      </p>
+      <div class="mb-8">
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Teams drowning in repetitive, manual tasks
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Chasing payments and sending reminders
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Copying data and following up with leads
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Necessary work that drained time and energy
+        </div>
+      </div>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        This insight inspired our evolution from marketing agency to digital transformation partner.
+      </p>
+    `,
+  },
+  {
+    title: "2022",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Strategic pivot from one-off marketing campaigns to building sustainable systems. Launched our consulting division focused on automation, AI integration, and operational excellence.
+      </p>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Developed proprietary frameworks for business automation, process optimization, and sustainable growth strategies.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Automation</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Strategy</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Systems</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Excellence</span>
+        </div>
+      </div>
+    `,
+  },
+  {
+    title: "2023",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Deep specialization in AI implementation and business automation. Developed proprietary methodologies and frameworks for:
+      </p>
+      <div class="mb-8">
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ AI-powered process automation
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Predictive analytics implementation
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Intelligent workflow optimization
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Enterprise digital transformation
+        </div>
+      </div>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal">
+        Positioned as thought leaders in AI-driven business transformation.
+      </p>
+    `,
+  },
+  {
+    title: "2024",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Launched Madavi Consulting as dedicated AI and digital transformation advisory. Combined years of agency experience with cutting-edge AI capabilities.
+      </p>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+        Serving enterprise clients with comprehensive AI strategy, implementation, and optimization services for critical industries and large-scale operations.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Enterprise AI</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Transformation</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Strategy</span>
+        </div>
+        <div class="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05)]">
+          <span class="text-white font-semibold">Growth</span>
+        </div>
+      </div>
+    `,
+  },
+  {
+    title: "2025 & Beyond",
+    content: `
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
+        Our vision for the future:
+      </p>
+      <div class="mb-8">
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Global leader in AI-driven transformation
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Serving Fortune 500 companies globally
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Advancing AI ethics and responsible implementation
+        </div>
+        <div class="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+          ✅ Building sustainable AI solutions for critical industries
+        </div>
+      </div>
+      <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal">
+        Continuing to innovate and help organizations unlock the full potential of artificial intelligence and automation.
+      </p>
+    `,
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="mb-12 lg:mb-20">
+      <Kicker variant="default">Our Journey</Kicker>
+      <Text
+        tag="h2"
+        variant="textLG"
+        class="text-base-900 lg:text-pretty lg:mt-4 font-medium font-display"
+      >
+        From Digital Marketing to AI-Driven Transformation
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="text-base-600 lg:text-pretty mt-4 max-w-3xl"
+      >
+        Over the past years, we've evolved from a digital marketing agency to a strategic partner in AI and digital transformation. Our journey has been driven by deep client insights, market shifts, and a commitment to delivering sustainable, technology-enabled growth.
+      </Text>
+    </div>
+
+    <Timeline data={timelineData} />
+  </Wrapper>
+</section>

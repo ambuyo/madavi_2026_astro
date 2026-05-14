@@ -1,0 +1,165 @@
+---
+import { Image } from "astro:assets";
+import talk from "@/images/assets/talk.png";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { WavePath } from "@/components/ui/wave-path";
+
+interface Props {
+  failures?: Array<{
+    title: string;
+    bullets: string[];
+  }>;
+  barrierTitle?: string;
+  barrierHeading?: string;
+  barrierDescription?: string;
+}
+
+const {
+  failures = [],
+  barrierTitle = "Common Barriers",
+  barrierHeading = "Most businesses prioritize tools",
+  barrierDescription = "A successful AI readiness program doesn't start with technology—it starts with awareness. By first understanding the specific barriers to adoption, we design a roadmap that proactively addresses cultural resistance and data silos.",
+} = Astro.props;
+const features = failures.length > 0 ? failures : [
+  {
+    title: "Cultural Barriers",
+    bullets: [
+      "Team doesn't trust it",
+      "Leadership doesn't champion it",
+      "Skepticism from previous tech failures ",
+    ],
+  },
+  {
+    title: "Process Chaos",
+    bullets: [
+      "Workflows too messy to automate",
+      "Every person does things differently",
+      "No standardization or documentation",
+    ],
+  },
+  {
+    title: "Technical Gaps",
+    bullets: [
+      "Systems don't integrate",
+      "Poor Data Quality ",
+      "Infrastructure can't handle it",
+    ],
+  },
+  {
+    title: "Capacity Issues",
+    bullets: [
+      "Team already at 120% capacity",
+      "No bandwidth for learning",
+      "No time for implementation",
+    ],
+  },
+];
+
+const columns = [
+  {
+    icon: "Team",
+    title: "Cultural Barriers",
+    bullets: [
+      "Team doesn't trust it",
+      "Leadership doesn't champion it",
+      "Previous tech failures created skepticism",
+    ],
+  },
+  {
+    icon: "Process",
+    title: "Process Chaos",
+    bullets: [
+      "Workflows too messy to automate",
+      "Every person does things differently",
+      "No standardization or documentation",
+    ],
+  },
+  {
+    icon: "Infrastructure",
+    title: "Technical Gaps",
+    bullets: [
+      "Systems don't integrate",
+      "Data quality is poor",
+      "Infrastructure can't handle it",
+    ],
+  },
+  {
+    icon: "Resources",
+    title: "Capacity Issues",
+    bullets: [
+      "Team already at 120% capacity",
+      "No bandwidth for learning",
+      "No time for implementation",
+    ],
+  },
+];
+---
+
+
+<section>
+  <Wrapper variant="standard" class="py-12">
+    <div
+      class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 p-8 lg:p-12 bg-base-50"
+    >
+      <Image
+        src={talk}
+        alt="Image"
+        width={800}
+        height={1440}
+        loading="eager"
+        decoding="async"
+        class="size-full object-cover object-center aspect-square"
+      />
+      <div class="flex flex-col">
+        <div>
+          <Kicker>{barrierTitle}</Kicker>
+          <Text
+            tag="h2"
+            variant="displayMD"
+            class="text-base-950 text-balance font-medium tracking-tight font-display mt-8 border-t border-base-200 pt-8"
+          >
+            {barrierHeading}
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-base-700 mt-2 text-pretty"
+          >
+            {barrierDescription}
+          </Text>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-8 mt-12">
+          {
+            features.map((feature) => (
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="text-base-900 font-display"
+                >
+                  {feature.title}
+                </Text>
+                <ul class="space-y-2 mt-4">
+                  {feature.bullets.map((bullet) => (
+                    <li class="flex gap-2">
+                      <span class="flex-shrink-0 text-accent-600 font-bold">•</span>
+                      <Text
+                        tag="span"
+                        variant="textSM"
+                        class="text-base-600"
+                      >
+                        {bullet}
+                      </Text>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

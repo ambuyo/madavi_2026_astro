@@ -5,10 +5,10 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
-import CasesCard from "@/components/cases/CasesCard.astro";
+import SingleWorkCard from "@/components/cases/SingleWorkCard.astro";
 // Data
-import { getCaseStudies } from "@/lib/data";
-const allCaseStudies = await getCaseStudies();
+import { getOurWork } from "@/lib/data";
+const allCaseStudies = await getOurWork();
 
 const seo = {
   title: "Our Work",
@@ -40,7 +40,7 @@ const seo = {
       <div
         class="grid grid-cols-1 lg:grid-cols-2 mt-12 gap-2 p-8 lg:p-12 bg-base-50"
       >
-        {allCaseStudies.map((caseStudy) => <CasesCard post={caseStudy} />)}
+        {allCaseStudies.map((caseStudy) => <SingleWorkCard post={caseStudy} />)}
       </div>
     </Wrapper>
   </section>

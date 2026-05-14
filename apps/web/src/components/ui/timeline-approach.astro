@@ -1,0 +1,166 @@
+---
+export interface TimelineEntry {
+  date: string;
+  title: string;
+  content: string;
+}
+
+interface Props {
+  data: TimelineEntry[];
+  heading?: string;
+}
+
+const { data, heading = "Our Approach" } = Astro.props;
+---
+
+<style>
+  .timeline-approach {
+    position: relative;
+  }
+
+  .timeline-approach-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 3rem;
+    animation: slideInFromLeft 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .timeline-approach-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .timeline-approach-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .timeline-approach-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .timeline-approach-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .timeline-approach-item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  .timeline-approach-dot {
+    position: absolute;
+    left: 0.5rem;
+    top: 1.25rem;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 9999px;
+    background-color: rgb(34, 211, 238);
+    box-shadow: 0 0 0 4px white;
+  }
+
+  .dark .timeline-approach-dot {
+    box-shadow: 0 0 0 4px rgb(9, 9, 11);
+  }
+
+  .timeline-approach-title {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: rgb(9, 9, 11);
+    margin-bottom: 0.5rem;
+  }
+
+  .dark .timeline-approach-title {
+    color: rgb(250, 250, 250);
+  }
+
+  .timeline-approach-date {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(107, 114, 128);
+  }
+
+  .dark .timeline-approach-date {
+    color: rgb(156, 163, 175);
+  }
+
+  .timeline-approach-card {
+    border: 1px solid rgb(229, 231, 235);
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .dark .timeline-approach-card {
+    border-color: rgb(39, 39, 42);
+    background-color: rgb(24, 24, 27);
+  }
+
+  .timeline-approach-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  .timeline-approach-card-content {
+    padding: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(107, 114, 128);
+  }
+
+  .dark .timeline-approach-card-content {
+    color: rgb(209, 213, 219);
+  }
+
+  .timeline-approach-vertical-line {
+    position: absolute;
+    left: 0.6rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgb(229, 231, 235);
+    height: 100%;
+  }
+
+  .dark .timeline-approach-vertical-line {
+    background-color: rgb(39, 39, 42);
+  }
+</style>
+
+<section class="bg-background py-24">
+  <div class="container">
+    <h1 class="text-foreground mb-16 text-center text-4xl font-bold tracking-tight sm:text-5xl">
+      {heading}
+    </h1>
+
+    <div class="relative mx-auto max-w-3xl">
+      <div class="timeline-approach-vertical-line"></div>
+
+      <div class="timeline-approach">
+        {
+          data.map((entry, index) => (
+            <div class="timeline-approach-item">
+              {/* Timeline dot */}
+              <div class="timeline-approach-dot" />
+
+              {/* Content */}
+              <h4 class="timeline-approach-title">{entry.title}</h4>
+              <p class="timeline-approach-date">{entry.date}</p>
+              <div class="timeline-approach-card">
+                <div class="timeline-approach-card-content">
+                  <p>{entry.content}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

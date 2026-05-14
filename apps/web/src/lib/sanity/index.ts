@@ -20,6 +20,6 @@ export {
   transformTeamMember,
   transformService,
   transformIndustry,
-  transformCaseStudy,
+  transformSingleWork,
   transformInfoPage,
 } from "./transforms";

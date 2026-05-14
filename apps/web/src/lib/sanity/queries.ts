@@ -310,7 +310,6 @@ export const industryBySlugQuery = groq`
 
 const caseStudyFields = groq`
   _id,
-  title,
   "slug": slug.current,
   client,
   industry,
@@ -318,15 +317,13 @@ const caseStudyFields = groq`
   year,
   tagline,
   aboutClient,
-  scopeOfWork,
-  whatWeDid,
+  ourProcess,
   projectUrl,
-  challenge,
-  solution,
   results[] {
     label,
     value
   },
+  businessImpact,
   testimonial {
     quote,
     author,
@@ -345,14 +342,14 @@ const caseStudyFields = groq`
 
 // All case studies
 export const allCaseStudiesQuery = groq`
-  *[_type == "caseStudy"] | order(pubDate desc) {
+  *[_type == "singleWork"] | order(pubDate desc) {
     ${caseStudyFields}
   }
 `;
 
 // Single case study by slug
 export const caseStudyBySlugQuery = groq`
-  *[_type == "caseStudy" && slug.current == $slug][0] {
+  *[_type == "singleWork" && slug.current == $slug][0] {
     ${caseStudyFields},
     body
   }

@@ -97,17 +97,30 @@ export async function fetchWordPressPosts(): Promise<WordPressPost[]> {
   );
 }
 
+// Map category slugs to WordPress category IDs
+const categorySlugToId: Record<string, number> = {
+  "company-updates": 240,
+  "hcaif": 1041,
+  "human-centric-ai": 1042,
+  "content-marketing": 241,
+  "growth-marketing": 238,
+  "decision-infrastructure": 1043,
+};
+
 // Fetch posts by category slug
 export async function fetchWordPressPostsByCategory(
   categorySlug: string
 ): Promise<WordPressPost[]> {
-  const posts = await fetchWordPressPosts();
-  return posts.filter((post) => {
-    const categories = post._embedded?.["wp:term"]?.flatMap((termArray) =>
-      termArray.filter((term) => term.taxonomy === "category")
-    ) || [];
-    return categories.some((cat) => cat.slug === categorySlug);
-  });
+  const categoryId = categorySlugToId[categorySlug];
+
+  if (!categoryId) {
+    console.warn(`Category slug "${categorySlug}" not found in mapping`);
+    return [];
+  }
+
+  return wpFetch<WordPressPost[]>(
+    `/posts?categories=${categoryId}&_embed&per_page=100&orderby=date&order=desc`
+  );
 }
 
 // Fetch single post by slug

@@ -3,7 +3,7 @@
 import Text from "@/components/fundations/elements/Text.astro";
 
 const { post } = Astro.props;
-const { name, slug, industry, summary, publicationDate, featuredImage } = post;
+const { name, slug, industry, summary, publicationDate, reportCoverImage } = post;
 
 if (!slug || !slug.current) {
   throw new Error(`Report "${name}" is missing a slug. Please add a slug in Sanity Studio.`);
@@ -18,12 +18,12 @@ const date = new Date(publicationDate).toLocaleDateString("en-US", {
 ---
 
 <a href={url} class="flex flex-col group h-full bg-white border border-base-200 hover:shadow-lg transition-shadow duration-300">
-  {/* Featured Image */}
-  {featuredImage && featuredImage.asset && (
+  {/* Report Cover Image */}
+  {reportCoverImage && reportCoverImage.asset && (
     <div class="relative overflow-hidden bg-base-100 flex-shrink-0" style="aspect-ratio: 3/4;">
       <img
-        src={featuredImage.asset.url}
-        alt={featuredImage.alt || name}
+        src={reportCoverImage.asset.url}
+        alt={reportCoverImage.alt || name}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
     </div>

@@ -16,9 +16,18 @@ interface Props {
   };
   categoryDescription?: string | null;
   posts: any[];
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    totalPosts: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    nextPageUrl: string | null;
+    prevPageUrl: string | null;
+  };
 }
 
-const { category, categoryDescription, posts } = Astro.props;
+const { category, categoryDescription, posts, pagination } = Astro.props;
 
 // Prepare SEO data for BaseLayout
 const seoData = {
@@ -76,11 +85,31 @@ const seoData = {
               ← Back to all posts
             </Button>
           </div>
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-24">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-24">
             {posts.map((post) => (
               <BlogCard post={post} />
             ))}
           </div>
+
+          {pagination && pagination.totalPages > 1 && (
+            <div class="flex items-center justify-center gap-4 mt-16">
+              {pagination.hasPrevPage && (
+                <Button isLink size="sm" variant="secondary" href={pagination.prevPageUrl}>
+                  ← Previous
+                </Button>
+              )}
+
+              <span class="text-base-600 text-sm">
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </span>
+
+              {pagination.hasNextPage && (
+                <Button isLink size="sm" variant="secondary" href={pagination.nextPageUrl}>
+                  Next →
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <div class="text-center py-16">

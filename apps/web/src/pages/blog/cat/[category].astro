@@ -6,6 +6,8 @@ interface Props {
   category: string;
 }
 
+const POSTS_PER_PAGE = 20;
+
 export async function getStaticPaths() {
   const posts = await getPosts();
 
@@ -17,12 +19,30 @@ export async function getStaticPaths() {
     });
   });
 
-  return Array.from(categorySet).map((categorySlug) => ({
-    params: { category: categorySlug },
-  }));
+  const paths: any[] = [];
+
+  for (const categorySlug of categorySet) {
+    const categoryPosts = await getPostsByCategory(categorySlug);
+    const totalPages = Math.ceil(categoryPosts.length / POSTS_PER_PAGE);
+
+    // Add page 1 without page number in URL
+    paths.push({ params: { category: categorySlug } });
+
+    // Add additional pages with page number
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({ params: { category: `${categorySlug}/${page}` } });
+    }
+  }
+
+  return paths;
 }
 
-const { category } = Astro.params;
+const { category: categoryParam } = Astro.params;
+
+// Parse category and page from params
+const parts = categoryParam.split('/');
+const category = parts[0];
+const pageParam = parts[1] ? parseInt(parts[1]) : 1;
 
 // Get all posts and find category info
 const allPosts = await getPosts();
@@ -39,10 +59,32 @@ const categoryDescription = await getCategoryDescription(category);
 
 // Get posts for this category
 const categoryPosts = await getPostsByCategory(category);
+
+// Calculate pagination
+const totalPages = Math.ceil(categoryPosts.length / POSTS_PER_PAGE);
+const currentPage = Math.min(Math.max(pageParam, 1), totalPages) || 1;
+
+if (currentPage !== pageParam) {
+  return Astro.redirect(`/blog/cat/${category}${currentPage > 1 ? `/${currentPage}` : ''}`);
+}
+
+const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+const paginatedPosts = categoryPosts.slice(startIdx, startIdx + POSTS_PER_PAGE);
+
+const pagination = {
+  currentPage,
+  totalPages,
+  totalPosts: categoryPosts.length,
+  hasNextPage: currentPage < totalPages,
+  hasPrevPage: currentPage > 1,
+  nextPageUrl: currentPage < totalPages ? `/blog/cat/${category}/${currentPage + 1}` : null,
+  prevPageUrl: currentPage > 1 ? `/blog/cat/${category}${currentPage - 1 > 1 ? `/${currentPage - 1}` : ''}` : null,
+};
 ---
 
 <CategoryLayout
   category={categoryInfo}
   categoryDescription={categoryDescription}
-  posts={categoryPosts}
+  posts={paginatedPosts}
+  pagination={pagination}
 />

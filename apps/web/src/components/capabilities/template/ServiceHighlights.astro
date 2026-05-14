@@ -4,7 +4,7 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import ServiceCard from "./ServiceCard.astro";
 import TeamCard from "@/components/team/TeamCard.astro";
-import CasesCard from "@/components/cases/CasesCard.astro";
+import SingleWorkCard from "@/components/cases/SingleWorkCard.astro";
 import { getCollection } from "astro:content";
 
 interface Props {
@@ -105,7 +105,7 @@ const alternateBg = type === "cases" ? "bg-white" : "bg-base-50";
             } else if (type === "team") {
               return <TeamCard post={item} />;
             } else if (type === "cases") {
-              return <CasesCard post={item} />;
+              return <SingleWorkCard post={item} />;
             }
           })}
         </div>

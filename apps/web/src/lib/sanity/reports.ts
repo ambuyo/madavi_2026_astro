@@ -11,11 +11,22 @@ export interface SanityReport {
   publicationDate: string;
   compiledBy: string;
   fullSummary?: any[];
+  reportCoverImage?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
   featuredImage?: {
     asset: {
       url: string;
     };
     alt?: string;
+  };
+  fullReport?: {
+    asset: {
+      url: string;
+    };
   };
 }
 
@@ -30,11 +41,22 @@ export async function getReports(): Promise<SanityReport[]> {
       publicationDate,
       compiledBy,
       fullSummary,
+      "reportCoverImage": {
+        "asset": {
+          "url": reportCoverImage.asset->url
+        },
+        "alt": reportCoverImage.alt
+      },
       "featuredImage": {
         "asset": {
           "url": featuredImage.asset->url
         },
         "alt": featuredImage.alt
+      },
+      "fullReport": {
+        "asset": {
+          "url": fullReport.asset->url
+        }
       }
     }
   `;
@@ -59,11 +81,22 @@ export async function getReportBySlug(slug: string): Promise<SanityReport | null
       publicationDate,
       compiledBy,
       fullSummary,
+      "reportCoverImage": {
+        "asset": {
+          "url": reportCoverImage.asset->url
+        },
+        "alt": reportCoverImage.alt
+      },
       "featuredImage": {
         "asset": {
           "url": featuredImage.asset->url
         },
         "alt": featuredImage.alt
+      },
+      "fullReport": {
+        "asset": {
+          "url": fullReport.asset->url
+        }
       }
     }
   `;

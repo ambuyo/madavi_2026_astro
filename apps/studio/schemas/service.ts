@@ -345,7 +345,7 @@ export const service = defineType({
           name: "featured",
           title: "Featured Case Study",
           type: "reference",
-          to: [{ type: "caseStudy" }],
+          to: [{ type: "singleWork" }],
           description: "Link to a case study document",
         }),
         defineField({

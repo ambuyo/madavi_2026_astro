@@ -1,0 +1,56 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import BreakableCardWrapper from '@/components/our-approach/BreakableCardWrapper';
+
+interface PricingTier {
+  title: string;
+  subtitle?: string;
+  description: string;
+  isBullet?: boolean;
+  pricing: string;
+  price: string;
+  period: string;
+  features: string[];
+  highlight: boolean;
+}
+
+interface Props {
+  pricingTiers: PricingTier[];
+}
+
+const { pricingTiers } = Astro.props;
+---
+
+<div class="mb-12 max-w-2xl">
+  <Text
+    tag="h2"
+    variant="displayMD"
+    class="text-base-900 text-balance font-display"
+  >
+    Pricing Philosophy: Transparency Over Games
+  </Text>
+  <Text
+    tag="p"
+    variant="textBase"
+    class="text-base-700 mt-4"
+  >
+    We don't play pricing games. Here's how we think about investment:
+  </Text>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  {
+    pricingTiers.map((tier: PricingTier, index: number) => (
+      <div class="h-96">
+        <BreakableCardWrapper
+          client:load
+          title={tier.title}
+          subtitle={tier.subtitle}
+          description={tier.description}
+          isBullet={tier.isBullet}
+          pricing={tier.pricing}
+        />
+      </div>
+    ))
+  }
+</div>

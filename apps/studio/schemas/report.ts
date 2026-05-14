@@ -22,9 +22,28 @@ export const report = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "reportCoverImage",
+      title: "Report Cover Image",
+      type: "image",
+      description: "Cover image for report listing page (3:4 aspect ratio - recommended 600x800px)",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Describe the image for accessibility",
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
+      description: "Featured image for report detail page (16:9 landscape - recommended 1920x1080px)",
       options: {
         hotspot: true,
       },
@@ -111,6 +130,16 @@ export const report = defineType({
         },
       ],
       description: "Full article summary with rich formatting (bold, lists, headings, etc.)",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "fullReport",
+      title: "Full Report",
+      type: "file",
+      description: "Upload the full report document (PDF, DOC, DOCX)",
+      options: {
+        accept: ".pdf,.doc,.docx",
+      },
       validation: (Rule) => Rule.required(),
     }),
   ],
