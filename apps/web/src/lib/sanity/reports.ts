@@ -9,6 +9,8 @@ export interface SanityReport {
   summary: string;
   industry: string;
   publicationDate: string;
+  compiledBy: string;
+  fullSummary?: any[];
   featuredImage?: {
     asset: {
       url: string;
@@ -26,6 +28,8 @@ export async function getReports(): Promise<SanityReport[]> {
       summary,
       industry,
       publicationDate,
+      compiledBy,
+      fullSummary,
       "featuredImage": {
         "asset": {
           "url": featuredImage.asset->url
@@ -53,6 +57,8 @@ export async function getReportBySlug(slug: string): Promise<SanityReport | null
       summary,
       industry,
       publicationDate,
+      compiledBy,
+      fullSummary,
       "featuredImage": {
         "asset": {
           "url": featuredImage.asset->url

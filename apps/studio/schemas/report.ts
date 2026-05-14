@@ -75,6 +75,44 @@ export const report = defineType({
       type: "date",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "compiledBy",
+      title: "Report Compiled by",
+      type: "string",
+      description: "Name of the person or organization that compiled the report",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "fullSummary",
+      title: "Full Summary",
+      type: "array",
+      of: [
+        {
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading 1", value: "h1" },
+            { title: "Heading 2", value: "h2" },
+            { title: "Heading 3", value: "h3" },
+            { title: "Quote", value: "blockquote" },
+          ],
+          lists: [
+            { title: "Bullet", value: "bullet" },
+            { title: "Numbered", value: "number" },
+          ],
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+              { title: "Code", value: "code" },
+              { title: "Underline", value: "underline" },
+            ],
+          },
+        },
+      ],
+      description: "Full article summary with rich formatting (bold, lists, headings, etc.)",
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {
