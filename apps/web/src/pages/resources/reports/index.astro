@@ -3,12 +3,24 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
 // Components
 import ReportCard from "@/components/documents/ReportCard.astro";
 // Sanity
 import { getReports } from "@/lib/sanity/reports";
 
-const reports = await getReports();
+const allReports = await getReports();
+const reportsPerPage = 4;
+const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
+const totalPages = Math.ceil(allReports.length / reportsPerPage);
+const startIndex = (currentPage - 1) * reportsPerPage;
+const endIndex = startIndex + reportsPerPage;
+const reports = allReports.slice(startIndex, endIndex);
+
+// Validate page number
+if (currentPage < 1 || currentPage > totalPages) {
+  return Astro.redirect("/resources/reports?page=1");
+}
 ---
 
 <BaseLayout>
@@ -36,7 +48,7 @@ const reports = await getReports();
         </Text>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-12">
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-12">
         {
           reports.length > 0 ? (
             reports.map((report) => <ReportCard post={report} />)
@@ -47,6 +59,47 @@ const reports = await getReports();
           )
         }
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div class="flex items-center justify-center gap-4 mt-16">
+          {currentPage > 1 && (
+            <Button
+              isLink
+              href={`/resources/reports?page=${currentPage - 1}`}
+              variant="muted"
+              size="sm"
+            >
+              ← Previous
+            </Button>
+          )}
+
+          <div class="flex items-center gap-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button
+                isLink
+                href={`/resources/reports?page=${page}`}
+                variant={page === currentPage ? "default" : "muted"}
+                size="xs"
+                class={page === currentPage ? "pointer-events-none" : ""}
+              >
+                {page}
+              </Button>
+            ))}
+          </div>
+
+          {currentPage < totalPages && (
+            <Button
+              isLink
+              href={`/resources/reports?page=${currentPage + 1}`}
+              variant="muted"
+              size="sm"
+            >
+              Next →
+            </Button>
+          )}
+        </div>
+      )}
     </Wrapper>
   </section>
 </BaseLayout>
