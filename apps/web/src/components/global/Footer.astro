@@ -5,20 +5,14 @@ import whiteLogo from "@/images/brand/logos/Madavi Logo - Full- white.png";
 import BigLogo from "@/components/assets/BigLogo.astro";
 // Icons
 import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
-import ShieldCheck from "@/components/fundations/icons/ShieldCheck.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 // Data
 import { getInfoPages } from "@/lib/data";
 
 // Fetch info pages from Sanity
 const infoPages = await getInfoPages();
-const legalLinks = infoPages.map((page) => ({
-  href: `/legal/${page.slug}`,
-  label: page.data.page,
-}));
 
 // Footer link configurations
 const footerSections = [
@@ -66,21 +60,11 @@ const footerSections = [
       { href: "/contact", label: "Contact Us" },
     ],
   },
-  {
-    title: "Legal & Compliance",
-    links: legalLinks,
-  },
-];
-
-const certifications = [
-  "Certified Public Accountants",
-  "Enrolled Agents",
-  "QuickBooks Certified",
 ];
 ---
 
-<footer class="border-t border-base-900 relative overflow-hidden" style="background-color: #00424e; background-image: url('/footer-bg.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-  <div class="absolute inset-0 bg-gradient-to-b from-[#00424e]/95 via-[#00424e]/97 to-[#00424e]"></div>
+<footer class="border-t border-base-900 relative overflow-hidden" style="background-color: #00424e; background-image: url('/footer-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="absolute inset-0 bg-gradient-to-b from-[#00424e]/70 via-[#00424e]/80 to-[#00424e]/90"></div>
   <div class="relative z-10">
   <Wrapper variant="standard" class="py-16">
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-8">
@@ -158,35 +142,7 @@ const certifications = [
       </div>
     </div>
 
-    <div
-      class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-2 items-start border-t border-base-900 pt-4 mt-12"
-    >
-      <div class="flex flex-col lg:flex-row gap-y-2 gap-x-2">
-        {
-          certifications.map((cert) => (
-            <div class="flex items-center gap-2">
-              <ShieldCheck class="h-3 text-white" />
-              <Text tag="span" variant="textXS" class="text-base-400">
-                {cert}
-              </Text>
-            </div>
-          ))
-        }
-      </div>
-
-      <div class="flex flex-wrap md:justify-end gap-y-2 gap-x-2">
-        {
-          legalLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-base-400 hover:text-accent-400 transition-colors text-xs"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </div>
-    </div>
+    <div class="border-t border-white/20 pt-4 mt-12"></div>
     <BigLogo class="text-white mt-24" />
   </Wrapper>
   </div>

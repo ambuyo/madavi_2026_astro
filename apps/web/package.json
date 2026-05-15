@@ -15,7 +15,7 @@
   "dependencies": {
     "@astrojs/react": "^3.5.0",
     "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/sitemap": "^3.7.2",
     "@hookform/resolvers": "^5.2.2",
     "@lexingtonthemes/seo": "^0.1.0",
     "@portabletext/to-html": "^2.0.13",

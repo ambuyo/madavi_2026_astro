@@ -8,24 +8,34 @@ import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const features = [
   {
-    title: "Human-Centric, Always.",
+    title: "Leadership Buy-In",
     description:
-      "Technology should amplify human potential, not replace it. Every system we build preserves the human touch where it matters most—while removing the drudgery that doesn't.",
+      "At least one C-level executive actively championing AI adoption, attending strategic sessions, and removing organizational blockers.",
   },
   {
-    title: "Practical Over Theoretical.",
+    title: "Clear Problem Definition",
     description:
-      "We don't sell AI dreams. We deliver working systems. Our solutions are deployed, tested, and optimized in real business environments before we call them done.",
+      "Specific pain points or opportunities identified (not just \"we should do AI\"). You know what you're trying to improve and why it matters.",
   },
   {
-    title: "Partnership, Not Projects.",
+    title: "Realistic Timeline Expectations",
     description:
-      "Automation isn't a one-time implementation—it's an ongoing capability. We stay involved, educating your team and evolving your systems as your business grows.",
+      "Understanding that cultural change takes months, not weeks. Adoption is a journey, not a one-time deployment.",
   },
   {
-    title: "Accountability Through Transparency.",
+    title: "Team Capacity",
     description:
-      "You'll always know what we're building, why we're building it, and what value it delivers. No black boxes. No buzzword smoke screens.",
+      "Someone internally accountable for coordinating with us, gathering requirements, testing systems, and driving adoption.",
+  },
+  {
+    title: "Willingness to Experiment",
+    description:
+      "Comfort with iteration and learning. Pilot-first mindset rather than demanding perfect systems on day one.",
+  },
+  {
+    title: "Budget Alignment",
+    description:
+      "Investment level matches ambition. Can't expect enterprise transformation on startup budget.",
   },
 ];
 ---
@@ -33,16 +43,16 @@ const features = [
 <section>
   <Wrapper variant="standard" class="py-12">
     <div
-      class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 p-8 lg:p-12 bg-base-50"
+      class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 lg:p-12 bg-base-50"
     >
-      <div class="flex flex-col">
+      <div class="flex flex-col lg:col-span-2">
         <div>
           <Text
             tag="h2"
             variant="displayMD"
             class="text-base 950 text-balance font-medium tracking-tight font-display mt-8"
           >
-           Our Mission
+What Makes An Engagement Successful?
 
           </Text>
           <Text
@@ -50,7 +60,7 @@ const features = [
             variant="textBase"
             class="text-base-700 mt-2 text-pretty"
           >
-To make intelligent automation accessible, practical, and transformative for businesses ready to lead in the AI Age.
+We've learned what predicts success across 50+ implementations:
           </Text>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-8 mt-12">

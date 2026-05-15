@@ -16,7 +16,7 @@ const pillars = [
       ],
       whoThisServes: "CEOs, CFOs, COOs making 3+ AI decisions per quarter—especially in law firms, healthcare, nonprofits, retail, and African enterprises."
     },
-    bgColor: "bg-accent-500",
+    bgColor: "#E65100",
   },
   {
     title: "We Implement",
@@ -30,7 +30,7 @@ const pillars = [
       ],
       whoThisServes: "Operations leaders, CTOs, process owners who need AI systems deployed—not just discussed."
     },
-    bgColor: "bg-accent-600",
+    bgColor: "#FFB300",
   },
   {
     title: "We Partner",
@@ -71,7 +71,7 @@ const pillars = [
     <div class="flex flex-col lg:flex-row gap-0 rounded-lg overflow-hidden">
       {
         pillars.map((pillar) => (
-          <div class={`flex-1 ${pillar.bgColor} p-8 lg:p-12 flex flex-col justify-between text-white`}>
+          <div class={`flex-1 p-8 lg:p-12 flex flex-col justify-between text-white ${pillar.bgColor.startsWith('#') ? '' : pillar.bgColor}`} style={pillar.bgColor.startsWith('#') ? `background-color: ${pillar.bgColor}` : ''}>
             {pillar.sections ? (
               <div class="text-left">
                 <Text
